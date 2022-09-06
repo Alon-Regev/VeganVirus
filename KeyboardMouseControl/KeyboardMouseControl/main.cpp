@@ -9,7 +9,7 @@
 std::map<std::string, std::string> keyboardReplaceMap =
 {
 	{"MEAT", "VEGETABLE"},
-	{"MILK", "SOY MILK"},
+	{"MILK", "SOY MIL\bLK"},
 	{"EGG", "BABY CHICKEN"}
 };
 
@@ -72,11 +72,14 @@ LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 	addToBuffer(kbdStruct.vkCode);
 
 	// check if typed word
-	if (checkWord("LIRON", 5))
+	for (auto pair : keyboardReplaceMap)
 	{
-		std::string toWrite(5, '\b');
-		toWrite += "ALON";
-		writeString(toWrite);
+		if (checkWord(pair.first.c_str(), pair.first.size()))
+		{
+			std::string toWrite(pair.first.size(), '\b');
+			toWrite += pair.second;
+			writeString(toWrite);
+		}
 	}
 
 	return CallNextHookEx(hookHandle, nCode, wParam, lParam);
