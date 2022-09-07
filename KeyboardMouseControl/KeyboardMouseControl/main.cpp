@@ -42,9 +42,7 @@ void writeString(std::string str)
 		// init key down struct
 		INPUT inputStruct = { 0 };
 		inputStruct.type = INPUT_KEYBOARD;
-		KEYBDINPUT kbdInput = { 0 };
-		kbdInput.wVk = str[i];
-		inputStruct.ki = kbdInput;
+		inputStruct.ki.wVk = str[i];
 
 		// init key up struct
 		INPUT inputUpStruct = inputStruct;
