@@ -5,28 +5,19 @@
 #include <iostream>
 #include <SDKDDKVer.h>
 #include <windows.h>
-//#include <objidl.h>
-//#include <gdiplus.h>
 
-//using namespace Gdiplus;
-//#pragma comment (lib,"Gdiplus.lib")
-//#include <gdiplusgraphics.h>
+#define IMAGE_WIDTH 800
+#define IMAGE_HEIGHT 800
 
 // Forward declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 void LoadScreen(HWND hWnd);
 
-HINSTANCE hInst;
-
 // Entry point
-int APIENTRY wWinMain(HINSTANCE hInstance,
-    HINSTANCE hPrevInstance,
-    LPTSTR    lpCmdLine,
-    int       nCmdShow) {
-
-    hInst = hInstance;
-    const wchar_t k_WndClassName[] = L"OverlayWindowClass";
+int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
+{
+    const wchar_t k_WndClassName[] = L"stop the killing";
 
     // Register window class
     WNDCLASSEXW wcex = { 0 };
@@ -44,15 +35,15 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
 
     HWND hWnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_LAYERED,
         k_WndClassName,
-        L"Overlay Window",
+        L"stop the killing",
         WS_POPUP | WS_VISIBLE,
         CW_USEDEFAULT, CW_USEDEFAULT,
-        800, 600,
+        IMAGE_WIDTH, IMAGE_HEIGHT,
         NULL, NULL,
         hInstance,
         NULL);
     // Make window semi-transparent, and mask out background color
-    ::SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 128, LWA_ALPHA | LWA_COLORKEY);
+    ::SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 128, LWA_COLORKEY);
 
     ::ShowWindow(hWnd, nCmdShow);
     ::UpdateWindow(hWnd);
@@ -84,11 +75,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         LoadScreen(hWnd);
         break;
-
     case WM_DESTROY:
-        DeleteObject(hBitmap);
         PostQuitMessage(0);
         break;
+    case WM_CLOSE:
+        return TRUE;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
@@ -101,7 +92,7 @@ void LoadScreen(HWND hWnd)
 {
     RECT rect;
     HDC hdc = GetDC(hWnd);
-    HBITMAP hey = (HBITMAP)LoadImage(NULL, L"C:\\ariel\\projects\\VeganVirus\\carted.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+    HBITMAP hey = (HBITMAP)LoadImage(NULL, L"C:\\ariel\\projects\\VeganVirus\\img1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     DWORD help = GetLastError();
 
     HBRUSH brush = CreatePatternBrush(hey);
