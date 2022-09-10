@@ -1,103 +1,88 @@
+/**/
+#include <windows.h> 
+#include <objidl.h>
+#include <gdiplus.h>
 
+using namespace Gdiplus;
+#pragma comment (lib, "Gdiplus.lib")
 
-#define STRICT 1
-#define WIN32_LEAN_AND_MEAN
-#include <iostream>
-#include <SDKDDKVer.h>
-#include <windows.h>
-
-#define IMAGE_WIDTH 800
-#define IMAGE_HEIGHT 800
-
-// Forward declarations
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-
-void LoadScreen(HWND hWnd);
-
-// Entry point
-int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
+void Example_DrawImage9(HDC hdc)
 {
-    const wchar_t k_WndClassName[] = L"stop the killing";
+    Graphics graphics(hdc);
+    // Create an Image object.
+    Image image(L"C:\\ariel\\projects\\VeganVirus\\download.png");
+    // Create a Pen object.
+    Pen pen(Color(255, 255, 0, 0), 2);
+    // Draw the original source image.
+    graphics.DrawImage(&image, 10, 10);
+}
 
-    // Register window class
-    WNDCLASSEXW wcex = { 0 };
-    wcex.cbSize = sizeof(wcex);
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = WndProc;
-    wcex.hInstance = hInstance;
-    wcex.hCursor = ::LoadCursorW(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)::GetStockObject(BLACK_BRUSH);
-    wcex.lpszClassName = k_WndClassName;
-    ::RegisterClassExW(&wcex);
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
+{
+    ULONG_PTR token;
+    GdiplusStartupInput input = { 0 };
+    input.GdiplusVersion = 1;
+    GdiplusStartup(&token, &input, NULL);
 
-
-
-    HWND hWnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_LAYERED,
-        k_WndClassName,
+    const wchar_t CLASS_NAME[] = L"Static";
+    WNDCLASS wc = {};
+    wc.lpfnWndProc = &WindowProc; //attach this callback procedure
+    wc.hInstance = hInstance; //handle to application instance
+    wc.lpszClassName = CLASS_NAME;
+    RegisterClass(&wc); //register wc
+    // Create the window.
+    HWND hwnd = ::CreateWindowExW(WS_EX_COMPOSITED | WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOPMOST,
+        CLASS_NAME,
         L"stop the killing",
         WS_POPUP | WS_VISIBLE,
         CW_USEDEFAULT, CW_USEDEFAULT,
-        IMAGE_WIDTH, IMAGE_HEIGHT,
+        300, 300,
         NULL, NULL,
         hInstance,
         NULL);
-    // Make window semi-transparent, and mask out background color
-    ::SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 128, LWA_COLORKEY);
 
-    ::ShowWindow(hWnd, nCmdShow);
-    ::UpdateWindow(hWnd);
+    ::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 128, LWA_COLORKEY);
 
-    // Main message loop:
-    MSG msg = { 0 };
-    while (::GetMessageW(&msg, NULL, 0, 0) > 0)
+
+    if (hwnd != NULL)
     {
-        ::TranslateMessage(&msg);
-        ::DispatchMessageW(&msg);
+        MSG msg;
+        while (GetMessage(&msg, NULL, 0, 0) > 0)
+        {
+            //ShowWindow(hwnd, nCmdShow);
+            //UpdateWindow(hwnd);
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
     }
 
-    return (int)msg.wParam;
+    GdiplusShutdown(token);
+    return 0;
+
 }
 
-
-
-HBITMAP hBitmap = NULL;
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+//callback procedure for this window, takes in all the window details
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    int wmId, wmEvent;
-
-
-    switch (message)
+    switch (uMsg)
     {
-    case WM_CREATE:
-        break;
-    case WM_PAINT:
-        LoadScreen(hWnd);
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
     case WM_CLOSE:
         return TRUE;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        return 0;
+
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hwnd, &ps);
+        Example_DrawImage9(hdc);
+        EndPaint(hwnd, &ps);
+        return 0;
+    }
     }
 
-    return 0;
-}
-
-
-void LoadScreen(HWND hWnd)
-{
-    RECT rect;
-    HDC hdc = GetDC(hWnd);
-    HBITMAP hey = (HBITMAP)LoadImage(NULL, L"C:\\ariel\\projects\\VeganVirus\\img1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-    DWORD help = GetLastError();
-
-    HBRUSH brush = CreatePatternBrush(hey);
-    GetWindowRect(hWnd, &rect);
-    FillRect(hdc, &rect, brush);
-    DeleteObject(brush);
-    ReleaseDC(hWnd, hdc);
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
