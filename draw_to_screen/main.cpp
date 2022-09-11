@@ -15,6 +15,7 @@ void drawImage(HDC hdc)
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 Draw* draw;
+Bitmap* bmp;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
 {   
@@ -27,22 +28,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     RegisterClass(&wc); //register wc
     // Create the window.
 
-
     draw = new Draw(hInstance);
+    bmp = new Bitmap(L"draw_to_screen.ico");
 
-    //SetTimer(draw->_hwnd, 1, 100, NULL);
+    SetTimer(draw->_hwnd, 1, 1. / 30, NULL);
     
-
-
     while (GetMessage(&msg, NULL, 0, 0) > 0)
     {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
-    
-
 
     delete draw;
+    delete bmp;
     return 0;
 
 }
@@ -59,16 +57,14 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         return 0;
     case WM_PAINT:
-        i += 2;
-        //draw->clear();
-        //RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
-        //Sleep(5);
-        draw->drawImage(L"C:\\ariel\\projects\\VeganVirus\\download.png", 0, 100);
-        //RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
+        i += 4;
+        draw->clear();
+        draw->drawImage(bmp, i % 1000, i / 1000 * 16);
         break;
     case WM_TIMER:
-        
-
+        RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE);
+        break;
+    default:
         break;
     }
 

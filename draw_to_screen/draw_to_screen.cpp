@@ -13,10 +13,19 @@ Draw::Draw(HINSTANCE hInstance)
     SetLayeredWindowAttributes(this->_hwnd, RGB(0, 0, 0), 128, LWA_COLORKEY);
 
     ShowWindow(this->_hwnd, SW_SHOWMAXIMIZED);
+
+    this->_graphics = new ::Graphics(this->_hwnd, FALSE);
+
+    this->_graphics->SetCompositingMode(CompositingModeSourceCopy);
+    this->_graphics->SetCompositingQuality(CompositingQualityHighSpeed);
+    this->_graphics->SetPixelOffsetMode(PixelOffsetModeNone);
+    this->_graphics->SetSmoothingMode(SmoothingModeNone);
+    this->_graphics->SetInterpolationMode(InterpolationModeDefault);
 }
 
 Draw::~Draw()
 {
+    delete this->_graphics;
     GdiplusShutdown(this->_token);
 }
 
@@ -36,19 +45,13 @@ void Draw::createWindow(HINSTANCE hInstance)
     );
 }
 
-
-void Draw::drawImage(const std::wstring path, int x, int y)
+void Draw::drawImage(Bitmap* bmp, int x, int y)
 {    
-    ::Graphics graphics(GetDC(this->_hwnd));
-    // Create an Image object.
-    ::Image image(path.c_str());
-    // Draw the original source image.
-    graphics.DrawImage(&image, x, y);
-
+    this->_graphics->DrawImage(bmp, x, y);
 }
 
 void Draw::clear()
 {
-    ::Graphics graphics(GetDC(this->_hwnd));
-    graphics.Clear(::Color(0));
+    SolidBrush brush(Color(0));
+    this->_graphics->FillRectangle(&brush, 0, 0, 400, 400);
 }

@@ -15,11 +15,13 @@ class Draw
 public:
 	Draw(HINSTANCE hInstance);
 	~Draw();
-	void drawImage(const std::wstring path, int x, int y);
+	void drawImage(Bitmap* bmp, int x, int y);
 	void clear();
 	
 	HWND _hwnd;
 	ULONG_PTR _token;
+	::Graphics* _graphics;
+	::Bitmap* _bitmap;
 	
 private:
 	void createWindow(HINSTANCE hInstance);
