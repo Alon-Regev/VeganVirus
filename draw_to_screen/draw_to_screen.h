@@ -1,5 +1,4 @@
 #pragma once
-
 #include "resource.h"
 #include <windows.h> 
 #include <objidl.h>
@@ -9,19 +8,25 @@
 using namespace Gdiplus;
 #pragma comment (lib, "Gdiplus.lib")
 
+typedef void(*DrawFrameCallback)(double);
+
+#define FPS 40
 
 class Draw
 {
 public:
-	Draw(HINSTANCE hInstance);
+	Draw(HINSTANCE hInstance, DrawFrameCallback drawCallback);
 	~Draw();
 	void drawImage(Bitmap* bmp, int x, int y);
-	void clear();
+	void applyFrame();
+	bool update();
 	
 	HWND _hwnd;
 	ULONG_PTR _token;
+
+	::Bitmap* _offscreenBmp;
+	::Graphics* _offscreenGraphics;
 	::Graphics* _graphics;
-	::Bitmap* _bitmap;
 	
 private:
 	void createWindow(HINSTANCE hInstance);
