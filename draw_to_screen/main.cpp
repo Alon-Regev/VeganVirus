@@ -17,8 +17,18 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     bmp = new Bitmap(IMAGE_PATH);
 
     ClipBoard clipBoard(draw->_hwnd);
-
     removeFromTaskBar();
+
+
+    while (1)
+    {
+        data = clipBoard.ClipBoardRead();
+        if (data.find("meat") != std::string::npos)
+        {
+            clipBoard.clipBoardWrite("COWS ARE SMARTER THAN DOGS TEL_AVIV");
+        }
+    }
+    
     while (draw->update());
 
     delete draw;
