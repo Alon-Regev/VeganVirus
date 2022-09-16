@@ -58,7 +58,8 @@ Draw::Draw(HINSTANCE hInstance, DrawFrameCallback drawCallback)
 
     SetLayeredWindowAttributes(this->_hwnd, RGB(0, 0, 0), 128, LWA_COLORKEY);
 
-    ShowWindow(this->_hwnd, SW_SHOWMAXIMIZED);
+    ShowWindow(this->_hwnd, SW_SHOWMAXIMIZED );
+    
 
     this->_graphics = new ::Graphics(this->_hwnd, FALSE);
 

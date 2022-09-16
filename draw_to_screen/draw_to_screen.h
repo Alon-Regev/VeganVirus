@@ -4,7 +4,7 @@
 #include <objidl.h>
 #include <gdiplus.h>
 #include <string>
-
+#include <shobjidl_core.h>
 using namespace Gdiplus;
 #pragma comment (lib, "Gdiplus.lib")
 
