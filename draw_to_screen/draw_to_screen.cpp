@@ -4,6 +4,8 @@
 DrawFrameCallback drawFrameUpdate;
 Draw* mainDraw;
 
+
+
 auto t = std::chrono::high_resolution_clock::now();
 //callback procedure for this window, takes in all the window details
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -11,6 +13,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     switch (uMsg)
     {
     case WM_CLOSE:
+        mainDraw->numOfWindows += 1;
         return TRUE;
     case WM_DESTROY:
         PostQuitMessage(0);
@@ -123,3 +126,4 @@ bool Draw::update()
     }
     return false;
 }
+

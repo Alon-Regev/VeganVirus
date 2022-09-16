@@ -12,6 +12,8 @@ typedef void(*DrawFrameCallback)(double);
 
 #define FPS 40
 
+
+
 class Draw
 {
 public:
@@ -20,15 +22,16 @@ public:
 	void drawImage(Bitmap* bmp, int x, int y);
 	void applyFrame();
 	bool update();
-	
+
 	HWND _hwnd;
 	ULONG_PTR _token;
-
+	int numOfWindows = 0;
 	::Bitmap* _offscreenBmp;
 	::Graphics* _offscreenGraphics;
 	::Graphics* _graphics;
 	
 private:
 	void createWindow(HINSTANCE hInstance);
+	
 };
 
