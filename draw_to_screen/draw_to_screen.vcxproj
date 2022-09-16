@@ -140,12 +140,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClipBoard.h" />
     <ClInclude Include="draw_to_screen.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClipBoard.cpp" />
     <ClCompile Include="draw_to_screen.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 #include "draw_to_screen.h"
+#include "ClipBoard.h"
 #include <math.h>
 
 #define IMAGE_PATH L"C:\\cat.jpg"
@@ -11,8 +12,11 @@ void removeFromTaskBar();
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
 {   
+    std::string data = "";
     draw = new Draw(hInstance, drawUpdate);
     bmp = new Bitmap(IMAGE_PATH);
+
+    ClipBoard clipBoard(draw->_hwnd);
 
     removeFromTaskBar();
     while (draw->update());
@@ -62,3 +66,4 @@ void removeFromTaskBar()
         pTaskList->Release();
     }
 }
+
