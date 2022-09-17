@@ -1,18 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <conio.h>
-
-void cuteFunction()
-{
-	int x = 0;
-	scanf("%d", &x);
-	printf("hi %d", x);
-	_getch();
-}
+#include <Windows.h>
 
 int main()
 {
-	cuteFunction();
-	printf("\nmain: %x\nuteFunction: %x\n", main, cuteFunction);
+	printf("hello: 0x%X\n", CreateFileA);
+	printf("hello: 0x%X\n", GetLastError);
+	GetLastError();
+	printf("hi\n");
 }
