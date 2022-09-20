@@ -5,8 +5,5 @@
 
 int main()
 {
-	printf("hello: 0x%X\n", CreateFileA);
-	printf("hello: 0x%X\n", GetLastError);
 	GetLastError();
-	printf("hi\n");
 }

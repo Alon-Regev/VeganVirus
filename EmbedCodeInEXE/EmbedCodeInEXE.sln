@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextEXE", "TextEXE\TextEXE.vcxproj", "{19D67DDB-60B2-4A5B-949B-3C72081079F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestEXE", "TextEXE\TextEXE.vcxproj", "{19D67DDB-60B2-4A5B-949B-3C72081079F5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Embed", "Embed\Embed.vcxproj", "{EB1A8E3E-F3C3-4073-A4CE-44A9D92531F5}"
 EndProject

