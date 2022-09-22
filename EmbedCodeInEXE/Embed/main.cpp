@@ -23,12 +23,14 @@ std::map<std::string, std::map<std::string, addr_t>> dllToFuncNameToAddress = {
     {
         "KERNEL32.dll", 
         {
+            { "CopyFileW", 0 },
             { "GetLastError", 0 },
         }
     },
 };
 
 std::vector<std::pair<std::string, std::string>> externFunctionsToFill = {
+    { "KERNEL32.dll", "CopyFileW" },
     { "KERNEL32.dll", "GetLastError" },
 };
 
@@ -127,13 +129,10 @@ void getExternCallAddresses(FILE* file, int importDirectoryPos, addr_t virtualRa
                 break;
 
             freadstr(file, nameBuffer, ILT.u1.AddressOfData + offsetof(IMAGE_IMPORT_BY_NAME, Name) + virtualRawOffset);
-            if (funcToAddress.find(nameBuffer) == funcToAddress.end())
-            {
-                offset += sizeof(IMAGE_THUNK_DATA64);
-                continue;
-            }
+            if (funcToAddress.find(nameBuffer) != funcToAddress.end())
+                funcToAddress[nameBuffer] = importDescriptor.FirstThunk + imageBase + offset;;
 
-            funcToAddress[nameBuffer] = importDescriptor.FirstThunk + imageBase + offset;//ILT.u1.Function;
+            offset += sizeof(IMAGE_THUNK_DATA64);
         }
     }
 }
@@ -196,7 +195,7 @@ void analyzeEXE(const char* exePath)
     {
         unsigned char b;
         fread(&b, sizeof(unsigned char), 1, file);
-        if (b == 0xCC)
+        if (b == 0x00)
             size++;
         else
         {
