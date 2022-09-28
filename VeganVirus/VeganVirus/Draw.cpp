@@ -104,6 +104,12 @@ void Draw::drawImage(Bitmap* bmp, int x, int y)
     this->_offscreenGraphics->DrawImage(bmp, x, y);
 }
 
+void Draw::drawRectangle(int x, int y, int w, int h, BYTE r, BYTE g, BYTE b, BYTE a)
+{
+    SolidBrush brush(Color(a, r, g, b));
+    this->_offscreenGraphics->FillRectangle(&brush, x, y, w, h);
+}
+
 void Draw::applyFrame()
 {
     // draw offscreen graphics to screen 
@@ -122,4 +128,9 @@ bool Draw::update()
         return true;
     }
     return false;
+}
+
+HWND Draw::getWindowHandle() const
+{
+    return this->_hwnd;
 }

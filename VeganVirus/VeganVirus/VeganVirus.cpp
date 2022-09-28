@@ -41,7 +41,7 @@ void removeFromTaskBar()
 
     if (createRet == S_OK && initRet == S_OK)
     {
-        pTaskList->DeleteTab(draw->_hwnd);
+        pTaskList->DeleteTab(draw->getWindowHandle());
         pTaskList->Release();
     }
 }
