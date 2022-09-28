@@ -23,6 +23,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 void drawUpdate(double dt)
 {
     veganProgress->draw();
+    veganProgress->addProgress(-0.1 * dt);
 }
 
 // the function remove the icon from the task bar
