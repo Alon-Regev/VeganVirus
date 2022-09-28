@@ -1,13 +1,15 @@
-#include "Draw.h"
-
-Draw* draw;
+#include "VeganProgress.h"
 
 void drawUpdate(double dt);
 void removeFromTaskBar();
 
+Draw* draw;
+VeganProgress* veganProgress;
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
 {
     draw = new Draw(hInstance, drawUpdate);
+    veganProgress = new VeganProgress(draw);
 
     removeFromTaskBar();
     while (draw->update());
@@ -20,7 +22,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 // the function updates the screen
 void drawUpdate(double dt)
 {
-
+    veganProgress->draw();
 }
 
 // the function remove the icon from the task bar
