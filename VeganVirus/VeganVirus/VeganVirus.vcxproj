@@ -139,12 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="ExampleAction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="VeganProgress.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="ExampleAction.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
     <ClCompile Include="VeganVirus.cpp" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 #include "VeganProgress.h"
+#include "ExampleAction.h"
 
 void drawUpdate(double dt);
 void removeFromTaskBar();
@@ -10,19 +11,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 {
     draw = new Draw(hInstance, drawUpdate);
     veganProgress = new VeganProgress(draw);
+    veganProgress->addAction(new ExampleAction());
 
     removeFromTaskBar();
     while (draw->update());
 
     delete draw;
     return 0;
-
 }
 
 // the function updates the screen
 void drawUpdate(double dt)
 {
-    veganProgress->draw();
+    veganProgress->draw(dt);
     veganProgress->addProgress(-0.1 * dt);
 }
 
