@@ -3,9 +3,14 @@
 #include "Draw.h"
 #include "Action.h"
 
+#define MEAT_ICON_FILE L"meat.ico"
+#define VEGETABLE_ICON_FILE L"vegetables.png"
+#define PROGRESS_BAR_ICON_SIZE 48, 48
+
 #define CONTENT_COLOR 0, 255, 40
 #define BACKGROUND_COLOR 80, 80, 80
 #define BORDER_COLOR 5, 5, 5
+#define REQ_LINE_COLOR 0, 0, 0
 
 class VeganProgress
 {
@@ -39,7 +44,7 @@ private:
 
 	double _progress = 1;
 	int _x, _h;
-	const int _w = 20, _y = 40;
+	const int _w = 20, _y = 60;
 	const int _bw = 3;	// border width
 
 	double _actionTimer = 0;
@@ -47,4 +52,7 @@ private:
 
 	std::vector<Action*> _actions;
 	Draw* _draw;
+
+	Bitmap* _meatIcon;
+	Bitmap* _vegetableIcon;
 };

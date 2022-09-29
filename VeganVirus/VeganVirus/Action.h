@@ -1,10 +1,17 @@
 #pragma once
+#include "Draw.h"
+
+#define ICON_SIZE 32, 32
+
 class Action
 {
 public:
 	// Action Constructor
 	// input: required progress to activate, path to action icon file
-	Action(double progressRequirement, const char* iconPath);
+	Action(double progressRequirement, const wchar_t* iconPath);
+
+	// Action Destructor
+	~Action();
 
 	// method called to start the action
 	// input: none
@@ -22,12 +29,12 @@ public:
 	virtual bool canActivate();
 
 	double getReq() const;
-	const char* getIconPath() const;
+	Bitmap* getIconBitmap();
 
 	bool activeFlag = false;
 
 private:
 	double _progressRequirement;
-	const char* _iconPath;
+	Bitmap* _iconBitmap;
 };
 

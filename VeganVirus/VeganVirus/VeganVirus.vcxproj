@@ -156,8 +156,11 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="meat.ico" />
+    <Image Include="message.ico" />
     <Image Include="small.ico" />
     <Image Include="VeganVirus.ico" />
+    <Image Include="vegetables.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

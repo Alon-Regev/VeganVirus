@@ -22,9 +22,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 
     draw = new Draw(hInstance, drawUpdate);
     veganProgress = new VeganProgress(draw);
-    veganProgress->addAction(new MessageAction(1, "Being a vegan is awesome!"));
-    veganProgress->addAction(new MessageAction(0.8, "Stay away from those pesky carnivores >:("));
-    veganProgress->addAction(new MessageAction(0.6, "Veganism is the only way! If you don't agree, there will be consequences..."));
+    veganProgress->addAction(new MessageAction(0.98, "Being a vegan is awesome!"));
+    veganProgress->addAction(new MessageAction(0.75, "Stay away from those pesky carnivores >:("));
+    veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
 
     removeFromTaskBar();
     while (draw->update());

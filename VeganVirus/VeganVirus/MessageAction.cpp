@@ -2,7 +2,7 @@
 #include <Windows.h>
 
 MessageAction::MessageAction(double req, const char* message) :
-	Action(req, EXAMPLE_ICON_PATH), _message(message)
+	Action(req, MESSAGE_ICON_PATH), _message(message)
 {
 }
 

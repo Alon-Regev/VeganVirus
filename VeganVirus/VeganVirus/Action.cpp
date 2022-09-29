@@ -1,8 +1,13 @@
 #include "Action.h"
 
-Action::Action(double progressRequirement, const char* iconPath) :
-	_progressRequirement(progressRequirement), _iconPath(iconPath)
+Action::Action(double progressRequirement, const wchar_t* iconPath) :
+	_progressRequirement(progressRequirement), _iconBitmap(Draw::resizedBitmap(iconPath, ICON_SIZE))
 {
+}
+
+Action::~Action()
+{
+	delete _iconBitmap;
 }
 
 void Action::update(double dt)
@@ -19,7 +24,8 @@ double Action::getReq() const
 	return this->_progressRequirement;
 }
 
-const char* Action::getIconPath() const
+Bitmap* Action::getIconBitmap()
 {
-	return this->_iconPath;
+	return this->_iconBitmap;
 }
+

@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 
-#define EXAMPLE_ICON_PATH "VeganVirus.ico"
+#define MESSAGE_ICON_PATH L"message.ico"
 
 class MessageAction :
     public Action
