@@ -1,4 +1,5 @@
 #include "VeganProgress.h"
+#include <stdlib.h>
 
 VeganProgress::VeganProgress(Draw* draw) : _draw(draw)
 {
@@ -27,18 +28,44 @@ void VeganProgress::draw(double dt)
 	this->_draw->drawRectangle(_x, _y + _h * (1-_progress), _w, _h * _progress, r, g, b);
 	
 	// update actions
-	for (Action* action : _actions)
+	for (Action* action : this->_actions)
 	{
 		action->update(dt);
+	}
+	this->_actionTimer += dt;
+	if (this->_actionTimer >= this->_actionInterval)
+	{
+		this->_actionTimer -= this->_actionInterval;
+		this->randomAction();
 	}
 }
 
 void VeganProgress::addProgress(double amount)
 {
 	this->_progress += amount;
+
+	// check immediate activations
+	for (Action* action : this->_actions)
+	{
+		if (!action->activeFlag && this->_progress < action->getReq())
+		{
+			action->activeFlag = true;
+			action->start();
+		}
+	}
 }
 
 void VeganProgress::addAction(Action* action)
 {
 	_actions.push_back(action);
+}
+
+void VeganProgress::randomAction()
+{
+	int actionIndex = rand() % this->_actions.size();
+	// check if can activate action
+	if (this->_progress < this->_actions[actionIndex]->getReq())
+	{
+		this->_actions[actionIndex]->start();
+	}
 }

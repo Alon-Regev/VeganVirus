@@ -32,10 +32,18 @@ public:
 	// return: none
 	void addAction(Action* action);
 private:
+	// method starts a random action
+	// input: none
+	// return: none
+	void randomAction();
+
 	double _progress = 1;
 	int _x, _h;
 	const int _w = 20, _y = 40;
 	const int _bw = 3;	// border width
+
+	double _actionTimer = 0;
+	double _actionInterval = 15;
 
 	std::vector<Action*> _actions;
 	Draw* _draw;

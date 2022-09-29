@@ -24,6 +24,8 @@ public:
 	double getReq() const;
 	const char* getIconPath() const;
 
+	bool activeFlag = false;
+
 private:
 	double _progressRequirement;
 	const char* _iconPath;

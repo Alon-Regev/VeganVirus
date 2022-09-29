@@ -27,7 +27,7 @@
     <ClInclude Include="Action.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExampleAction.h">
+    <ClInclude Include="MessageAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,7 +44,7 @@
     <ClCompile Include="Action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExampleAction.cpp">
+    <ClCompile Include="MessageAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
