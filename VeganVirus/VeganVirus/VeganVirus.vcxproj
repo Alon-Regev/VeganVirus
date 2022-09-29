@@ -143,6 +143,7 @@
     <ClInclude Include="Draw.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="VeganProgress.h" />
   </ItemGroup>
@@ -150,6 +151,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="MessageAction.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
     <ClCompile Include="VeganVirus.cpp" />

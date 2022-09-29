@@ -1,7 +1,7 @@
 #include "System.h"
 
-System::System(double req) :
-	Action(req, SYSTEM_ICON_PATH)
+System::System() :
+	Action(0, SYSTEM_ICON_PATH)
 {
 }
 
