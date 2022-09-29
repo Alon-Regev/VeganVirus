@@ -1,5 +1,6 @@
 #include "VeganProgress.h"
 #include "MessageAction.h"
+#include "System.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -25,6 +26,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new MessageAction(0.98, "Being a vegan is awesome!"));
     veganProgress->addAction(new MessageAction(0.75, "Stay away from those pesky carnivores >:("));
     veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
+    veganProgress->addAction(new System(0));
 
     removeFromTaskBar();
     while (draw->update());
