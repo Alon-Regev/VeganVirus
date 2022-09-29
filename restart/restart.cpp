@@ -1,6 +1,6 @@
 #include<stdlib.h>
 int main()
 {
-    system("C:\\Windows\\System32\\shutdown /s");
+    system("C:\\windows\\system32\\shutdown /r /t 30\n\n");
     return 0;
 }
