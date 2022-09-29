@@ -32,7 +32,7 @@ void VeganProgress::draw(double dt)
 
 	// draw icons
 	this->_draw->drawImage(_vegetableIcon, _x + _w + _bw * 2, _y - _vegetableIcon->GetHeight() * 3. / 5);
-	this->_draw->drawImage(_meatIcon, _x + _w + _bw * 2, _y + _h - _meatIcon->GetHeight() * 2. / 5);
+	this->_draw->drawImage(_meatIcon, _x + _w + _bw * 2, _y + _h - _meatIcon->GetHeight() * 1. / 2);
 
 	// draw action requirements
 	for (Action* action : this->_actions)
