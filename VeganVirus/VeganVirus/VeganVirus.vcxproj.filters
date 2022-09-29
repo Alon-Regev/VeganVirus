@@ -39,6 +39,12 @@
     <ClInclude Include="MouseManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FruitThrowAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FruitThrow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VeganVirus.cpp">
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MouseManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FruitThrowAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FruitThrow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

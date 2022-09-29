@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="FruitThrow.h" />
+    <ClInclude Include="FruitThrowAction.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
     <ClInclude Include="Resource.h" />
@@ -150,6 +152,8 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="FruitThrow.cpp" />
+    <ClCompile Include="FruitThrowAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="MouseManager.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
