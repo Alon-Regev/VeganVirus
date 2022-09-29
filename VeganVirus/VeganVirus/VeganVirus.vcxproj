@@ -139,22 +139,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="Draw.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="MessageAction.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="VeganVirus.h" />
+    <ClInclude Include="VeganProgress.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="MessageAction.cpp" />
+    <ClCompile Include="VeganProgress.cpp" />
     <ClCompile Include="VeganVirus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="meat.ico" />
+    <Image Include="message.ico" />
     <Image Include="small.ico" />
     <Image Include="VeganVirus.ico" />
+    <Image Include="vegetables.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

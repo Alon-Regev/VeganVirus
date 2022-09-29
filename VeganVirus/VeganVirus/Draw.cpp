@@ -104,6 +104,33 @@ void Draw::drawImage(Bitmap* bmp, int x, int y)
     this->_offscreenGraphics->DrawImage(bmp, x, y);
 }
 
+void Draw::drawRectangle(int x, int y, int w, int h, BYTE r, BYTE g, BYTE b, BYTE a)
+{
+    SolidBrush brush(Color(a, r, g, b));
+    this->_offscreenGraphics->FillRectangle(&brush, x, y, w, h);
+}
+
+void Draw::drawLine(int x1, int y1, int x2, int y2, double w, BYTE r, BYTE g, BYTE b, BYTE a)
+{
+    Pen pen(Color(a, r, b, g), w);
+    this->_offscreenGraphics->DrawLine(&pen, Point(x1, y1), Point(x2, y2));
+}
+
+Bitmap* Draw::resizedBitmap(const wchar_t* path, int w, int h)
+{
+    Bitmap original(path);
+    Bitmap* newBitmap = new Bitmap(w, h);
+    Graphics g(newBitmap);
+
+    float horizontalScalingFactor = (float)w / original.GetWidth();
+    float verticalScalingFactor = (float)h / original.GetHeight();
+
+    g.ScaleTransform(horizontalScalingFactor, verticalScalingFactor);
+    g.DrawImage(&original, 0, 0);
+
+    return newBitmap;
+}
+
 void Draw::applyFrame()
 {
     // draw offscreen graphics to screen 
@@ -122,4 +149,9 @@ bool Draw::update()
         return true;
     }
     return false;
+}
+
+HWND Draw::getWindowHandle() const
+{
+    return this->_hwnd;
 }
