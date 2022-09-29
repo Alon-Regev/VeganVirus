@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ClipBoard.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="Resource.h" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ClipBoard.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="Sound.cpp" />
