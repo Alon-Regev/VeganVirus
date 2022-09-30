@@ -46,6 +46,11 @@ public:
 	// return: Bitmap object pointer (needs to be deleted by user)
 	static Bitmap* resizedBitmap(const wchar_t* path, int w, int h);
 
+	// method returns size of screen
+	// input: none
+	// return: size of screen in pixels (x, y)
+	POINT getScreenSize();
+
 	// method draws the current frame to the screen
 	// input: none
 	// return: none
