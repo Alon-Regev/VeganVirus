@@ -136,8 +136,10 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 		{
 			delete f;
 			return true;
-			MessageBoxA(NULL, "bye", "", 0);
 		}
 		return false;
 	});
+
+	if (_currentFruits.size() == 0)
+		BlockInput(FALSE);
 }
