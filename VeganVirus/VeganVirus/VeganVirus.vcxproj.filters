@@ -16,6 +16,9 @@
     <Filter Include="Resource Files\Images">
       <UniqueIdentifier>{4a6d18e0-7dd5-4db8-81d5-dd70733e926e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images\mouseDisabledAnimation">
+      <UniqueIdentifier>{801f735b-790e-4932-acfb-20740ca337ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -45,6 +48,9 @@
     <ClInclude Include="FruitThrow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VeganVirus.cpp">
@@ -71,6 +77,9 @@
     <ClCompile Include="FruitThrow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VeganVirus.rc">
@@ -92,6 +101,33 @@
     </Image>
     <Image Include="vegetables.png">
       <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="stars0.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars1.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars2.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars3.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars4.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars5.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars6.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars7.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars8.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
     </Image>
   </ItemGroup>
 </Project>

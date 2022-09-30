@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="FruitThrow.h" />
     <ClInclude Include="FruitThrowAction.h" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="FruitThrow.cpp" />
     <ClCompile Include="FruitThrowAction.cpp" />
@@ -166,6 +168,15 @@
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="small.ico" />
+    <Image Include="stars0.gif" />
+    <Image Include="stars1.gif" />
+    <Image Include="stars2.gif" />
+    <Image Include="stars3.gif" />
+    <Image Include="stars4.gif" />
+    <Image Include="stars5.gif" />
+    <Image Include="stars6.gif" />
+    <Image Include="stars7.gif" />
+    <Image Include="stars8.gif" />
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
   </ItemGroup>

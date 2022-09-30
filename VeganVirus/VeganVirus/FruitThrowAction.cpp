@@ -1,7 +1,8 @@
 #include "FruitThrowAction.h"
 
 FruitThrowAction::FruitThrowAction(Draw* draw, MouseManager& mouseManager) : 
-	Action(FRUIT_THROW_REQ, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager)
+	Action(FRUIT_THROW_REQ, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager), 
+	_mouseDisabledAnimation(draw, FRAME_DURATION, MOUSE_ANIMATION_PATHS, MOUSE_DISABLED_ANIMATION_SIZE, MOUSE_DISABLED_ANIMATION_SIZE)
 {
 	// initialize trail
 	for (int i = 0; i < TRAIL_LENGTH; i++)
@@ -65,6 +66,18 @@ void FruitThrowAction::update(double dt)
 	if (_mouseDisabled)
 	{
 		_mouseManager.setMousePosition(x1, y1);
+
+		// update mouse freeze
+		if (_mouseDisabledTimer > 0)
+		{
+			_mouseDisabledTimer -= dt;
+			this->_mouseDisabledAnimation.update(dt, x1 - MOUSE_DISABLED_ANIMATION_SIZE / 2, y1 - MOUSE_DISABLED_ANIMATION_SIZE / 2);
+			if (_mouseDisabledTimer <= 0)
+			{
+				_mouseDisabled = false;
+				BlockInput(FALSE);
+			}
+		}
 	}
 
 	for (FruitThrow* fruit : this->_currentFruits)
@@ -103,8 +116,9 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 		if (signbit(_vx) != signbit(ux) || signbit(_vy) != signbit(uy))
 		{
 			_vx = _vy = 0;
-			BlockInput(FALSE);
-			_mouseDisabled = false;
+			// start mouse freeze
+			_mouseDisabledTimer = MOUSE_DISABLE_TIMER;
+			this->_mouseDisabledAnimation.reset();
 		}
 		else
 		{
