@@ -11,14 +11,16 @@ const std::vector<const wchar_t*> FruitThrow::fruitImages = {
 FruitThrow::FruitThrow(Draw* draw, MouseManager& mouseManager) : _draw(draw), _mouseManager(mouseManager)
 {
 	// randomize fields
+	_r += rand() % RADIUS_RANGE;
+
 	const wchar_t* path = FruitThrow::fruitImages[rand() % FruitThrow::fruitImages.size()];
 	this->_image = Draw::resizedBitmap(path, _r * 2, _r * 2);
 
-	POINT screen = draw->getScreenSize();
-	_x = (float)rand() / RAND_MAX * (screen.x + 200) - 100;
-	_y = screen.y + 100;
-	_vx = (screen.x / 2 - _x) * ((float)rand() / RAND_MAX / 2 + 0.25);
-	_vy = -sqrt(2. * _g * screen.y * ((float)rand() / RAND_MAX / 2 + 0.6));
+	_screen = draw->getScreenSize();
+	_x = (float)rand() / RAND_MAX * (_screen.x + 200) - 100;
+	_y = _screen.y + 100;
+	_vx = (_screen.x / 2 - _x) * ((float)rand() / RAND_MAX / 2 + 0.25);
+	_vy = -sqrt(2. * _g * _screen.y * ((float)rand() / RAND_MAX / 2 + 0.6));
 }
 
 FruitThrow::~FruitThrow()
@@ -31,6 +33,12 @@ void FruitThrow::update(double dt)
 	_x += _vx * dt;
 	_y += _vy * dt;
 	_vy += _g * dt;
+
+	// check wall bounce
+	if (_x < (_r - BOUNCE_MARGIN_X) && _vx < 0 || _x > _screen.x - (_r - BOUNCE_MARGIN_X) && _vx > 0)
+		_vx *= -1;
+	if (_y < (_r - BOUNCE_MARGIN_Y) && _vy < 0)
+		_vy *= -1;
 }
 
 void FruitThrow::draw()
@@ -75,4 +83,9 @@ DPoint_t FruitThrow::mouseCollision(double x1, double y1, double vx1, double vy1
 	_vx = ux2; 
 	_vy = uy2;
 	return { ux1, uy1 };
+}
+
+bool FruitThrow::outOfScreen()
+{
+	return _y > _screen.y + _r && _vy > 0;
 }

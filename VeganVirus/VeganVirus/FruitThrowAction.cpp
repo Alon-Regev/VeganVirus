@@ -72,10 +72,10 @@ void FruitThrowAction::update(double dt)
 	}
 }
 
-void FruitThrowAction::subFrameUpdate(double dt, double x1, double x2)
+void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 {
 	// move mouse
-	if (_vx != 0 || _vy != 0)
+	if (_mouseDisabled && _vx != 0 || _vy != 0)
 	{
 		// friction
 		double mult = CURSOR_FRICTION / sqrt(_vx * _vx + _vy * _vy);
@@ -91,17 +91,33 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double x2)
 			_vx = ux;
 			_vy = uy;
 		}
+		// check wall bounce
+		POINT screen = _draw->getScreenSize();
+		if (x1 < 0 && _vx < 0 || x1 > screen.x && _vx > 0)
+			_vx *= -1;
+		if (y1 < 0 && _vy < 0 || y1 > screen.y && _vy > 0)
+			_vy *= -1;
 	}
 	// check collisions
 	for (FruitThrow* fruit : this->_currentFruits)
 	{
 		fruit->update(dt);
-		if (fruit->checkMouseCollision(x1, x2))
+		if (fruit->checkMouseCollision(x1, y1))
 		{
-			DPoint_t u = fruit->mouseCollision(x1, x2, _vx / 5, _vy / 5);
+			DPoint_t u = fruit->mouseCollision(x1, y1, _vx / 5, _vy / 5);
 			_vx = u.x, _vy = u.y;
 			BlockInput(TRUE);
 			_mouseDisabled = true;
 		}
 	}
+
+	_currentFruits.remove_if([](FruitThrow* f) { 
+		if (f->outOfScreen())
+		{
+			delete f;
+			return true;
+			MessageBoxA(NULL, "bye", "", 0);
+		}
+		return false;
+	});
 }
