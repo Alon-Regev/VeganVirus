@@ -31,14 +31,16 @@ void FruitThrow::update(double dt)
 	_x += _vx * dt;
 	_y += _vy * dt;
 	_vy += _g * dt;
+}
 
+void FruitThrow::draw()
+{
 	this->_draw->drawImage(this->_image, _x - _r, _y - _r);
 }
 
-bool FruitThrow::checkMouseCollision()
+bool FruitThrow::checkMouseCollision(double x1, double y1)
 {
-	Point_t mousePos = _mouseManager.getMousePosition();
-	double x1 = mousePos.x, y1 = mousePos.y, x2 = _x, y2 = _y;
+	double x2 = _x, y2 = _y;
 	double Dx = x1 - x2, Dy = y1 - y2;
 	double Dsqr = Dx * Dx + Dy * Dy;
 	if (Dsqr <= _r * _r)
@@ -54,17 +56,16 @@ bool FruitThrow::checkMouseCollision()
 	return false;
 }
 
-DPoint_t FruitThrow::mouseCollision(double vx1, double vy1)
+DPoint_t FruitThrow::mouseCollision(double x1, double y1, double vx1, double vy1)
 {
-	Point_t mousePos = _mouseManager.getMousePosition();
-	double x1 = mousePos.x, y1 = mousePos.y, x2 = _x, y2 = _y;
+	double x2 = _x, y2 = _y;
 	double Dx = x1 - x2, Dy = y1 - y2;
 	double Dsqr = Dx * Dx + Dy * Dy;
 
 	double vx2 = _vx, vy2 = _vy;
 	double m1 = CURSOR_MASS, m2 = FRUIT_MASS;
 
-	double a = 2. * (Dx * (vx2 - vx1) + Dy * (vy2 - vy1)) / Dsqr / (1 / m1 + 1 / m2);
+	double a = BOUNCE_FACTOR * 2. * (Dx * (vx2 - vx1) + Dy * (vy2 - vy1)) / Dsqr / (1 / m1 + 1 / m2);
 
 	double ux1 = vx1 + a * Dx / m1;
 	double uy1 = vy1 + a * Dy / m1;

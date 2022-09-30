@@ -6,8 +6,10 @@
 #define FRUIT_GRAVITY 500
 // pixels per second^2
 
-#define CURSOR_MASS 50
-#define FRUIT_MASS 5
+#define CURSOR_MASS 1
+#define FRUIT_MASS 100
+
+#define BOUNCE_FACTOR 2.5
 
 typedef struct
 {
@@ -27,8 +29,10 @@ public:
 
 	void update(double dt);
 
-	bool checkMouseCollision();
-	DPoint_t mouseCollision(double vx1, double vy1);
+	void draw();
+
+	bool checkMouseCollision(double x1, double y1);
+	DPoint_t mouseCollision(double x1, double y1, double vx1, double vy1);
 
 private:
 	Draw* _draw;
