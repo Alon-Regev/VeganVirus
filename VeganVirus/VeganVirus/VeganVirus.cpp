@@ -2,6 +2,7 @@
 #include "MessageAction.h"
 #include "Sound.h"
 #include "ClipBoard.h"
+#include "GDI_CapturingAnImage.h"
 
 #include "System.h"
 #include <stdlib.h>
@@ -32,6 +33,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new System());
     veganProgress->addAction(new Sound(0.25));
     veganProgress->addAction(new ClipBoard(0, 1));
+    veganProgress->addAction(new Capture(hInstance, 0.99));
 
     removeFromTaskBar();
     while (draw->update());

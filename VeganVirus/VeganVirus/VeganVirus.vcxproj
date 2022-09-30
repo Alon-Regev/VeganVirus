@@ -142,6 +142,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="ClipBoard.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="GDI_CapturingAnImage.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sound.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ClipBoard.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="GDI_CapturingAnImage.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="System.cpp" />
