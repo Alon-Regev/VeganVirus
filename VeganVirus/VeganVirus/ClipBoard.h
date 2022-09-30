@@ -3,6 +3,8 @@
 #include <string>
 #include <windows.h> 
 
+#define CLIP_BOARD_ICON_PATH L"clipBoard.ico"
+
 class ClipBoard : public Action
 {
 public:

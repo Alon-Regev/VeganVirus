@@ -144,6 +144,7 @@
     <ClInclude Include="Draw.h" />
     <ClInclude Include="GDI_CapturingAnImage.h" />
     <ClInclude Include="MessageAction.h" />
+    <ClInclude Include="PopUp.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="System.h" />
@@ -155,6 +156,7 @@
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="GDI_CapturingAnImage.cpp" />
     <ClCompile Include="MessageAction.cpp" />
+    <ClCompile Include="PopUp.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="VeganProgress.cpp" />

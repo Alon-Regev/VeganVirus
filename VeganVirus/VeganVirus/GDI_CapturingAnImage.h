@@ -4,12 +4,7 @@
 #include "Draw.h"
 #include "Action.h"
 
-
 #define CAPTURE_ICON_PATH L"capture.ico"
-
-
-
-
 
 
 class Capture : public Action

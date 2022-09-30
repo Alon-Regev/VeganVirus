@@ -2,7 +2,7 @@
 
 
 ClipBoard::ClipBoard(HWND hwnd, double req) : 
-	_hwnd(hwnd), Action(req, NULL)
+	_hwnd(hwnd), Action(req, CLIP_BOARD_ICON_PATH)
 {
 }
 
