@@ -4,16 +4,24 @@
 #include "FruitThrow.h"
 #include <list>
 
+#define TRAIL_LENGTH 5
+
+typedef struct
+{
+    int x;
+    int y;
+} TrailPoint;
+
 #define FRUIT_THROW_ICON L"vegetables.png"
 #define FRUIT_THROW_REQ 0.9975
 
-#define MIN_FRUIT_TIMER 0.325
-#define MAX_FRUIT_TIMER 0.8
+#define MIN_FRUIT_TIMER 0.375
+#define MAX_FRUIT_TIMER 1
 #define FRUIT_COUNT 24
 
 #define COMPUTATION_SUB_FRAME_INTERVAL 0.006
 
-#define CURSOR_FRICTION -45
+#define CURSOR_FRICTION -50
 // accelaration from friction (px/s^2)
 
 class FruitThrowAction :
@@ -40,5 +48,5 @@ private:
     bool _mouseDisabled = false;
 
     std::list<FruitThrow*> _currentFruits;
+    std::list<TrailPoint> _trailPoints;
 };
-

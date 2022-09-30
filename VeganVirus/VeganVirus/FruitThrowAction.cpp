@@ -3,6 +3,11 @@
 FruitThrowAction::FruitThrowAction(Draw* draw, MouseManager& mouseManager) : 
 	Action(FRUIT_THROW_REQ, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager)
 {
+	// initialize trail
+	for (int i = 0; i < TRAIL_LENGTH; i++)
+	{
+		_trailPoints.push_back({ 0, 0 });
+	}
 }
 
 FruitThrowAction::~FruitThrowAction()
@@ -26,6 +31,9 @@ void FruitThrowAction::start()
 
 void FruitThrowAction::update(double dt)
 {
+	if (this->_fruitLeft == 0 && this->_currentFruits.size() == 0)
+		return;
+
 	double x1 = _px, y1 = _py;
 
 	if (!_mouseDisabled)
@@ -43,7 +51,6 @@ void FruitThrowAction::update(double dt)
 	{
 		x1 += _vx * COMPUTATION_SUB_FRAME_INTERVAL;
 		y1 += _vy * COMPUTATION_SUB_FRAME_INTERVAL;
-		this->_draw->drawRectangle(x1, y1, 6, 6, 255, 0, 0);
 		this->subFrameUpdate(COMPUTATION_SUB_FRAME_INTERVAL, x1, y1);
 	}
 	x1 += _vx * t;
@@ -52,6 +59,8 @@ void FruitThrowAction::update(double dt)
 
 	_px = x1;
 	_py = y1;
+	_trailPoints.push_back({ (int)x1, (int)y1 });
+	_trailPoints.pop_front();
 
 	if (_mouseDisabled)
 	{
@@ -69,6 +78,17 @@ void FruitThrowAction::update(double dt)
 		this->_currentFruits.push_back(new FruitThrow(this->_draw, this->_mouseManager));
 		this->_timer += (float)rand() / RAND_MAX * (MAX_FRUIT_TIMER - MIN_FRUIT_TIMER) + MIN_FRUIT_TIMER;
 		this->_fruitLeft--;
+	}
+
+	// draw trail
+	TrailPoint prev = _trailPoints.front();
+	int width = 2;
+	for (auto it = ++_trailPoints.begin(); it != _trailPoints.end(); it++)
+	{
+		TrailPoint curr = *it;
+		this->_draw->drawLine(prev.x, prev.y, curr.x, curr.y, width, 255, 255, 255);
+		prev = curr;
+		width += 3;
 	}
 }
 
