@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="ClipBoard.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="GDI_CapturingAnImage.h" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="ClipBoard.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="GDI_CapturingAnImage.cpp" />

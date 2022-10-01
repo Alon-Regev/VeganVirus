@@ -1,12 +1,8 @@
 #pragma once
 #include "Action.h"
 #include "windows.h"
-#include "mmsystem.h"
-#include <Mmsystem.h>
-#include <mciapi.h>
-#include <mmeapi.h>
-#include <mmdeviceapi.h>
-#include <endpointvolume.h>
+#include "AudioManager.h"
+
 
 #include <chrono>
 #include <ctime>  
@@ -25,6 +21,7 @@ public:
 	void changeVolume(double vol);
 	bool canActivate();
 private:
+	AudioManager _audioManager;
 	clock_t songStartTime;
 	int currentSong = -1;
 	//how many second it takes until the song end
