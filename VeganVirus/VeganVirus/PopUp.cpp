@@ -6,15 +6,24 @@ PopUp::PopUp(double req, Draw* draw) :
     Action(req, POP_UP_ICON_PATH), _draw(draw)
 {
     _bmp = new Bitmap(IMAGE_PATH);
-    start();
+    _time = 0;
 }
 
 void PopUp::start()
 {
     _numberOfWindows = 4;
-    duplicateWindow();
+    _time = POP_UP_DURATION;
 }
 
+void PopUp::update(double dt)
+{
+    if (_time <= 0)
+    {
+        return;
+    }
+    _time -= dt;
+    duplicateWindow();
+}
 
 void PopUp::duplicateWindow()
 {
