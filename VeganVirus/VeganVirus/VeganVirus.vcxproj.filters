@@ -42,6 +42,9 @@
     <ClInclude Include="DesktopManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DesktopAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VeganVirus.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DesktopManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

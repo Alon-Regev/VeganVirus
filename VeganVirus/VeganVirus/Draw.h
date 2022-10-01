@@ -56,6 +56,11 @@ public:
 	// return: whether can get message or not
 	bool update();
 
+	// method returns size of screen
+	// input: none
+	// return: size of screen in pixels (x, y)
+	POINT getScreenSize();
+
 	// getter for window handle (HWND)
 	HWND getWindowHandle() const;
 private:
