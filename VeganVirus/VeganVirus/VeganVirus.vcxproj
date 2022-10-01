@@ -145,8 +145,8 @@
     <ClInclude Include="ClipBoardAction.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="ImageAction.h" />
     <ClInclude Include="MessageAction.h" />
-    <ClInclude Include="PopUpAction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SoundAction.h" />
     <ClInclude Include="SystemAction.h" />
@@ -160,8 +160,8 @@
     <ClCompile Include="CaptureAction.cpp" />
     <ClCompile Include="ClipBoardAction.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="ImageAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
-    <ClCompile Include="PopUpAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
     <ClCompile Include="SystemAction.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
