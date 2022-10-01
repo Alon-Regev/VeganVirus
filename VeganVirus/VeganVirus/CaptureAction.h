@@ -7,10 +7,10 @@
 #define CAPTURE_ICON_PATH L"capture.ico"
 
 
-class Capture : public Action
+class CaptureAction : public Action
 {
 public:
-	Capture(HINSTANCE hinstance, double req);
+	CaptureAction(HINSTANCE hinstance, double req);
 	void start();
 
 

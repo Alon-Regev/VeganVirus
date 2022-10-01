@@ -6,10 +6,10 @@
 #define POP_UP_DURATION 30
 
 
-class PopUp : public Action
+class PopUpAction : public Action
 {
 public:
-	PopUp(double req, Draw* draw);
+	PopUpAction(double req, Draw* draw);
 	
 	virtual void start();
 	virtual void update(double dt);

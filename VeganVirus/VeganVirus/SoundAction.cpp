@@ -1,11 +1,11 @@
-#include "Sound.h"
+#include "SoundAction.h"
 
-Sound::Sound(double req) : Action(req, MUSIC_ICON_PATH)
+SoundAction::SoundAction(double req) : Action(req, MUSIC_ICON_PATH)
 {
     playListTime[0] = 62;
 }
 
-void Sound::start()
+void SoundAction::start()
 {
     if (!canActivate())
     {
@@ -25,7 +25,7 @@ void Sound::start()
 }
 
 
-bool Sound::canActivate()
+bool SoundAction::canActivate()
 {
     //check that song is playing
     if (this->currentSong != -1)

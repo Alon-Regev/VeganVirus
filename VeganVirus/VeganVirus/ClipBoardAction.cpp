@@ -1,13 +1,13 @@
-#include "ClipBoard.h"
+#include "ClipBoardAction.h"
 
 
-ClipBoard::ClipBoard(HWND hwnd, double req) : 
+ClipBoardAction::ClipBoardAction(HWND hwnd, double req) :
 	_hwnd(hwnd), Action(req, CLIP_BOARD_ICON_PATH)
 {
 }
 
 
-void ClipBoard::clipBoardWrite(std::string content)
+void ClipBoardAction::clipBoardWrite(std::string content)
 {
 	OpenClipboard(_hwnd);
 	EmptyClipboard();
@@ -20,7 +20,7 @@ void ClipBoard::clipBoardWrite(std::string content)
 	CloseClipboard();
 }
 
-std::string ClipBoard::ClipBoardRead()
+std::string ClipBoardAction::ClipBoardRead()
 {
 
 	OpenClipboard(_hwnd);
@@ -39,14 +39,14 @@ std::string ClipBoard::ClipBoardRead()
 
 }
 
-void ClipBoard::clearClipBoard()
+void ClipBoardAction::clearClipBoard()
 {
 	OpenClipboard(_hwnd);
 	EmptyClipboard();
 	CloseClipboard();
 }
 
-void ClipBoard::start()
+void ClipBoardAction::start()
 {
 	std::string data = this->ClipBoardRead();
 	if (data.find("meat") != std::string::npos)

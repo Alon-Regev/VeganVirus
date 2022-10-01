@@ -1,21 +1,21 @@
-#include "PopUp.h"
+#include "PopUpAction.h"
 
 
 
-PopUp::PopUp(double req, Draw* draw) : 
+PopUpAction::PopUpAction(double req, Draw* draw) :
     Action(req, POP_UP_ICON_PATH), _draw(draw)
 {
     _bmp = new Bitmap(IMAGE_PATH);
     _time = 0;
 }
 
-void PopUp::start()
+void PopUpAction::start()
 {
     _numberOfWindows = 4;
     _time = POP_UP_DURATION;
 }
 
-void PopUp::update(double dt)
+void PopUpAction::update(double dt)
 {
     if (_time <= 0)
     {
@@ -25,7 +25,7 @@ void PopUp::update(double dt)
     duplicateWindow();
 }
 
-void PopUp::duplicateWindow()
+void PopUpAction::duplicateWindow()
 {
     int x = 0, y = 0;
     RectF sourceRect(

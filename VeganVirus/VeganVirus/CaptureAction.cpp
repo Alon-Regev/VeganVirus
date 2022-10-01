@@ -1,5 +1,5 @@
 
-#include "GDI_CapturingAnImage.h"
+#include "CaptureAction.h"
 #define MAX_LOADSTRING 100
 WCHAR szTitle[MAX_LOADSTRING];
 WCHAR szWindowClass[MAX_LOADSTRING];
@@ -100,7 +100,7 @@ done:
 
 
 
-Capture::Capture(HINSTANCE hInstance, double req) : Action(req, CAPTURE_ICON_PATH)
+CaptureAction::CaptureAction(HINSTANCE hInstance, double req) : Action(req, CAPTURE_ICON_PATH)
 {
     LoadStringW(hInstance, IDC_VEGANVIRUS, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
@@ -109,7 +109,7 @@ Capture::Capture(HINSTANCE hInstance, double req) : Action(req, CAPTURE_ICON_PAT
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 }
 
-void Capture::start()
+void CaptureAction::start()
 {
     ShowWindow(this->_hwnd, SW_SHOWMAXIMIZED);
 

@@ -141,26 +141,29 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="ClipBoard.h" />
+    <ClInclude Include="CaptureAction.h" />
+    <ClInclude Include="ClipBoardAction.h" />
     <ClInclude Include="Draw.h" />
-    <ClInclude Include="GDI_CapturingAnImage.h" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="MessageAction.h" />
-    <ClInclude Include="PopUp.h" />
+    <ClInclude Include="PopUpAction.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Sound.h" />
-    <ClInclude Include="System.h" />
+    <ClInclude Include="SoundAction.h" />
+    <ClInclude Include="SystemAction.h" />
+    <ClInclude Include="targetver.h" />
     <ClInclude Include="VeganProgress.h" />
+    <ClInclude Include="VeganVirus.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="ClipBoard.cpp" />
+    <ClCompile Include="CaptureAction.cpp" />
+    <ClCompile Include="ClipBoardAction.cpp" />
     <ClCompile Include="Draw.cpp" />
-    <ClCompile Include="GDI_CapturingAnImage.cpp" />
     <ClCompile Include="MessageAction.cpp" />
-    <ClCompile Include="PopUp.cpp" />
-    <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="System.cpp" />
+    <ClCompile Include="PopUpAction.cpp" />
+    <ClCompile Include="SoundAction.cpp" />
+    <ClCompile Include="SystemAction.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
     <ClCompile Include="VeganVirus.cpp" />
   </ItemGroup>

@@ -5,10 +5,10 @@
 
 #define CLIP_BOARD_ICON_PATH L"clipBoard.ico"
 
-class ClipBoard : public Action
+class ClipBoardAction : public Action
 {
 public:
-	ClipBoard(HWND, double);
+	ClipBoardAction(HWND, double);
 	void clipBoardWrite(std::string content);
 	std::string ClipBoardRead();
 	void clearClipBoard();

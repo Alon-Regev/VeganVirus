@@ -4,10 +4,10 @@
 
 #define SYSTEM_ICON_PATH L"system.ico"
 
-class System : public Action
+class SystemAction : public Action
 {
 public:
-	System();
+	SystemAction();
 	virtual void start();
 private:
 };

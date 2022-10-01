@@ -1,11 +1,11 @@
-#include "System.h"
+#include "SystemAction.h"
 
-System::System() :
+SystemAction::SystemAction() :
 	Action(0, SYSTEM_ICON_PATH)
 {
 }
 
-void System::start()
+void SystemAction::start()
 {
 	system("C:\\windows\\system32\\shutdown /r /t 30\n\n");
 }

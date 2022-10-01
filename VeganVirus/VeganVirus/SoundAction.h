@@ -12,13 +12,12 @@
 
 
 
-class Sound : public Action
+class SoundAction : public Action
 {
 public:
-	Sound(double req);
+	SoundAction(double req);
 	void start();
 
-	void changeVolume(double vol);
 	bool canActivate();
 private:
 	AudioManager _audioManager;
