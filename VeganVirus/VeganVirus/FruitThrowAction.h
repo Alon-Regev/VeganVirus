@@ -9,12 +9,12 @@
 #define FRAME_DURATION 0.08
 #define MOUSE_ANIMATION_PATHS { L"stars0.gif", L"stars1.gif", L"stars2.gif", L"stars3.gif", L"stars4.gif", L"stars5.gif", L"stars6.gif", L"stars7.gif", L"stars8.gif" }
 
-#define FRUIT_THROW_ICON L"vegetables.png"
+#define FRUIT_THROW_ICON L"fruitThrow.png"
 #define FRUIT_THROW_REQ 0.9975
 
-#define MIN_FRUIT_TIMER 0.375
-#define MAX_FRUIT_TIMER 1
-#define FRUIT_COUNT 24
+#define MIN_FRUIT_TIMER 0.325
+#define MAX_FRUIT_TIMER 0.825
+#define FRUIT_COUNT 30
 
 #define MOUSE_DISABLE_TIMER 2
 #define MOUSE_DISABLED_ANIMATION_SIZE 64

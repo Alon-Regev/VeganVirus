@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\Images\mouseDisabledAnimation">
       <UniqueIdentifier>{801f735b-790e-4932-acfb-20740ca337ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images\FruitsToThrow">
+      <UniqueIdentifier>{c6846c78-6663-427e-a610-e6a38f1e6a1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -128,6 +131,36 @@
     </Image>
     <Image Include="stars8.gif">
       <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="fruit0.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit1.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit2.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit3.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit4.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit5.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit6.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit7.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit8.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruitThrow.png">
+      <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
 </Project>

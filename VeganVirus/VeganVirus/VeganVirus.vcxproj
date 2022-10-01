@@ -165,6 +165,16 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="fruit0.png" />
+    <Image Include="fruit1.png" />
+    <Image Include="fruit2.png" />
+    <Image Include="fruit3.png" />
+    <Image Include="fruit4.png" />
+    <Image Include="fruit5.png" />
+    <Image Include="fruit6.png" />
+    <Image Include="fruit7.png" />
+    <Image Include="fruit8.png" />
+    <Image Include="fruitThrow.png" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="small.ico" />

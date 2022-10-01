@@ -3,9 +3,15 @@
 #include <math.h>
 
 const std::vector<const wchar_t*> FruitThrow::fruitImages = {
-	L"meat.ico",
-	L"message.ico",
-	L"vegetables.png"
+	L"fruit0.png",
+	L"fruit1.png",
+	L"fruit2.png",
+	L"fruit3.png",
+	L"fruit4.png",
+	L"fruit5.png",
+	L"fruit6.png",
+	L"fruit7.png",
+	L"fruit8.png",
 };
 
 FruitThrow::FruitThrow(Draw* draw, MouseManager& mouseManager) : _draw(draw), _mouseManager(mouseManager)
@@ -17,10 +23,13 @@ FruitThrow::FruitThrow(Draw* draw, MouseManager& mouseManager) : _draw(draw), _m
 	this->_image = Draw::resizedBitmap(path, _r * 2, _r * 2);
 
 	_screen = draw->getScreenSize();
-	_x = (float)rand() / RAND_MAX * (_screen.x + 200) - 100;
-	_y = _screen.y + 100;
-	_vx = (_screen.x / 2 - _x) * ((float)rand() / RAND_MAX / 2 + 0.25);
-	_vy = -sqrt(2. * _g * _screen.y * ((float)rand() / RAND_MAX / 2 + 0.6));
+	_x = (float)rand() / RAND_MAX * (_screen.x + 400) - 200;
+	_y = rand() % 3 ? _screen.y + 100 : -100;
+	_vx = (_screen.x / 2 - _x) * ((float)rand() / RAND_MAX * 0.5 + 0.4);
+	if (_y < 0)
+		_vy = 0;
+	else
+		_vy = -sqrt(2. * _g * _screen.y * ((float)rand() / RAND_MAX * 0.55 + 0.6));
 }
 
 FruitThrow::~FruitThrow()
