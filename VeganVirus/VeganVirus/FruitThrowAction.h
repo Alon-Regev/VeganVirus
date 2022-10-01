@@ -34,7 +34,11 @@ class FruitThrowAction :
     public Action
 {
 public:
+    // FruitThrowAction Constructor
+    // input: pointer to draw object, mouse manager reference
     FruitThrowAction(Draw* draw, MouseManager& mouseManager);
+
+    // FruitThrowAction Destructor
     ~FruitThrowAction();
 
     virtual void start();
@@ -42,6 +46,9 @@ public:
     virtual void update(double dt);
 
 private:
+    // method computes movement of object multiple times per frame
+    // input: time since last sub-update, mouse position (x1, y1) in pixels
+    // return: none
     void subFrameUpdate(double dt, double x1, double y1);
 
     Draw* _draw;

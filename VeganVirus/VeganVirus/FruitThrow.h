@@ -25,19 +25,35 @@ class FruitThrow
 {
 public:
 	// FruitThrow Constructor
-	// input: pointer to draw object
+	// input: pointer to draw object, mouse manager reference
 	FruitThrow(Draw* draw, MouseManager& mouseManager);
 
 	// FruitThrow Destructor
 	~FruitThrow();
 
+	// method updates the fruit throw object
+	// input: time since last update
+	// return: none
 	void update(double dt);
 
+	// method draws the fruit throw object to the screen (for one frame)
+	// input: none
+	// return: none
 	void draw();
 
+	// method checks if the fruit throw object collides with the mouse
+	// input: mouse position (x1, y1) in pixels
+	// return: true if there's a collision
 	bool checkMouseCollision(double x1, double y1);
+
+	// method computes results of collision with the mouse
+	// input: mouse position and speed (x1, y1, vx1, vy1) in pixels or px/s
+	// return: new mouse velocity vector as a point (vx, vy) in px/s
 	DPoint_t mouseCollision(double x1, double y1, double vx1, double vy1);
 
+	// method checks if the fruit throw object is outside the screen and ready to be deleted
+	// input: none
+	// return: true if out of bounds
 	bool outOfScreen();
 
 private:
