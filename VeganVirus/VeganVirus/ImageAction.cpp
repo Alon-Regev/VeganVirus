@@ -1,5 +1,7 @@
 #include "ImageAction.h"
 
+//global var
+int num = 0;
 
 
 ImageAction::ImageAction(double req, Draw* draw) :
@@ -21,8 +23,10 @@ return: none
 */
 void ImageAction::start()
 {
-    _x = rand() % (GetSystemMetrics(SM_CXSCREEN) - IMAGE_WIDTH);
-    _y = rand() % (GetSystemMetrics(SM_CYSCREEN) - IMAGE_HIGH);
+    //check that image don't start in out of bounce
+    _x = GetSystemMetrics(SM_CXSCREEN) - IMAGE_WIDTH;//rand() % (GetSystemMetrics(SM_CXSCREEN) - IMAGE_WIDTH);
+    _y = GetSystemMetrics(SM_CYSCREEN) - IMAGE_HIGH;// rand() % (GetSystemMetrics(SM_CYSCREEN) - IMAGE_HIGH - 1);
+
     _time = POP_UP_DURATION;
 }
 
@@ -37,9 +41,15 @@ void ImageAction::update(double dt)
     {
         return;
     }
-    _time -= dt;
+    _time -= dt;    
     
-    imageAction();
+    //move(pixelPerSecond)
+    _x += movmentX * dt * 15;
+    _y += movmentY * dt * 15; 
+
+    updateWallBounce(dt);
+
+    this->_draw->drawImage(_bmp, _x, _y);
 }
 
 /*
@@ -50,44 +60,32 @@ return: none
 void ImageAction::setImage()
 {
     delete _bmp;
-    int num = rand() % NUM_OF_IMAGES;
+    num++;
     //choose random image
-    std::string path = "popUp\\image" + std::to_string(num) + ".png";
+    std::wstring path = POPUP_IMAGE_PATH(num % NUM_OF_IMAGES);
     //convert string wchar
-    std::wstring wstring(path.begin(), path.end());
-    _bmp = new Bitmap((wchar_t*)wstring.c_str());
+    _bmp = new Bitmap((wchar_t*)path.c_str());
 }
 
 /*
 the function check if image hit side of screen
 param: none
-return: none
+return bool: of out of bounce return true 
 */
-void ImageAction::isHittingWall()
+void ImageAction::updateWallBounce(double dt)
 {
-    if (_x >= GetSystemMetrics(SM_CXSCREEN) - IMAGE_WIDTH || _x < 0)
+    if (_x > GetSystemMetrics(SM_CXSCREEN) - IMAGE_WIDTH || _x < 0)
     {
         setImage();
         movmentX *= -1;
+        //return to previous position
+        _x += movmentX * dt * 15;
     }
-    if (_y >= GetSystemMetrics(SM_CYSCREEN) - IMAGE_HIGH || _y < 0)
+    if (_y > GetSystemMetrics(SM_CYSCREEN) - IMAGE_HIGH || _y < 0)
     {
         setImage();
         movmentY *= -1;
+        //return to previous position
+        _y += movmentY * dt * 15;
     }
-}
-
-/*
-the function change the image location and drwa it
-param: none
-return: none*/
-void ImageAction::imageAction()
-{
-    isHittingWall();
-
-    //move
-    _x += movmentX;
-    _y += movmentY;
-
-    this->_draw->drawImage(_bmp, _x, _y);
 }
