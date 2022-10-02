@@ -3,6 +3,7 @@
 SoundAction::SoundAction(double req) : Action(req, MUSIC_ICON_PATH)
 {
     playListTime[0] = 62;
+    start();
 }
 
 void SoundAction::start()

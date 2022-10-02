@@ -8,7 +8,7 @@
 #include <ctime>  
 
 #define MUSIC_ICON_PATH L"music.ico"
-#define NUM_OF_SONGS 1
+#define NUM_OF_SONGS 7
 
 
 
@@ -16,7 +16,7 @@ class SoundAction : public Action
 {
 public:
 	SoundAction(double req);
-	void start();
+	virtual void start();
 
 	bool canActivate();
 private:
