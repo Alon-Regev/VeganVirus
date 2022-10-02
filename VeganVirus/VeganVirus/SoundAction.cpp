@@ -2,25 +2,25 @@
 
 SoundAction::SoundAction(double req) : Action(req, MUSIC_ICON_PATH)
 {
-    _timer = 0;
+    _timer = SOUND_DUARTION + 1;
 }
 
 void SoundAction::start()
 {
-    _timer = SOUND_DUARTION;
+    this->_audioManager.changeVolume(60);
+    _timer = 0;
 }
 
 void SoundAction::update(double dt)
 {
     std::string song = "";
-    _timer -= dt;
-    if (_timer <= 0 || !canActivate())
+
+    _timer += dt;
+    if (!canActivate() || _timer >= SOUND_DUARTION)
     {
         return;
     }
     
-    //change the volume to 30 for now
-    this->_audioManager.changeVolume(60);
 
     //choose randomly song
     this->currentSong = rand() % NUM_OF_SONGS;
@@ -32,16 +32,11 @@ void SoundAction::update(double dt)
 
 
 bool SoundAction::canActivate()
-{
-    double timePass = SOUND_DUARTION - _timer;
-    
+{    
     //check that song no is playing
-    if (this->currentSong != -1)
+    if (this->currentSong != NO_SONG && _timer <= _playTimeList[currentSong])
     {
-        if (timePass <= playTimeList[currentSong])
-        {
-            return false;
-        }  
+        return false;  
     }
     return true;
 }

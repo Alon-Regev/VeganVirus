@@ -10,7 +10,7 @@
 #define MUSIC_ICON_PATH L"music.ico"
 #define NUM_OF_SONGS 6
 #define SOUND_DUARTION 120
-
+#define NO_SONG -1
 
 class SoundAction : public Action
 {
@@ -23,8 +23,8 @@ public:
 private:
 	AudioManager _audioManager;
 	double _timer;
-	int currentSong = -1;
+	int currentSong = NO_SONG;
 	
-	int playTimeList[NUM_OF_SONGS] = { 160, 70, 150, 220, 270, 30 };
+	const int _playTimeList[NUM_OF_SONGS] = { 160, 70, 150, 220, 270, 30 };
 };
 
