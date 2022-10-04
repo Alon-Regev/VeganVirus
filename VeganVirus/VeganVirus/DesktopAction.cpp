@@ -23,13 +23,13 @@ void DesktopAction::update(double dt)
 	_actionTime -= dt;
 	Point_t mouseTemp = _mouseManager.getMousePosition();
 	POINT mousePos = { mouseTemp.x, mouseTemp.y };
-	std::vector<POINT> iconVelocityArr = iconsMoveFromIcons();
+	std::vector<POINT> iconVelocityArr = computeIconInteractionVelocities();
 	// going over all icons, calculating their velocity and updating their position
 	for (int i = 0; i < _desktopManager.iconCount(); i++)
 	{
 		POINT position = _desktopManager.getIconPosition(i);
 		POINT cursorInteraction = velocityBetweeenPoints(position, mousePos, CURSOR_INTERACTION_VELCITY_COEFFICIENT, 1);
-		POINT newPosition = CheckIconPos(
+		POINT newPosition = correctIconOutOfScreen(
 			{ (long)(position.x + (cursorInteraction.x + iconVelocityArr[i].x) * dt),
 			(long)(position.y + (cursorInteraction.y + iconVelocityArr[i].y) * dt) }
 		);
