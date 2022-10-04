@@ -93,5 +93,8 @@
     <Image Include="vegetables.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

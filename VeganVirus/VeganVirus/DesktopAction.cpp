@@ -1,14 +1,12 @@
 #include "DesktopAction.h"
 #include <cmath>
 
-#define BOUND_DIFF 10
+
 
 DesktopAction::DesktopAction(Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
-	:Action(DESKTOP_ACTION_PROGRESS, L"meat.ico"), _mouseManager(mouseManager), _desktopManager(desktopManager)
+	:Action(DESKTOP_ACTION_PROGRESS, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager)
 {
 	_draw = draw;
-	_mouseManager = mouseManager;
-	_desktopManager = desktopManager;
 	_actionTime = 0;
 }
 
@@ -25,13 +23,13 @@ void DesktopAction::update(double dt)
 	_actionTime -= dt;
 	Point_t mouseTemp = _mouseManager.getMousePosition();
 	POINT mousePos = { mouseTemp.x, mouseTemp.y };
-	std::vector<POINT> iconSpeedArr = iconsMoveFromIcons();
-	// loping for each icon and seting is new postion on the screen base on interaction between the icons and the curser
+	std::vector<POINT> iconVelocityArr = iconsMoveFromIcons();
+	// going over all icons, calculating their velocity and updating their position
 	for (int i = 0; i < _desktopManager.iconCount(); i++)
 	{
 		POINT iconPosition = _desktopManager.getIconPosition(i);
 		POINT iconMoveCurser = velocityBetweeenPoints(iconPosition, mousePos, CURSOR_INTERACTION_VELCITY_COEFFICIENT, 1);
-		POINT iconNewPosCurser = CheckIconPos({ (long)(iconPosition.x + (iconMoveCurser.x + iconSpeedArr[i].x) * dt), (long)(iconPosition.y + (iconMoveCurser.y + iconSpeedArr[i].y) * dt)});
+		POINT iconNewPosCurser = CheckIconPos({ (long)(iconPosition.x + (iconMoveCurser.x + iconVelocityArr[i].x) * dt), (long)(iconPosition.y + (iconMoveCurser.y + iconVelocityArr[i].y) * dt)});
 		_desktopManager.setIconPosition(i, iconNewPosCurser);
 	}
 }
@@ -73,21 +71,21 @@ POINT DesktopAction::CheckIconPos(POINT newPos)
 {
 	// checking if the icon is out of boundries and setting is new position
 	POINT screenBoundries = _draw->getScreenSize();
-	if (newPos.x < BOUND_DIFF)
+	if (newPos.x < SCREEN_MARGIN)
 	{
-		newPos.x = BOUND_DIFF;
+		newPos.x = SCREEN_MARGIN;
 	}
-	if (newPos.x > screenBoundries.x - BOUND_DIFF)
+	if (newPos.x > screenBoundries.x - SCREEN_MARGIN)
 	{
-		newPos.x = screenBoundries.x - BOUND_DIFF;
+		newPos.x = screenBoundries.x - SCREEN_MARGIN;
 	}
-	if (newPos.y < BOUND_DIFF)
+	if (newPos.y < SCREEN_MARGIN)
 	{
-		newPos.y = BOUND_DIFF;
+		newPos.y = SCREEN_MARGIN;
 	}
-	if (newPos.y > screenBoundries.y - BOUND_DIFF)
+	if (newPos.y > screenBoundries.y - SCREEN_MARGIN)
 	{
-		newPos.y = screenBoundries.y - BOUND_DIFF;
+		newPos.y = screenBoundries.y - SCREEN_MARGIN;
 	}
 	return { newPos.x, newPos.y };
 }

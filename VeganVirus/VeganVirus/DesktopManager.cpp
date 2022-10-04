@@ -8,6 +8,7 @@ DesktopManager::DesktopManager()
     this->_hDesktopListView = FindWindowEx(hDefView, NULL, L"SysListView32", NULL);
     if (!this->_hDesktopListView)
     {
+        // first method failed. try a different one
         HWND destop = GetDesktopWindow();
         HWND hWorkerW = NULL;
         HWND hShellViewWin = NULL;

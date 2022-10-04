@@ -8,13 +8,14 @@
 #define DESKTOP_ACTION_TIME 30
 #define CURSOR_INTERACTION_VELCITY_COEFFICIENT 10000
 #define ICON_INTERACTION_VELOCITY_COEFFICIENT 10000
-
+#define SCREEN_MARGIN 10
+#define DESKTOP_ACTION_ICON L"desktop.ico"
 
 class DesktopAction:
     public Action
-{
-public:
-    DesktopAction(Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager);
+	{
+	public:
+	DesktopAction(Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager);
 
 	// method called to start the action
 	// input: none
@@ -26,23 +27,24 @@ public:
 	// return: none
 	virtual void update(double dt);
 
-	// method that calclate the velocity of the icon base on distance from curser
-	// input: Point: two point the coeficient and the power  for the calclatesion
-	// return: POINT: the velocity of the two points
-	virtual POINT velocityBetweeenPoints(POINT a, POINT b, double coefficient, int power);
+	// method calculates an icon's velocity based on the interaction between it's position and another point.
+	// input: two positions of interacting objects, 
+	// the coefficient and power to use while calculating (V=C/R^p)
+	// return: velocity of interaction (POINT)
+	POINT velocityBetweeenPoints(POINT a, POINT b, double coefficient, int power);
 
-	// method update the icon pos and check if the icon pos is on boundaries of the screen
-	// input: POINT: pos of the icon
-	// return: POINT: the position of the icon need to be
-	virtual POINT CheckIconPos(POINT newPos);
+	// method updates the icon position by checking if the icon is out of the screen boundaries.
+	// input: icon position (POINT)
+	// return: position the icon needs to be in (POINT)
+	POINT CheckIconPos(POINT newPos);
 
-	// method calclate the velocity of the icon base on all the other icon 
-	// input: None
-	// return: vector that store the velocity of the icon base on all the other icon 
-	virtual std::vector<POINT> iconsMoveFromIcons();
+	// method calculates the velocities of all icons based on the interactions between them.
+	// input: none
+	// return: vector that stores total velocity of each icon
+	std::vector<POINT> iconsMoveFromIcons();
 
 
-private:
+	private:
     Draw* _draw;
     MouseManager& _mouseManager;
 	DesktopManager& _desktopManager;

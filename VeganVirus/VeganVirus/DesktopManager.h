@@ -13,7 +13,7 @@ public:
 
 	// method returns desktop icon position based on it's index
 	// input: icon index (int)
-	// return: icon position: (POINT)
+	// return: icon position (POINT)
 	POINT getIconPosition(int i);
 
 	// method sets position of desktop icon based on index

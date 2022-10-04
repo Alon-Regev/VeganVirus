@@ -163,6 +163,7 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="small.ico" />
