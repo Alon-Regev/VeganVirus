@@ -27,28 +27,32 @@ void DesktopAction::update(double dt)
 	// going over all icons, calculating their velocity and updating their position
 	for (int i = 0; i < _desktopManager.iconCount(); i++)
 	{
-		POINT iconPosition = _desktopManager.getIconPosition(i);
-		POINT iconMoveCurser = velocityBetweeenPoints(iconPosition, mousePos, CURSOR_INTERACTION_VELCITY_COEFFICIENT, 1);
-		POINT iconNewPosCurser = CheckIconPos({ (long)(iconPosition.x + (iconMoveCurser.x + iconVelocityArr[i].x) * dt), (long)(iconPosition.y + (iconMoveCurser.y + iconVelocityArr[i].y) * dt)});
-		_desktopManager.setIconPosition(i, iconNewPosCurser);
+		POINT position = _desktopManager.getIconPosition(i);
+		POINT cursorInteraction = velocityBetweeenPoints(position, mousePos, CURSOR_INTERACTION_VELCITY_COEFFICIENT, 1);
+		POINT newPosition = CheckIconPos(
+			{ (long)(position.x + (cursorInteraction.x + iconVelocityArr[i].x) * dt),
+			(long)(position.y + (cursorInteraction.y + iconVelocityArr[i].y) * dt) }
+		);
+		_desktopManager.setIconPosition(i, newPosition);
 	}
 }
 
-std::vector<POINT> DesktopAction::iconsMoveFromIcons()
+std::vector<POINT> DesktopAction::computeIconInteractionVelocities()
 {
-	int iconNum = _desktopManager.iconCount();
-	std::vector<POINT> iconPositions;
-	for (int i = 0; i < iconNum; i++)
+	int iconCount = _desktopManager.iconCount();
+	std::vector<POINT> positions;
+	for (int i = 0; i < iconCount; i++)
 	{
-		iconPositions.push_back(_desktopManager.getIconPosition(i));
+		positions.push_back(_desktopManager.getIconPosition(i));
 	}
-	std::vector<POINT> iconVelocities(iconNum, { 0 });
-	// lopping for calcalute the velocity of the icon base on the distance from other icons
-	for (int i = 0; i < iconNum; i++)
+	std::vector<POINT> iconVelocities(iconCount, { 0 });
+	// looping over all pairs of icons and calculating their interaction. 
+	// then summing up all interaction velocities on every icon.
+	for (int i = 0; i < iconCount; i++)
 	{
-		for (int j = i + 1; j < iconNum; j++)
+		for (int j = i + 1; j < iconCount; j++)
 		{
-			POINT velocity = velocityBetweeenPoints(iconPositions[i], iconPositions[j], ICON_INTERACTION_VELOCITY_COEFFICIENT, 2);
+			POINT velocity = velocityBetweeenPoints(positions[i], positions[j], ICON_INTERACTION_VELOCITY_COEFFICIENT, 2);
 			iconVelocities[i].x += velocity.x;
 			iconVelocities[i].y += velocity.y;
 			iconVelocities[j].x -= velocity.x;
@@ -67,25 +71,17 @@ POINT DesktopAction::velocityBetweeenPoints(POINT a, POINT b, double coefficient
 	return { velocityX, velocityY };
 }
 
-POINT DesktopAction::CheckIconPos(POINT newPos)
+POINT DesktopAction::correctIconOutOfScreen(POINT newPos)
 {
-	// checking if the icon is out of boundries and setting is new position
+	// check if icon is out of boundaries and return corrected position
 	POINT screenBoundries = _draw->getScreenSize();
 	if (newPos.x < SCREEN_MARGIN)
-	{
 		newPos.x = SCREEN_MARGIN;
-	}
 	if (newPos.x > screenBoundries.x - SCREEN_MARGIN)
-	{
 		newPos.x = screenBoundries.x - SCREEN_MARGIN;
-	}
 	if (newPos.y < SCREEN_MARGIN)
-	{
 		newPos.y = SCREEN_MARGIN;
-	}
 	if (newPos.y > screenBoundries.y - SCREEN_MARGIN)
-	{
 		newPos.y = screenBoundries.y - SCREEN_MARGIN;
-	}
 	return { newPos.x, newPos.y };
 }
