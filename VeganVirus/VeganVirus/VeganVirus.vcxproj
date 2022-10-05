@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="DesktopAction.h" />
+    <ClInclude Include="DesktopManager.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
@@ -149,6 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="DesktopAction.cpp" />
+    <ClCompile Include="DesktopManager.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="MouseManager.cpp" />
@@ -159,6 +163,7 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="small.ico" />

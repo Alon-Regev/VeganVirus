@@ -39,6 +39,12 @@
     <ClInclude Include="MouseManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DesktopManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VeganVirus.cpp">
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MouseManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,6 +91,9 @@
       <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="vegetables.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
