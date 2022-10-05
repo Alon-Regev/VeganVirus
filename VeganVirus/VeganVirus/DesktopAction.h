@@ -5,9 +5,9 @@
 
 
 #define DESKTOP_ACTION_PROGRESS 0.998
-#define DESKTOP_ACTION_TIME 30
-#define CURSOR_INTERACTION_VELCITY_COEFFICIENT 10000
-#define ICON_INTERACTION_VELOCITY_COEFFICIENT 10000
+#define DESKTOP_ACTION_TIME 10
+#define CURSOR_INTERACTION_VELCITY_COEFFICIENT 200000
+#define ICON_INTERACTION_VELOCITY_COEFFICIENT 40000000
 #define SCREEN_MARGIN 10
 #define DESKTOP_ACTION_ICON L"desktop.ico"
 
@@ -49,6 +49,8 @@ private:
 	MouseManager& _mouseManager;
 	DesktopManager& _desktopManager;
 	double _actionTime;
+
+	std::vector<POINT> _iconPositions;
 };
 
 
