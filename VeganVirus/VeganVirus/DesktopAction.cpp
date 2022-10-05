@@ -32,9 +32,11 @@ void DesktopAction::update(double dt)
 	{
 		POINT position = _iconPositions[i];
 		POINT cursorInteraction = velocityBetweeenPoints(position, mousePos, CURSOR_INTERACTION_VELCITY_COEFFICIENT, 1);
+		POINT velocity = limitVelocity({ cursorInteraction.x + iconVelocityArr[i].x,
+			cursorInteraction.y + iconVelocityArr[i].y });
 		POINT newPosition = correctIconOutOfScreen(
-			{ (long)(position.x + (cursorInteraction.x + iconVelocityArr[i].x) * dt),
-			(long)(position.y + (cursorInteraction.y + iconVelocityArr[i].y) * dt) }
+			{ (long)(position.x + velocity.x * dt),
+			(long)(position.y + velocity.y * dt) }
 		);
 		_iconPositions[i] = newPosition;
 		_desktopManager.setIconPosition(i, newPosition);
@@ -58,6 +60,17 @@ std::vector<POINT> DesktopAction::computeIconInteractionVelocities()
 		}
 	}
 	return iconVelocities;
+}
+
+POINT DesktopAction::limitVelocity(POINT velocity)
+{
+	double vSqr = velocity.x * velocity.x + velocity.y * velocity.y;
+	if (vSqr > MAX_VELOCITY * MAX_VELOCITY)
+	{
+		double mul = MAX_VELOCITY / sqrt(vSqr);
+		return { (long)(velocity.x * mul), (long)(velocity.y * mul) };
+	}
+	return velocity;
 }
 
 POINT DesktopAction::velocityBetweeenPoints(POINT a, POINT b, double coefficient, int power)

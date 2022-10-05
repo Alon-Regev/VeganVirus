@@ -3,13 +3,13 @@
 #include "MouseManager.h"
 #include "DesktopManager.h"
 
-
 #define DESKTOP_ACTION_PROGRESS 0.998
-#define DESKTOP_ACTION_TIME 10
-#define CURSOR_INTERACTION_VELCITY_COEFFICIENT 200000
-#define ICON_INTERACTION_VELOCITY_COEFFICIENT 40000000
+#define DESKTOP_ACTION_TIME 30
+#define CURSOR_INTERACTION_VELCITY_COEFFICIENT 10000
+#define ICON_INTERACTION_VELOCITY_COEFFICIENT 100000
 #define SCREEN_MARGIN 10
 #define DESKTOP_ACTION_ICON L"desktop.ico"
+#define MAX_VELOCITY 500
 
 class DesktopAction :
 	public Action
@@ -27,6 +27,7 @@ public:
 	// return: none
 	virtual void update(double dt);
 
+private:
 	// method calculates an icon's velocity based on the interaction between it's position and another point.
 	// input: two positions of interacting objects, 
 	//        the coefficient and power to use while calculating (V=C/R^p)
@@ -43,8 +44,11 @@ public:
 	// return: vector that stores total velocity of each icon
 	std::vector<POINT> computeIconInteractionVelocities();
 
+	// method limits the magnitude of the input velocity
+	// input: velocity as POINT
+	// return: corrected velocity
+	POINT limitVelocity(POINT velocity);
 
-private:
 	Draw* _draw;
 	MouseManager& _mouseManager;
 	DesktopManager& _desktopManager;
