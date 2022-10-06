@@ -8,22 +8,23 @@
 #include <ctime>  
 
 #define MUSIC_ICON_PATH L"music.ico"
-#define NUM_OF_SONGS 1
-
-
+#define NUM_OF_SONGS 6
+#define SOUND_DUARTION 120
+#define NO_SONG -1
 
 class SoundAction : public Action
 {
 public:
 	SoundAction(double req);
-	void start();
+	virtual void start();
+	virtual void update(double dt);
 
 	bool canActivate();
 private:
 	AudioManager _audioManager;
-	clock_t songStartTime;
-	int currentSong = -1;
-	//how many second it takes until the song end
-	int playListTime[NUM_OF_SONGS];
+	double _timer;
+	int _currentSong = NO_SONG;
+	
+	const int _playTimeList[NUM_OF_SONGS] = { 160, 70, 150, 220, 270, 30 };
 };
 
