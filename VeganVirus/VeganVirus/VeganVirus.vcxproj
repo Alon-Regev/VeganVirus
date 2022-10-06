@@ -173,6 +173,22 @@
   <ItemGroup>
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
+    <Image Include="popUp\image0.png" />
+    <Image Include="popUp\image1.png" />
+    <Image Include="popUp\image10.png" />
+    <Image Include="popUp\image11.png" />
+    <Image Include="popUp\image12.png" />
+    <Image Include="popUp\image14.png" />
+    <Image Include="popUp\image15.png" />
+    <Image Include="popUp\image16.png" />
+    <Image Include="popUp\image2.png" />
+    <Image Include="popUp\image3.png" />
+    <Image Include="popUp\image4.png" />
+    <Image Include="popUp\image5.png" />
+    <Image Include="popUp\image6.png" />
+    <Image Include="popUp\image7.png" />
+    <Image Include="popUp\image8.png" />
+    <Image Include="popUp\image9.png" />
     <Image Include="small.ico" />
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
