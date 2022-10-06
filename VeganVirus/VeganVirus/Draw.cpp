@@ -131,6 +131,13 @@ Bitmap* Draw::resizedBitmap(const wchar_t* path, int w, int h)
     return newBitmap;
 }
 
+POINT Draw::getScreenSize()
+{
+    RECT rect;
+    GetClientRect(this->_hwnd, &rect);
+    return { rect.right - rect.left, rect.bottom - rect.top };
+}
+
 void Draw::applyFrame()
 {
     // draw offscreen graphics to screen 
