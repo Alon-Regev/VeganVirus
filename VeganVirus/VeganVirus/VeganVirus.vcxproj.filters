@@ -39,12 +39,6 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClipBoardAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SoundAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,13 +48,22 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VeganVirus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CaptureAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ImageAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,9 +86,6 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClipBoardAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SoundAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,6 +96,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ImageAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,6 +176,9 @@
     </Image>
     <Image Include="popUp\image16.png">
       <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
+      <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
 </Project>
