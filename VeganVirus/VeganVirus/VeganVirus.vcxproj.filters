@@ -16,6 +16,9 @@
     <Filter Include="Resource Files\Images">
       <UniqueIdentifier>{4a6d18e0-7dd5-4db8-81d5-dd70733e926e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\popUp">
+      <UniqueIdentifier>{1aa7acb6-eb93-43ab-8f99-19c2b4696da7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -42,9 +45,6 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PopUpAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SoundAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -58,6 +58,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CaptureAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,9 +86,6 @@
     <ClCompile Include="ClipBoardAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PopUpAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SoundAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CaptureAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,6 +119,54 @@
     </Image>
     <Image Include="vegetables.png">
       <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="popUp\image0.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image1.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image2.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image3.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image4.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image5.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image6.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image7.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image8.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image9.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image10.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image11.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image12.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image14.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image15.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image16.png">
+      <Filter>Resource Files\popUp</Filter>
     </Image>
   </ItemGroup>
 </Project>
