@@ -22,6 +22,9 @@
     <Filter Include="Resource Files\Images\FruitsToThrow">
       <UniqueIdentifier>{c6846c78-6663-427e-a610-e6a38f1e6a1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\popUp">
+      <UniqueIdentifier>{1aa7acb6-eb93-43ab-8f99-19c2b4696da7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -39,6 +42,24 @@
     <ClInclude Include="MessageAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CaptureAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +73,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
+		<Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,6 +98,21 @@
     <ClCompile Include="MessageAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CaptureAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="MouseManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -81,6 +123,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -160,6 +208,57 @@
       <Filter>Resource Files\Images\FruitsToThrow</Filter>
     </Image>
     <Image Include="fruitThrow.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="popUp\image0.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image1.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image2.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image3.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image4.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image5.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image6.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image7.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image8.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image9.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image10.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image11.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image12.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image14.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image15.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="popUp\image16.png">
+      <Filter>Resource Files\popUp</Filter>
+    </Image>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>

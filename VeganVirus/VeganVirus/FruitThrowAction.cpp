@@ -140,7 +140,7 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 		{
 			DPoint_t u = fruit->mouseCollision(x1, y1, _vx / 5, _vy / 5);
 			_vx = u.x, _vy = u.y;
-			BlockInput(TRUE);
+			bool ret = BlockInput(TRUE);
 			_mouseDisabled = true;
 		}
 	}
