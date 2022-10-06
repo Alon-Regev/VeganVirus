@@ -1,5 +1,9 @@
 #include "VeganProgress.h"
 #include "MessageAction.h"
+#include "SoundAction.h"
+#include "CaptureAction.h"
+#include "ImageAction.h"
+#include "SystemAction.h"
 #include "MouseManager.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
@@ -24,14 +28,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     Sleep(rand() / RAND_MAX * (MAX_INITIAL_SLEEP - MIN_INITIAL_SLEEP) + MIN_INITIAL_SLEEP);
 
     draw = new Draw(hInstance, drawUpdate);
-    veganProgress = new VeganProgress(draw);
     MouseManager mouseManager;
     DesktopManager desktopManager;
 
-    veganProgress->addAction(new MessageAction(0.98, "Being a vegan is awesome!"));
-    veganProgress->addAction(new MessageAction(0.75, "Stay away from those pesky carnivores >:("));
-    veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
+    veganProgress = new VeganProgress(draw);
+
+    veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
+    veganProgress->addAction(new CaptureAction(hInstance, 0.85));
+    veganProgress->addAction(new MessageAction(0.70, "Stay away from those pesky carnivores >:("));
+    veganProgress->addAction(new MessageAction(0.40, "Veganism is the only way! If you don't agree, there will be consequences..."));
+    veganProgress->addAction(new SoundAction(0.25));
+    veganProgress->addAction(new ImageAction(0.15, draw));
+    veganProgress->addAction(new SystemAction());
     veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));
+
     removeFromTaskBar();
     while (draw->update());
 

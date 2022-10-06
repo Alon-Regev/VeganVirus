@@ -70,7 +70,8 @@ void VeganProgress::addProgress(double amount)
 		if (!action->activeFlag && this->_progress < action->getReq())
 		{
 			action->activeFlag = true;
-			action->start();
+			if(action->canActivate())
+				action->start();
 		}
 	}
 }
@@ -86,6 +87,7 @@ void VeganProgress::randomAction()
 	// check if can activate action
 	if (this->_progress < this->_actions[actionIndex]->getReq())
 	{
-		this->_actions[actionIndex]->start();
+		if(this->_actions[actionIndex]->canActivate())
+			this->_actions[actionIndex]->start();
 	}
 }

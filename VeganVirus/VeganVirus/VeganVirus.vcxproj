@@ -140,21 +140,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="CaptureAction.h" />
     <ClInclude Include="DesktopAction.h" />
     <ClInclude Include="DesktopManager.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="ImageAction.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SoundAction.h" />
+    <ClInclude Include="SystemAction.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VeganProgress.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="CaptureAction.cpp" />
     <ClCompile Include="DesktopAction.cpp" />
     <ClCompile Include="DesktopManager.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="ImageAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
+    <ClCompile Include="SoundAction.cpp" />
+    <ClCompile Include="SystemAction.cpp" />
     <ClCompile Include="MouseManager.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
     <ClCompile Include="VeganVirus.cpp" />
@@ -166,6 +176,22 @@
     <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
+    <Image Include="popUp\image0.png" />
+    <Image Include="popUp\image1.png" />
+    <Image Include="popUp\image10.png" />
+    <Image Include="popUp\image11.png" />
+    <Image Include="popUp\image12.png" />
+    <Image Include="popUp\image14.png" />
+    <Image Include="popUp\image15.png" />
+    <Image Include="popUp\image16.png" />
+    <Image Include="popUp\image2.png" />
+    <Image Include="popUp\image3.png" />
+    <Image Include="popUp\image4.png" />
+    <Image Include="popUp\image5.png" />
+    <Image Include="popUp\image6.png" />
+    <Image Include="popUp\image7.png" />
+    <Image Include="popUp\image8.png" />
+    <Image Include="popUp\image9.png" />
     <Image Include="small.ico" />
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
