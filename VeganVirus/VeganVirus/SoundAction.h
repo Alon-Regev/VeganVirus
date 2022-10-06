@@ -23,7 +23,7 @@ public:
 private:
 	AudioManager _audioManager;
 	double _timer;
-	int currentSong = NO_SONG;
+	int _currentSong = NO_SONG;
 	
 	const int _playTimeList[NUM_OF_SONGS] = { 160, 70, 150, 220, 270, 30 };
 };
