@@ -146,6 +146,7 @@
     <ClInclude Include="DesktopManager.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="ImageAction.h" />
+    <ClInclude Include="KeyboardAction.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
     <ClInclude Include="Resource.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="DesktopManager.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="ImageAction.cpp" />
+    <ClCompile Include="KeyboardAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
     <ClCompile Include="SystemAction.cpp" />

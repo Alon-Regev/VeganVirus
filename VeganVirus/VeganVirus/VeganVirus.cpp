@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <time.h>
 #include "VeganProgress.h"
 #include "MessageAction.h"
 #include "SoundAction.h"
@@ -7,8 +9,7 @@
 #include "MouseManager.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
-#include <stdlib.h>
-#include <time.h>
+#include "KeyboardAction.h"
 
 #define MIN_INITIAL_SLEEP 2000
 #define MAX_INITIAL_SLEEP 4000
@@ -41,6 +42,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
     veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));
+    veganProgress->addAction((Action*)keyboard);
 
     removeFromTaskBar();
     while (draw->update());
