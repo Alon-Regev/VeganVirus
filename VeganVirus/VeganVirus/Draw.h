@@ -32,13 +32,21 @@ public:
 	// method draws a rectangle on the screen
 	// input: rect to draw (x, y, w , h) in pixels
 	//		  color to draw (r, g, b, opt a)
+	// return: none
 	void drawRectangle(int x, int y, int w, int h, BYTE r, BYTE g, BYTE b, BYTE a = 255);
 
 	// method draws a line on the screen
 	// input: line to draw (x1, y1) -> (x2, y2) in pixels,
 	//		  line width,
 	//		  color to draw (r, g, b, opt a)
+	// return: none
 	void drawLine(int x1, int y1, int x2, int y2, double w, BYTE r, BYTE g, BYTE b, BYTE a = 255);
+
+	// method draws text on the screen
+	// input: position of the text (x, y) in pixels
+	//		  text to draw (wide string, utf-16)
+	// return: none
+	void drawText(int x, int y, const wchar_t* text);
 
 	// method loads a bitmap in a specific size
 	// input: bitmap path to load,

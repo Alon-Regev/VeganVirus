@@ -4,18 +4,26 @@
 #include "DesktopManager.h"
 
 #define DESKTOP_ACTION_PROGRESS 0.998
-#define DESKTOP_ACTION_TIME 30
+#define DESKTOP_ACTION_TIME 20
 #define CURSOR_INTERACTION_VELCITY_COEFFICIENT 10000
 #define ICON_INTERACTION_VELOCITY_COEFFICIENT 100000
 #define SCREEN_MARGIN 10
 #define DESKTOP_ACTION_ICON L"desktop.ico"
 #define MAX_VELOCITY 500
+#define SPEECH_BUBBLE_CHANCE_INV 125
+
+typedef struct
+{
+	int iconIndex;
+	const wchar_t* message;
+} SpeechBubble;
 
 class DesktopAction :
 	public Action
 {
 public:
-	DesktopAction(Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager);
+	DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager);
+	~DesktopAction();
 
 	// method called to start the action
 	// input: none
@@ -55,6 +63,9 @@ private:
 	double _actionTime;
 
 	std::vector<POINT> _iconPositions;
+	std::vector<SpeechBubble> _speechBubbles;
+
+	Bitmap* _speechBubbleBmp;
 };
 
 

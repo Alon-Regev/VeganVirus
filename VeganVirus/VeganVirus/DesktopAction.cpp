@@ -1,11 +1,19 @@
 #include "DesktopAction.h"
 #include <cmath>
 
-DesktopAction::DesktopAction(Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
-	:Action(DESKTOP_ACTION_PROGRESS, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager)
+DesktopAction::DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
+	: Action(req, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
+	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", 300, 250))
 {
 	_draw = draw;
 	_actionTime = 0;
+
+	_speechBubbles.push_back({ 0, L"Hello\nWorld!" });
+}
+
+DesktopAction::~DesktopAction()
+{
+	delete this->_speechBubbleBmp;
 }
 
 void DesktopAction::start()
@@ -28,7 +36,7 @@ void DesktopAction::update(double dt)
 	POINT mousePos = { mouseTemp.x, mouseTemp.y };
 	std::vector<POINT> iconVelocityArr = computeIconInteractionVelocities();
 	// going over all icons, calculating their velocity and updating their position
-	for (int i = 0; i < _desktopManager.iconCount(); i++)
+	for (int i = 0; i < _iconPositions.size(); i++)
 	{
 		POINT position = _iconPositions[i];
 		POINT cursorInteraction = velocityBetweeenPoints(position, mousePos, CURSOR_INTERACTION_VELCITY_COEFFICIENT, 1);
@@ -40,6 +48,15 @@ void DesktopAction::update(double dt)
 		);
 		_iconPositions[i] = newPosition;
 		_desktopManager.setIconPosition(i, newPosition);
+	}
+
+	// draw speech bubbles
+	for (SpeechBubble& sb : _speechBubbles)
+	{
+		int x = _iconPositions[sb.iconIndex].x + 10;
+		int y = _iconPositions[sb.iconIndex].y - 140;
+		_draw->drawImage(_speechBubbleBmp, x, y);
+		_draw->drawText(x + 32, y + 32, sb.message);
 	}
 }
 

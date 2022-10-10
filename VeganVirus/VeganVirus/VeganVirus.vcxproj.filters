@@ -180,5 +180,8 @@
     <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
       <Filter>Resource Files\Images</Filter>
     </Image>
+    <Image Include="speechBubble.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

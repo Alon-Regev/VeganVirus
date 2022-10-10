@@ -40,7 +40,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new SoundAction(0.25));
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
-    veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));
+    veganProgress->addAction(new DesktopAction(0.999, draw, mouseManager, desktopManager));
 
     removeFromTaskBar();
     while (draw->update());

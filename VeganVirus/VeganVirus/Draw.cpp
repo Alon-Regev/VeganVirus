@@ -116,6 +116,13 @@ void Draw::drawLine(int x1, int y1, int x2, int y2, double w, BYTE r, BYTE g, BY
     this->_offscreenGraphics->DrawLine(&pen, Point(x1, y1), Point(x2, y2));
 }
 
+void Draw::drawText(int x, int y, const wchar_t* text)
+{
+    Font font(&FontFamily(L"Arial"), 12);
+    SolidBrush brush(Color(5, 5, 5));
+    this->_offscreenGraphics->DrawString(text, -1, &font, PointF(x, y), &brush);
+}
+
 Bitmap* Draw::resizedBitmap(const wchar_t* path, int w, int h)
 {
     Bitmap original(path);
