@@ -25,6 +25,9 @@
     <Filter Include="Resource Files\popUp">
       <UniqueIdentifier>{1aa7acb6-eb93-43ab-8f99-19c2b4696da7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\music">
+      <UniqueIdentifier>{30ad4e6f-898c-4417-94c6-9edefe6a43fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -73,7 +76,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-		<Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DesktopManager.h">
       <Filter>Header Files</Filter>
@@ -261,5 +264,28 @@
     <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
       <Filter>Resource Files\Images</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="music\song0.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song1.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song2.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song3.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song4.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song5.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
   </ItemGroup>
 </Project>

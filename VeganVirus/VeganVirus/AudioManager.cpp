@@ -2,7 +2,7 @@
 
 void AudioManager::play(std::string path)
 {
-    mciSendStringA(path.c_str(), NULL, 0, 0);
+    MCIERROR err = mciSendStringA(("play " + path).c_str(), NULL, 0, 0);
 }
 
 void AudioManager::changeVolume(double nVolume)

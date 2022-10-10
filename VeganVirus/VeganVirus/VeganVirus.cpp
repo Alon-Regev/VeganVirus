@@ -31,15 +31,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     draw = new Draw(hInstance, drawUpdate);
     MouseManager mouseManager;
     DesktopManager desktopManager;
+    AudioManager audioManager;
 
     veganProgress = new VeganProgress(draw);
 
-    veganProgress->addAction(new FruitThrowAction(draw, mouseManager));
+    veganProgress->addAction(new FruitThrowAction(draw, mouseManager, audioManager));
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new MessageAction(0.7, "Stay away from those pesky carnivores >:("));
     veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
     veganProgress->addAction(new CaptureAction(hInstance, 0.85));
-    veganProgress->addAction(new SoundAction(0.25));
+    veganProgress->addAction(new SoundAction(0.25, audioManager));
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
     veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));

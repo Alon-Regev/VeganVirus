@@ -1,6 +1,7 @@
 #include "SoundAction.h"
 
-SoundAction::SoundAction(double req) : Action(req, MUSIC_ICON_PATH)
+SoundAction::SoundAction(double req, AudioManager& audioManager) 
+    : Action(req, MUSIC_ICON_PATH), _audioManager(audioManager)
 {
     _timer = SOUND_DUARTION + 1;
 }
@@ -12,7 +13,7 @@ void SoundAction::start()
 
     //choose randomly song
     this->_currentSong = rand() % NUM_OF_SONGS;
-    std::string song = "play music\\song" + std::to_string(this->_currentSong) + ".wav";
+    std::string song = "music\\song" + std::to_string(this->_currentSong) + ".wav";
 
     //play and check when song start
     this->_audioManager.play(song);

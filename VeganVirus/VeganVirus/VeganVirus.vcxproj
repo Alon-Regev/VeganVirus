@@ -221,6 +221,15 @@
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="hit.wav" />
+    <Media Include="music\song0.wav" />
+    <Media Include="music\song1.wav" />
+    <Media Include="music\song2.wav" />
+    <Media Include="music\song3.wav" />
+    <Media Include="music\song4.wav" />
+    <Media Include="music\song5.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,7 +1,7 @@
 #include "FruitThrowAction.h"
 
-FruitThrowAction::FruitThrowAction(Draw* draw, MouseManager& mouseManager) : 
-	Action(FRUIT_THROW_REQ, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager), 
+FruitThrowAction::FruitThrowAction(Draw* draw, MouseManager& mouseManager, AudioManager& audioManager) : 
+	Action(FRUIT_THROW_REQ, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager), _audioManager(audioManager),
 	_mouseDisabledAnimation(draw, FRAME_DURATION, MOUSE_ANIMATION_PATHS, MOUSE_DISABLED_ANIMATION_SIZE, MOUSE_DISABLED_ANIMATION_SIZE)
 {
 	// initialize trail
@@ -142,6 +142,8 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 			_vx = u.x, _vy = u.y;
 			bool ret = BlockInput(TRUE);
 			_mouseDisabled = true;
+			// play sound effect
+			this->_audioManager.play("hit.wav");
 		}
 	}
 

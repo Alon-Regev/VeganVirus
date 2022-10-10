@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "MouseManager.h"
+#include "AudioManager.h"
 #include "FruitThrow.h"
 #include "Animation.h"
 #include <list>
@@ -36,7 +37,7 @@ class FruitThrowAction :
 public:
     // FruitThrowAction Constructor
     // input: pointer to draw object, mouse manager reference
-    FruitThrowAction(Draw* draw, MouseManager& mouseManager);
+    FruitThrowAction(Draw* draw, MouseManager& mouseManager, AudioManager& audioManager);
 
     // FruitThrowAction Destructor
     ~FruitThrowAction();
@@ -53,6 +54,7 @@ private:
 
     Draw* _draw;
     MouseManager& _mouseManager;
+    AudioManager& _audioManager;
     double _timer = 0;
     double _fruitLeft = 0;
 
