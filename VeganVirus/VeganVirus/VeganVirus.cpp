@@ -7,6 +7,7 @@
 #include "MouseManager.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
+#include "ClipBoardAction.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -32,7 +33,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     DesktopManager desktopManager;
 
     veganProgress = new VeganProgress(draw);
-
+    
+    veganProgress->addAction(new ClipBoardAction(1));
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new CaptureAction(hInstance, 0.85));
     veganProgress->addAction(new MessageAction(0.70, "Stay away from those pesky carnivores >:("));
@@ -40,6 +42,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new SoundAction(0.25));
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
+    
     veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));
 
     removeFromTaskBar();

@@ -8,15 +8,14 @@
 class ClipBoardAction : public Action
 {
 public:
-	ClipBoardAction(HWND, double);
+	ClipBoardAction(double req);
+
+	virtual void start();
+	virtual void update(double dt);
+
 	void clipBoardWrite(std::string content);
 	std::string ClipBoardRead();
-	void clearClipBoard();
-
-	void start();
 
 private:
 	HGLOBAL _hMem;
-	HWND _hwnd;
 };
-
