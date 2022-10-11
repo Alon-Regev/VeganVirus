@@ -1,4 +1,5 @@
 #pragma once
+#include <list>
 #include "Action.h"
 #include "MouseManager.h"
 #include "DesktopManager.h"
@@ -10,10 +11,12 @@
 #define SCREEN_MARGIN 10
 #define DESKTOP_ACTION_ICON L"desktop.ico"
 #define MAX_VELOCITY 500
-#define SPEECH_BUBBLE_CHANCE_INV 125
+#define SPEECH_BUBBLE_CHANCE_INV 100
+#define SPEECH_BUBBLE_TIMER 5
 
 typedef struct
 {
+	double timer;
 	int iconIndex;
 	const wchar_t* message;
 } SpeechBubble;
@@ -63,7 +66,8 @@ private:
 	double _actionTime;
 
 	std::vector<POINT> _iconPositions;
-	std::vector<SpeechBubble> _speechBubbles;
+	std::list<SpeechBubble> _speechBubbles;
+	static const std::vector<const wchar_t*> _messages;
 
 	Bitmap* _speechBubbleBmp;
 };

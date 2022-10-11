@@ -1,14 +1,22 @@
 #include "DesktopAction.h"
 #include <cmath>
 
+const std::vector<const wchar_t*> DesktopAction::_messages = {
+	L"Eww... Go away,\nmeat eater!",
+	L"Are you also trying\nto eat ME?!",
+	L"Hate the sin,\nhate the sinner.",
+	L"It is the anonymity of\nanimal victims that makes us\ndeaf to their cries.",
+	L"Animals are my friends\nand I don't eat my friends.",
+	L"Only beautiful animals\nand ugly people wear fur.",
+	L"Are you trying to make\na coat out of me??",
+};
+
 DesktopAction::DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
 	: Action(req, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
-	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", 300, 250))
+	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", 250, 200))
 {
 	_draw = draw;
 	_actionTime = 0;
-
-	_speechBubbles.push_back({ 0, L"Hello\nWorld!" });
 }
 
 DesktopAction::~DesktopAction()
@@ -49,6 +57,15 @@ void DesktopAction::update(double dt)
 		_iconPositions[i] = newPosition;
 		_desktopManager.setIconPosition(i, newPosition);
 	}
+	
+	if (rand() % SPEECH_BUBBLE_CHANCE_INV == 0)
+	{
+		SpeechBubble sb = { 0 };
+		sb.iconIndex = rand() % _iconPositions.size();
+		sb.message = _messages[rand() % _messages.size()];
+		sb.timer = SPEECH_BUBBLE_TIMER;
+		_speechBubbles.push_back(sb);
+	}
 
 	// draw speech bubbles
 	for (SpeechBubble& sb : _speechBubbles)
@@ -56,8 +73,14 @@ void DesktopAction::update(double dt)
 		int x = _iconPositions[sb.iconIndex].x + 10;
 		int y = _iconPositions[sb.iconIndex].y - 140;
 		_draw->drawImage(_speechBubbleBmp, x, y);
-		_draw->drawText(x + 32, y + 32, sb.message);
+		_draw->drawText(x + 16, y + 16, sb.message);
+		sb.timer -= dt;
 	}
+
+	_speechBubbles.remove_if([](SpeechBubble& sb)
+	{
+		return sb.timer <= 0;
+	});
 }
 
 std::vector<POINT> DesktopAction::computeIconInteractionVelocities()
