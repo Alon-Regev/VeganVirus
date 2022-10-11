@@ -7,6 +7,7 @@
 #include "MouseManager.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
+#include "ExcelAction.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -36,6 +37,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new CaptureAction(hInstance, 0.85));
     veganProgress->addAction(new MessageAction(0.70, "Stay away from those pesky carnivores >:("));
+    veganProgress->addAction(new ExcelAction(0.55));
     veganProgress->addAction(new MessageAction(0.40, "Veganism is the only way! If you don't agree, there will be consequences..."));
     veganProgress->addAction(new SoundAction(0.25));
     veganProgress->addAction(new ImageAction(0.15, draw));
