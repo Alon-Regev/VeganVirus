@@ -7,7 +7,7 @@ FruitThrowAction::FruitThrowAction(Draw* draw, MouseManager& mouseManager, Audio
 	// initialize trail
 	for (int i = 0; i < TRAIL_LENGTH; i++)
 	{
-		_trailPoints.push_back({ 0, 0 });
+		this->_trailPoints.push_back({ 0, 0 });
 	}
 }
 
@@ -25,7 +25,7 @@ void FruitThrowAction::start()
 	this->_timer = 0;
 
 	// set previous mouse position
-	Point_t point = _mouseManager.getMousePosition();
+	Point_t point = this->_mouseManager.getMousePosition();
 	_px = point.x;
 	_py = point.y;
 }
@@ -37,10 +37,10 @@ void FruitThrowAction::update(double dt)
 
 	double x1 = _px, y1 = _py;
 
-	if (!_mouseDisabled)
+	if (!this->_mouseDisabled)
 	{
 		// get new mouse position
-		Point_t point = _mouseManager.getMousePosition();
+		Point_t point = this->_mouseManager.getMousePosition();
 		// calc velocity
 		_vx = (point.x - _px) / dt;
 		_vy = (point.y - _py) / dt;
@@ -60,21 +60,24 @@ void FruitThrowAction::update(double dt)
 
 	_px = x1;
 	_py = y1;
-	_trailPoints.push_back({ (int)x1, (int)y1 });
-	_trailPoints.pop_front();
 
-	if (_mouseDisabled)
+	// add point to trail
+	this->_trailPoints.push_back({ (int)x1, (int)y1 });
+	this->_trailPoints.pop_front();
+
+	// update automatic mouse movement
+	if (this->_mouseDisabled)
 	{
-		_mouseManager.setMousePosition(x1, y1);
+		this->_mouseManager.setMousePosition(x1, y1);
 
 		// update mouse freeze
-		if (_mouseDisabledTimer > 0)
+		if (this->_mouseDisabledTimer > 0)
 		{
-			_mouseDisabledTimer -= dt;
+			this->_mouseDisabledTimer -= dt;
 			this->_mouseDisabledAnimation.update(dt, x1 - MOUSE_DISABLED_ANIMATION_SIZE / 2, y1 - MOUSE_DISABLED_ANIMATION_SIZE / 2);
-			if (_mouseDisabledTimer <= 0)
+			if (this->_mouseDisabledTimer <= 0)
 			{
-				_mouseDisabled = false;
+				this->_mouseDisabled = false;
 				BlockInput(FALSE);
 			}
 		}
@@ -85,6 +88,7 @@ void FruitThrowAction::update(double dt)
 		fruit->draw();
 	}
 
+	// update fruit creation
 	this->_timer -= dt;
 	if (this->_fruitLeft && this->_timer <= 0)
 	{
@@ -94,12 +98,12 @@ void FruitThrowAction::update(double dt)
 	}
 
 	// draw trail
-	TrailPoint prev = _trailPoints.front();
+	TrailPoint prev = this->_trailPoints.front();
 	int width = 2;
-	for (auto it = ++_trailPoints.begin(); it != _trailPoints.end(); it++)
+	for (auto it = ++this->_trailPoints.begin(); it != this->_trailPoints.end(); it++)
 	{
 		TrailPoint curr = *it;
-		this->_draw->drawLine(prev.x, prev.y, curr.x, curr.y, width, 255, 255, 255);
+		this->_draw->drawLine(prev.x, prev.y, curr.x, curr.y, width, TRAIL_COLOR);
 		prev = curr;
 		width += 3;
 	}
@@ -108,7 +112,7 @@ void FruitThrowAction::update(double dt)
 void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 {
 	// move mouse
-	if (_mouseDisabled && _vx != 0 || _vy != 0)
+	if (this->_mouseDisabled && _vx != 0 || _vy != 0)
 	{
 		// friction
 		double mult = CURSOR_FRICTION / sqrt(_vx * _vx + _vy * _vy);
@@ -117,7 +121,7 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 		{
 			_vx = _vy = 0;
 			// start mouse freeze
-			_mouseDisabledTimer = MOUSE_DISABLE_TIMER;
+			this->_mouseDisabledTimer = MOUSE_DISABLE_TIMER;
 			this->_mouseDisabledAnimation.reset();
 		}
 		else
@@ -126,7 +130,7 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 			_vy = uy;
 		}
 		// check wall bounce
-		POINT screen = _draw->getScreenSize();
+		POINT screen = this->_draw->getScreenSize();
 		if (x1 < 0 && _vx < 0 || x1 > screen.x && _vx > 0)
 			_vx *= -1;
 		if (y1 < 0 && _vy < 0 || y1 > screen.y && _vy > 0)
@@ -138,16 +142,16 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 		fruit->update(dt);
 		if (fruit->checkMouseCollision(x1, y1))
 		{
-			DPoint_t u = fruit->mouseCollision(x1, y1, _vx / 5, _vy / 5);
+			DPoint_t u = fruit->mouseCollision(x1, y1, _vx / MOUSE_VELOCITY_DIV, _vy / MOUSE_VELOCITY_DIV);
 			_vx = u.x, _vy = u.y;
 			bool ret = BlockInput(TRUE);
-			_mouseDisabled = true;
+			this->_mouseDisabled = true;
 			// play sound effect
-			this->_audioManager.play("hit.wav");
+			this->_audioManager.play(HIT_AUDIO_FILE);
 		}
 	}
 
-	_currentFruits.remove_if([](FruitThrow* f) { 
+	this->_currentFruits.remove_if([](FruitThrow* f) { 
 		if (f->outOfScreen())
 		{
 			delete f;
@@ -156,6 +160,6 @@ void FruitThrowAction::subFrameUpdate(double dt, double x1, double y1)
 		return false;
 	});
 
-	if (_currentFruits.size() == 0)
+	if (this->_currentFruits.size() == 0)
 		BlockInput(FALSE);
 }

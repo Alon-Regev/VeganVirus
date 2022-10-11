@@ -7,9 +7,11 @@
 #include <list>
 
 #define TRAIL_LENGTH 5
+#define TRAIL_COLOR 255, 255, 255
 #define FRAME_DURATION 0.08
 #define MOUSE_ANIMATION_PATHS { L"stars0.gif", L"stars1.gif", L"stars2.gif", L"stars3.gif", L"stars4.gif", L"stars5.gif", L"stars6.gif", L"stars7.gif", L"stars8.gif" }
 
+#define HIT_AUDIO_FILE "hit.wav"
 #define FRUIT_THROW_ICON L"fruitThrow.png"
 #define FRUIT_THROW_REQ 0.9975
 
@@ -22,6 +24,7 @@
 
 #define COMPUTATION_SUB_FRAME_INTERVAL 0.006
 
+#define MOUSE_VELOCITY_DIV 5
 #define CURSOR_FRICTION -50
 // accelaration from friction (px/s^2)
 

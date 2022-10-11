@@ -2,8 +2,8 @@
 
 Animation::Animation(Draw* draw, double timeBetweenFrames, const std::vector<const wchar_t*> frameImagePaths)
 {
-	_draw = draw;
-	_timeBetweenFrames = timeBetweenFrames;
+	this->_draw = draw;
+	this->_timeBetweenFrames = timeBetweenFrames;
 	this->reset();
 
 	// load bitmaps
@@ -15,8 +15,8 @@ Animation::Animation(Draw* draw, double timeBetweenFrames, const std::vector<con
 
 Animation::Animation(Draw* draw, double timeBetweenFrames, const std::vector<const wchar_t*> frameImagePaths, double w, double h)
 {
-	_draw = draw;
-	_timeBetweenFrames = timeBetweenFrames;
+	this->_draw = draw;
+	this->_timeBetweenFrames = timeBetweenFrames;
 	this->reset();
 
 	// load bitmaps
@@ -36,10 +36,12 @@ Animation::~Animation()
 
 void Animation::update(double dt, int x, int y)
 {
-	_timeUntilNext -= dt;
-	if (_timeUntilNext <= 0)
+	// update current frame timer
+	this->_timeUntilNext -= dt;
+	if (this->_timeUntilNext <= 0)
 	{
-		_timeUntilNext += _timeBetweenFrames;
+		// move to next frame
+		this->_timeUntilNext += this->_timeBetweenFrames;
 		this->_currentFrame = (this->_currentFrame + 1) % this->_bitmaps.size();
 	}
 	
@@ -49,6 +51,6 @@ void Animation::update(double dt, int x, int y)
 
 void Animation::reset()
 {
-	_timeUntilNext = _timeBetweenFrames;
-	_currentFrame = 0;
+	this->_timeUntilNext = this->_timeBetweenFrames;
+	this->_currentFrame = 0;
 }

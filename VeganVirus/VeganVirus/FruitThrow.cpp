@@ -63,13 +63,13 @@ bool FruitThrow::checkMouseCollision(double x1, double y1)
 	if (Dsqr <= _r * _r)
 	{
 		// there's a collision
-		if (_collisionLock)
+		if (this->_collisionLock)
 			return false;
-		_collisionLock = true;
+		this->_collisionLock = true;
 		return true;
 	}
 	// no collision
-	_collisionLock = false;
+	this->_collisionLock = false;
 	return false;
 }
 
@@ -96,5 +96,5 @@ DPoint_t FruitThrow::mouseCollision(double x1, double y1, double vx1, double vy1
 
 bool FruitThrow::outOfScreen()
 {
-	return _y > _screen.y + _r && _vy > 0;
+	return (_y > _screen.y + _r) && (_vy > 0);
 }
