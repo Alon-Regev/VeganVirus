@@ -10,6 +10,8 @@
 
 #define EXCEL_ICON_PATH L"excel.ico"
 #define EXCEL_FILE_EXTENSION ".xlsx"
+#define TITLE_LEN 100
+#define EXCEL_DOCUMENT_PATH "liron.xlsx"
 
 typedef struct
 {
@@ -26,11 +28,17 @@ public:
 	virtual void update(double dt);
 
 private:
+	//brief Check if a process is running
 	int processCount(const char* searchTerm);
+	//opens file
 	void openFile(int num);
+	//create file
 	void createFile(int num);
+	//delete file
 	void deleteFile(int num, std::set<int> arr);
+	//deleteing all files inside vecter
 	void deleteAllExcelFile(std::set<int> arr);
+	//count the number of excel windows
 	int excelWindowCount();
 
 	std::set<int> _vectorExcelFiles;
