@@ -24,7 +24,6 @@ void ClipBoardAction::update(double dt)
 	Sleep(100);
 }
 
-
 void ClipBoardAction::clipBoardWrite(std::string content)
 {
 	OpenClipboard(NULL);
