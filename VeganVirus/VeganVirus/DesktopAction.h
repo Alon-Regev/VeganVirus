@@ -14,6 +14,9 @@
 #define SPEECH_BUBBLE_CHANCE_INV 100
 #define SPEECH_BUBBLE_TIMER 5
 
+#define ICON_SIZE_REGISTRY_PATH  "Software\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop"
+#define DESKTOP_FFLAGS_DISABLE_AUTO_ARRANGE_AND_GRID_ALIGN 1075839520 
+
 typedef struct
 {
 	double timer;
@@ -60,12 +63,18 @@ private:
 	// return: corrected velocity
 	POINT limitVelocity(POINT velocity);
 
+	// method updates value in/from the registry at the start of the action
+	// input: none
+	// return: none
+	void registryUpdate();
+
 	Draw* _draw;
 	MouseManager& _mouseManager;
 	DesktopManager& _desktopManager;
 	double _actionTime;
 
 	std::vector<POINT> _iconPositions;
+	int _iconSize = 32;
 	std::list<SpeechBubble> _speechBubbles;
 	static const std::vector<const wchar_t*> _messages;
 

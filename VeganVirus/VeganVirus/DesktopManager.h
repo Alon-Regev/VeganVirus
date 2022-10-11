@@ -31,6 +31,11 @@ public:
 	// return: number of desktop items (int)
 	int iconCount();
 
+	// method resets the desktop manager
+	// input: none
+	// return: none
+	void reset();
+
 private:
 	HWND _hDesktopListView;
 	HANDLE _hListViewProcess;
