@@ -16,8 +16,17 @@
     <Filter Include="Resource Files\Images">
       <UniqueIdentifier>{4a6d18e0-7dd5-4db8-81d5-dd70733e926e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images\mouseDisabledAnimation">
+      <UniqueIdentifier>{801f735b-790e-4932-acfb-20740ca337ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images\FruitsToThrow">
+      <UniqueIdentifier>{c6846c78-6663-427e-a610-e6a38f1e6a1b}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files\popUp">
       <UniqueIdentifier>{1aa7acb6-eb93-43ab-8f99-19c2b4696da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\music">
+      <UniqueIdentifier>{30ad4e6f-898c-4417-94c6-9edefe6a43fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +69,15 @@
     <ClInclude Include="MouseManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FruitThrowAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FruitThrow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="DesktopManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -67,6 +85,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardAction.h">
+    <ClInclude Include="ExcelAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,6 +123,15 @@
     <ClCompile Include="MouseManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FruitThrowAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FruitThrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="DesktopManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,6 +139,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardAction.cpp">
+    <ClCompile Include="ExcelAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -133,6 +162,63 @@
       <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="vegetables.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="stars0.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars1.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars2.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars3.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars4.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars5.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars6.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars7.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="stars8.gif">
+      <Filter>Resource Files\Images\mouseDisabledAnimation</Filter>
+    </Image>
+    <Image Include="fruit0.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit1.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit2.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit3.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit4.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit5.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit6.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit7.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruit8.png">
+      <Filter>Resource Files\Images\FruitsToThrow</Filter>
+    </Image>
+    <Image Include="fruitThrow.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="popUp\image0.png">
@@ -183,5 +269,34 @@
     <Image Include="popUp\image16.png">
       <Filter>Resource Files\popUp</Filter>
     </Image>
+    <Image Include="speechBubble.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="desktopAction.ico">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="music\song0.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song1.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song2.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song3.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song4.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
+    <Media Include="music\song5.wav">
+      <Filter>Resource Files\music</Filter>
+    </Media>
   </ItemGroup>
 </Project>

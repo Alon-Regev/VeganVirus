@@ -140,11 +140,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Draw.h" />
+    <ClInclude Include="FruitThrow.h" />
+    <ClInclude Include="FruitThrowAction.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="CaptureAction.h" />
     <ClInclude Include="DesktopAction.h" />
     <ClInclude Include="DesktopManager.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="ExcelAction.h" />
     <ClInclude Include="ImageAction.h" />
     <ClInclude Include="KeyboardAction.h" />
     <ClInclude Include="MessageAction.h" />
@@ -157,11 +162,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="FruitThrow.cpp" />
+    <ClCompile Include="FruitThrowAction.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="CaptureAction.cpp" />
     <ClCompile Include="DesktopAction.cpp" />
     <ClCompile Include="DesktopManager.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="ExcelAction.cpp" />
     <ClCompile Include="ImageAction.cpp" />
     <ClCompile Include="KeyboardAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
@@ -175,6 +185,18 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="fruit0.png" />
+    <Image Include="fruit1.png" />
+    <Image Include="fruit2.png" />
+    <Image Include="fruit3.png" />
+    <Image Include="fruit4.png" />
+    <Image Include="fruit5.png" />
+    <Image Include="fruit6.png" />
+    <Image Include="fruit7.png" />
+    <Image Include="fruit8.png" />
+    <Image Include="fruitThrow.png" />
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico" />
+    <Image Include="desktopAction.ico" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="popUp\image0.png" />
@@ -194,8 +216,27 @@
     <Image Include="popUp\image8.png" />
     <Image Include="popUp\image9.png" />
     <Image Include="small.ico" />
+    <Image Include="stars0.gif" />
+    <Image Include="stars1.gif" />
+    <Image Include="stars2.gif" />
+    <Image Include="stars3.gif" />
+    <Image Include="stars4.gif" />
+    <Image Include="stars5.gif" />
+    <Image Include="stars6.gif" />
+    <Image Include="stars7.gif" />
+    <Image Include="stars8.gif" />
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
+    <Image Include="speechBubble.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="hit.wav" />
+    <Media Include="music\song0.wav" />
+    <Media Include="music\song1.wav" />
+    <Media Include="music\song2.wav" />
+    <Media Include="music\song3.wav" />
+    <Media Include="music\song4.wav" />
+    <Media Include="music\song5.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

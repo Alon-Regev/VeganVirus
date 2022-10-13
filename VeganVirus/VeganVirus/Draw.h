@@ -32,19 +32,32 @@ public:
 	// method draws a rectangle on the screen
 	// input: rect to draw (x, y, w , h) in pixels
 	//		  color to draw (r, g, b, opt a)
+	// return: none
 	void drawRectangle(int x, int y, int w, int h, BYTE r, BYTE g, BYTE b, BYTE a = 255);
 
 	// method draws a line on the screen
 	// input: line to draw (x1, y1) -> (x2, y2) in pixels,
 	//		  line width,
 	//		  color to draw (r, g, b, opt a)
+	// return: none
 	void drawLine(int x1, int y1, int x2, int y2, double w, BYTE r, BYTE g, BYTE b, BYTE a = 255);
+
+	// method draws text on the screen
+	// input: position of the text (x, y) in pixels
+	//		  text to draw (wide string, utf-16)
+	// return: none
+	void drawText(int x, int y, const wchar_t* text);
 
 	// method loads a bitmap in a specific size
 	// input: bitmap path to load,
 	//		  width and height in pixels
 	// return: Bitmap object pointer (needs to be deleted by user)
 	static Bitmap* resizedBitmap(const wchar_t* path, int w, int h);
+
+	// method returns size of screen
+	// input: none
+	// return: size of screen in pixels (x, y)
+	POINT getScreenSize();
 
 	// method draws the current frame to the screen
 	// input: none
@@ -56,13 +69,15 @@ public:
 	// return: whether can get message or not
 	bool update();
 
-	// method returns size of screen
-	// input: none
-	// return: size of screen in pixels (x, y)
-	POINT getScreenSize();
-
 	// getter for window handle (HWND)
 	HWND getWindowHandle() const;
+
+	// method removes the icon from the task bar
+	// input: none
+	// return: none
+	void removeFromTaskBar();
+
+	DrawFrameCallback drawFrameUpdate;
 private:
 	// method creates a window
 	// input: hinstance to use
