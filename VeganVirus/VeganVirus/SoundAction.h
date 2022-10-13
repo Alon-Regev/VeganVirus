@@ -15,13 +15,13 @@
 class SoundAction : public Action
 {
 public:
-	SoundAction(double req);
+	SoundAction(double req, AudioManager& audioManager);
 	virtual void start();
 	virtual void update(double dt);
 
 	bool canActivate();
 private:
-	AudioManager _audioManager;
+	AudioManager& _audioManager;
 	double _timer;
 	int _currentSong = NO_SONG;
 	
