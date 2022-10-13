@@ -1,11 +1,14 @@
 #include "KeyboardAction.h"
 
+#define KEYBOARD_PENALTY -0.04
+#define KEYBOARD_AWARD 0.03
+
 KeyboardAction* keyboardActionInstance = nullptr;
 
-KeyboardAction::KeyboardAction(double req) : Action(req, KEYBOARD_ACTION_ICON)
+KeyboardAction::KeyboardAction(double req, VeganProgress* veganProgress)
+	: Action(req, KEYBOARD_ACTION_ICON), myVeganProgress(veganProgress)
 {
 	keyboardActionInstance = this;
-	this->setHook();
 }
 
 // callback for a keypress (only checks key down)
@@ -25,14 +28,23 @@ LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 	// check if typed word
 	for (auto pair : keyboardActionInstance->keyboardReplaceMap)
 	{
+		//check if in list of bad words
 		if (keyboardActionInstance->checkWord(pair.first.c_str(), pair.first.size()))
 		{
+			//decrease bar meat 
+			keyboardActionInstance->myVeganProgress->addProgress(-0.05);
+			//replace the word
 			std::string toWrite(pair.first.size(), '\b');
 			toWrite += pair.second;
 			keyboardActionInstance->writeString(toWrite);
 		}
+		//check if in list of good words
+		if (keyboardActionInstance->checkWord(pair.second.c_str(), pair.second.size()))
+		{
+			keyboardActionInstance->myVeganProgress->addProgress(0.01);
+		}
 	}
-
+	
 	return CallNextHookEx(keyboardActionInstance->hookHandle, nCode, wParam, lParam);
 }
 
@@ -89,10 +101,5 @@ KeyboardAction::~KeyboardAction()
 
 void KeyboardAction::start()
 {
-	return;
-}
-
-void KeyboardAction::update(double dt)
-{
-	return;
+	this->setHook();
 }

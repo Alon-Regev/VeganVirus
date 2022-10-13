@@ -1,5 +1,6 @@
 #pragma once
 #include "Action.h"
+#include "VeganProgress.h"
 #include <Windows.h>
 #include <conio.h>
 #include <string>
@@ -13,11 +14,10 @@ class KeyboardAction : public Action
 {
 
 public:
-	KeyboardAction(double req);
+	KeyboardAction(double req, VeganProgress*);
 	~KeyboardAction();
 
 	virtual void start();
-	virtual void update(double dt);
 
 	void addToBuffer(char toAdd);
 	bool checkWord(const char* word, int length);
@@ -30,7 +30,8 @@ public:
 		{"MILK", "SOY MIL\bLK"},
 		{"EGG", "BABY CHICKEN"}
 	};
-	
+	VeganProgress* myVeganProgress;
+
 private:
 	void setHook();
 	void releaseHook();
