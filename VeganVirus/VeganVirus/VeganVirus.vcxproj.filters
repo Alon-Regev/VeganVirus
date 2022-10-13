@@ -85,6 +85,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ExcelAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -139,6 +141,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ExcelAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

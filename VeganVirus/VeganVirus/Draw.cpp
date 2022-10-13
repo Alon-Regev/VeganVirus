@@ -116,7 +116,8 @@ void Draw::drawLine(int x1, int y1, int x2, int y2, double w, BYTE r, BYTE g, BY
 
 void Draw::drawText(int x, int y, const wchar_t* text)
 {
-    Font font(&FontFamily(L"Arial"), 12);
+    FontFamily fontFamily(L"Arial");
+    Font font(&fontFamily, 12);
     SolidBrush brush(Color(5, 5, 5));
     this->_offscreenGraphics->DrawString(text, -1, &font, PointF(x, y), &brush);
 }
