@@ -175,7 +175,7 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico" />
+    <Image Include="desktopAction.ico" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="popUp\image0.png" />
@@ -197,6 +197,7 @@
     <Image Include="small.ico" />
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
+    <Image Include="speechBubble.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
