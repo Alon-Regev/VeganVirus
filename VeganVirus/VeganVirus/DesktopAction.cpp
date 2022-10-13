@@ -13,7 +13,7 @@ const std::vector<const wchar_t*> DesktopAction::_messages = {
 
 DesktopAction::DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
 	: Action(req, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
-	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", 300, 215))
+	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", SPEECH_BUBBLE_SIZE))
 {
 	_draw = draw;
 	_actionTime = 0;
@@ -128,15 +128,17 @@ POINT DesktopAction::limitVelocity(POINT velocity)
 	return velocity;
 }
 
-void restartExplorer(DesktopManager& desktopManager, DesktopAction* action)
+void restartExplorer(DesktopManager& desktopManager, Draw* draw, DesktopAction* action)
 {
 	action->allowUpdates(false);
 	HINSTANCE hinst = ShellExecuteA(NULL, "runas", "taskkill", "/F /IM explorer.exe", NULL, 0);
-	Sleep(400);
+	Sleep(500);
 	hinst = ShellExecuteA(NULL, "runas", "C:\\Windows\\explorer.exe", NULL, NULL, 0);
 	Sleep(1500);
 	desktopManager.reset();
 	action->allowUpdates(true);
+	Sleep(1000);
+	draw->removeFromTaskBar();
 }
 
 void DesktopAction::registryUpdate()
@@ -168,7 +170,7 @@ void DesktopAction::registryUpdate()
 		return;
 	}
 	// reset explorer in thread
-	std::thread(restartExplorer, std::ref(this->_desktopManager), this).detach();
+	std::thread(restartExplorer, std::ref(this->_desktopManager), this->_draw, this).detach();
 }
 
 POINT DesktopAction::velocityBetweeenPoints(POINT a, POINT b, double coefficient, int power)

@@ -16,15 +16,12 @@ POINT DesktopManager::getIconPosition(int i)
     bool ret = ListView_GetItemPosition(this->_hDesktopListView, i, this->_pPointData);
     POINT p = { 0 };
     ret |= ReadProcessMemory(this->_hListViewProcess, this->_pPointData, &p, sizeof(POINT), nullptr);
-    if (!ret)
-        ;// throw std::exception("Can't read position data");
     return p;
 }
 
 bool DesktopManager::setIconPosition(int i, POINT p)
 {
-    bool ret = ListView_SetItemPosition(this->_hDesktopListView, i, p.x, p.y);
-    return ret;
+    return ListView_SetItemPosition(this->_hDesktopListView, i, p.x, p.y);
 }
 
 void DesktopManager::moveIcon(int i, POINT p)

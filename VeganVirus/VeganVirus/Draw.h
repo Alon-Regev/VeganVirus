@@ -71,6 +71,13 @@ public:
 
 	// getter for window handle (HWND)
 	HWND getWindowHandle() const;
+
+	// method removes the icon from the task bar
+	// input: none
+	// return: none
+	void removeFromTaskBar();
+
+	DrawFrameCallback drawFrameUpdate;
 private:
 	// method creates a window
 	// input: hinstance to use
