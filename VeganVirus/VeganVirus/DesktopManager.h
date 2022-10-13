@@ -18,8 +18,8 @@ public:
 
 	// method sets position of desktop icon based on index
 	// input: icon index (int), new position (POINT)
-	// return: none
-	void setIconPosition(int i, POINT p);
+	// return: true if succeeded, otherwise false
+	bool setIconPosition(int i, POINT p);
 
 	// method moves icon by a relative position
 	// input: icon index (int), move by (POINT)

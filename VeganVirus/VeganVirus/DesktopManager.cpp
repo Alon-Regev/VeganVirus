@@ -21,11 +21,10 @@ POINT DesktopManager::getIconPosition(int i)
     return p;
 }
 
-void DesktopManager::setIconPosition(int i, POINT p)
+bool DesktopManager::setIconPosition(int i, POINT p)
 {
     bool ret = ListView_SetItemPosition(this->_hDesktopListView, i, p.x, p.y);
-    if (!ret)
-        ;//throw std::exception("Can't set icon position");
+    return ret;
 }
 
 void DesktopManager::moveIcon(int i, POINT p)

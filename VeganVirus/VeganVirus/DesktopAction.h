@@ -3,6 +3,7 @@
 #include "Action.h"
 #include "MouseManager.h"
 #include "DesktopManager.h"
+#include <mutex>
 
 #define DESKTOP_ACTION_PROGRESS 0.998
 #define DESKTOP_ACTION_TIME 20
@@ -40,6 +41,11 @@ public:
 	// input: time since last frame
 	// return: none
 	virtual void update(double dt);
+
+	// method allows or blocks updates and the desktop from being accessed.
+	// input: whether to allow (true) or to block (false)
+	// return: none
+	void allowUpdates(bool allow);
 
 private:
 	// method calculates an icon's velocity based on the interaction between it's position and another point.
@@ -79,6 +85,9 @@ private:
 	static const std::vector<const wchar_t*> _messages;
 
 	Bitmap* _speechBubbleBmp;
+
+	std::mutex _allowUpdatesMutex;
+	bool _allowUpdates = true;
 };
 
 

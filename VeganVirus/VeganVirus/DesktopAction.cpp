@@ -1,11 +1,11 @@
 #include "DesktopAction.h"
-#include <cmath>
+#include <thread>
 
 const std::vector<const wchar_t*> DesktopAction::_messages = {
 	L"Eww... Go away,\nmeat eater!",
 	L"Are you also trying\nto eat ME?!",
 	L"Hate the sin,\nhate the sinner.",
-	L"It is the anonymity of\nanimal victims that makes us\ndeaf to their cries.",
+	L"It is the anonymity of\nanimal victims that makes\nus deaf to their cries.",
 	L"Animals are my friends\nand I don't eat my friends.",
 	L"Only beautiful animals\nand ugly people wear fur.",
 	L"Are you trying to make\na coat out of me??",
@@ -13,7 +13,7 @@ const std::vector<const wchar_t*> DesktopAction::_messages = {
 
 DesktopAction::DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
 	: Action(req, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
-	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", 280, 210))
+	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", 300, 215))
 {
 	_draw = draw;
 	_actionTime = 0;
@@ -38,8 +38,14 @@ void DesktopAction::start()
 
 void DesktopAction::update(double dt)
 {
-	if (_actionTime <= 0)
+	if (this->_actionTime <= 0)
 		return;
+	// check if updates allowed
+	{
+		std::lock_guard<std::mutex> lock(this->_allowUpdatesMutex);
+		if (!this->_allowUpdates)
+			return;
+	}
 	_actionTime -= dt;
 	Point_t mouseTemp = _mouseManager.getMousePosition();
 	POINT mousePos = { mouseTemp.x, mouseTemp.y };
@@ -56,7 +62,9 @@ void DesktopAction::update(double dt)
 			(long)(position.y + velocity.y * dt) }
 		);
 		_iconPositions[i] = newPosition;
-		_desktopManager.setIconPosition(i, newPosition);
+		bool success = this->_desktopManager.setIconPosition(i, newPosition);
+		if (!success)
+			this->allowUpdates(false);
 	}
 	
 	if (rand() % SPEECH_BUBBLE_CHANCE_INV == 0)
@@ -82,6 +90,12 @@ void DesktopAction::update(double dt)
 	{
 		return sb.timer <= 0;
 	});
+}
+
+void DesktopAction::allowUpdates(bool allow)
+{
+	std::lock_guard<std::mutex> lock(this->_allowUpdatesMutex);
+	this->_allowUpdates = allow;
 }
 
 std::vector<POINT> DesktopAction::computeIconInteractionVelocities()
@@ -114,6 +128,17 @@ POINT DesktopAction::limitVelocity(POINT velocity)
 	return velocity;
 }
 
+void restartExplorer(DesktopManager& desktopManager, DesktopAction* action)
+{
+	action->allowUpdates(false);
+	HINSTANCE hinst = ShellExecuteA(NULL, "runas", "taskkill", "/F /IM explorer.exe", NULL, 0);
+	Sleep(400);
+	hinst = ShellExecuteA(NULL, "runas", "C:\\Windows\\explorer.exe", NULL, NULL, 0);
+	Sleep(1500);
+	desktopManager.reset();
+	action->allowUpdates(true);
+}
+
 void DesktopAction::registryUpdate()
 {
 	// get icon size from registry
@@ -142,12 +167,8 @@ void DesktopAction::registryUpdate()
 		MessageBoxA(NULL, ("Can't set registry value (Error " + std::to_string(ret) + ")").c_str(), "ERROR", 0);
 		return;
 	}
-	// update changes
-	HINSTANCE hinst = ShellExecuteA(NULL, "runas", "taskkill", "/F /IM explorer.exe", NULL, 0);
-	Sleep(500);
-	hinst = ShellExecuteA(NULL, "runas", "C:\\Windows\\explorer.exe", NULL, NULL, 0);
-	Sleep(2000);
-	this->_desktopManager.reset();
+	// reset explorer in thread
+	std::thread(restartExplorer, std::ref(this->_desktopManager), this).detach();
 }
 
 POINT DesktopAction::velocityBetweeenPoints(POINT a, POINT b, double coefficient, int power)
