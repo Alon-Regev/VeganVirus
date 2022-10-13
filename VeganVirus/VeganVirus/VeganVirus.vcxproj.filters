@@ -183,8 +183,5 @@
     <Image Include="popUp\image16.png">
       <Filter>Resource Files\popUp</Filter>
     </Image>
-    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
-      <Filter>Resource Files\Images</Filter>
-    </Image>
   </ItemGroup>
 </Project>

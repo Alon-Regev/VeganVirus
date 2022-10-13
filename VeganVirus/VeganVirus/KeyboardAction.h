@@ -7,9 +7,7 @@
 #include <map>
 
 #define CHAR_BUFFER_LENGTH 10
-#define KEYBOARD_ACTION_ICON L"keyboard.ico"
-
-
+#define KEYBOARD_ACTION_ICON L"meat.ico"
 
 class KeyboardAction : public Action
 {
@@ -34,10 +32,8 @@ public:
 	};
 	
 private:
-	void SetHook();
-	void ReleaseHook();
-	char _lastChars[CHAR_BUFFER_LENGTH + 1] = { 0 };
-	
-};
+	void setHook();
+	void releaseHook();
 
-static KeyboardAction* keyboard = new KeyboardAction(100);
+	char _lastChars[CHAR_BUFFER_LENGTH + 1] = { 0 };
+};

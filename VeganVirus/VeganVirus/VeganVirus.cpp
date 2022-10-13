@@ -34,6 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 
     veganProgress = new VeganProgress(draw);
 
+    veganProgress->addAction(new KeyboardAction(1));
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new CaptureAction(hInstance, 0.85));
     veganProgress->addAction(new MessageAction(0.70, "Stay away from those pesky carnivores >:("));
@@ -42,8 +43,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
     veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));
-    veganProgress->addAction((Action*)keyboard);
-
+    
     removeFromTaskBar();
     while (draw->update());
 

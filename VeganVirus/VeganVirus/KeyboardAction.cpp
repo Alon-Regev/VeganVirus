@@ -1,11 +1,18 @@
 #include "KeyboardAction.h"
 
+KeyboardAction* keyboardActionInstance = nullptr;
+
+KeyboardAction::KeyboardAction(double req) : Action(req, KEYBOARD_ACTION_ICON)
+{
+	keyboardActionInstance = this;
+	this->setHook();
+}
 
 // callback for a keypress (only checks key down)
 LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	if (nCode < 0 || wParam != WM_KEYUP)
-		return CallNextHookEx(keyboard->hookHandle, nCode, wParam, lParam);
+		return CallNextHookEx(keyboardActionInstance->hookHandle, nCode, wParam, lParam);
 	// key down event
 
 	// get data struct
@@ -13,25 +20,25 @@ LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 
 	// main characters (letters and digits) are the same as ascii (uppercase)
 	// so stored as ascii
-	keyboard->addToBuffer(kbdStruct.vkCode);
+	keyboardActionInstance->addToBuffer(kbdStruct.vkCode);
 
 	// check if typed word
-	for (auto pair : keyboard->keyboardReplaceMap)
+	for (auto pair : keyboardActionInstance->keyboardReplaceMap)
 	{
-		if (keyboard->checkWord(pair.first.c_str(), pair.first.size()))
+		if (keyboardActionInstance->checkWord(pair.first.c_str(), pair.first.size()))
 		{
 			std::string toWrite(pair.first.size(), '\b');
 			toWrite += pair.second;
-			keyboard->writeString(toWrite);
+			keyboardActionInstance->writeString(toWrite);
 		}
 	}
 
-	return CallNextHookEx(keyboard->hookHandle, nCode, wParam, lParam);
+	return CallNextHookEx(keyboardActionInstance->hookHandle, nCode, wParam, lParam);
 }
 
-void KeyboardAction::SetHook()
+void KeyboardAction::setHook()
 {
-	hookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallback, NULL, 0);
+	hookHandle = SetWindowsHookExW(WH_KEYBOARD_LL, HookCallback, NULL, 0);
 	if (!hookHandle)
 		MessageBoxA(NULL, "Failed to install hook!", "Error", MB_ICONERROR);
 }
@@ -70,19 +77,14 @@ void KeyboardAction::writeString(std::string str)
 	SendInput(inputs.size(), inputs.data(), sizeof(INPUT));
 }
 
-void KeyboardAction::ReleaseHook()
+void KeyboardAction::releaseHook()
 {
 	UnhookWindowsHookEx(hookHandle);
 }
 
-KeyboardAction::KeyboardAction(double req) : Action(req, KEYBOARD_ACTION_ICON)
-{
-	SetHook();
-}
-
 KeyboardAction::~KeyboardAction()
 {
-	ReleaseHook();
+	this->releaseHook();
 }
 
 void KeyboardAction::start()
