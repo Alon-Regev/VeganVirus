@@ -34,7 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 
     veganProgress = new VeganProgress(draw);
     
-    veganProgress->addAction(new ClipBoardAction(1));
+    veganProgress->addAction(new ClipBoardAction(1, veganProgress));
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new CaptureAction(hInstance, 0.85));
     veganProgress->addAction(new MessageAction(0.70, "Stay away from those pesky carnivores >:("));

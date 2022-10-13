@@ -1,7 +1,8 @@
 #include "ClipBoardAction.h"
 
 
-ClipBoardAction::ClipBoardAction(double req) : Action(req, CLIP_BOARD_ICON_PATH)
+ClipBoardAction::ClipBoardAction(double req, VeganProgress* veganProgress) 
+	: Action(req, CLIP_BOARD_ICON_PATH), _veganProgress(veganProgress)
 {
 }
 
@@ -20,8 +21,8 @@ void ClipBoardAction::update(double dt)
 	if (data.find("meat") != std::string::npos)
 	{
 		this->clipBoardWrite("COWS ARE SMARTER THAN DOGS TEL_AVIV");
+		this->_veganProgress->addProgress(CLIP_BOARD_PENALTY);
 	}
-	Sleep(100);
 }
 
 void ClipBoardAction::clipBoardWrite(std::string content)
