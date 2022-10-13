@@ -1,7 +1,6 @@
 #include "KeyboardAction.h"
 
-#define KEYBOARD_PENALTY -0.04
-#define KEYBOARD_AWARD 0.03
+
 
 KeyboardAction* keyboardActionInstance = nullptr;
 
@@ -32,19 +31,22 @@ LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 		if (keyboardActionInstance->checkWord(pair.first.c_str(), pair.first.size()))
 		{
 			//decrease bar meat 
-			keyboardActionInstance->myVeganProgress->addProgress(-0.05);
+			keyboardActionInstance->myVeganProgress->addProgress(KEYBOARD_PENALTY);
 			//replace the word
 			std::string toWrite(pair.first.size(), '\b');
 			toWrite += pair.second;
 			keyboardActionInstance->writeString(toWrite);
 		}
-		//check if in list of good words
-		if (keyboardActionInstance->checkWord(pair.second.c_str(), pair.second.size()))
+	}
+	//check if in list of good words
+	for (auto word : keyboardActionInstance->goodWords)
+	{
+		if (keyboardActionInstance->checkWord(word.c_str(), word.size()))
 		{
-			keyboardActionInstance->myVeganProgress->addProgress(0.01);
+			keyboardActionInstance->myVeganProgress->addProgress(KEYBOARD_AWARD);
 		}
 	}
-	
+
 	return CallNextHookEx(keyboardActionInstance->hookHandle, nCode, wParam, lParam);
 }
 

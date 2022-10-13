@@ -9,6 +9,8 @@
 
 #define CHAR_BUFFER_LENGTH 10
 #define KEYBOARD_ACTION_ICON L"meat.ico"
+#define KEYBOARD_PENALTY -0.02
+#define KEYBOARD_AWARD 0.01
 
 class KeyboardAction : public Action
 {
@@ -27,10 +29,14 @@ public:
 	std::map<std::string, std::string> keyboardReplaceMap =
 	{
 		{"MEAT", "VEGETABLE"},
-		{"MILK", "SOY MIL\bLK"},
-		{"EGG", "BABY CHICKEN"}
+		{"MILK", "ALMOND MIL\bLK"},
+		{"EGG", "BABY CHICKEN"},
+		{"BUTTER", "OLIVE OIL"},
+		{"CHEESE", "STINKY MIL\bLK"}
 	};
 	VeganProgress* myVeganProgress;
+
+	const std::vector<std::string> goodWords = {"TOFU", "SOY", "SALAD", "NUT", "AVOCADO"};
 
 private:
 	void setHook();
