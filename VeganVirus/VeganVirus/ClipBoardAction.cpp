@@ -13,15 +13,27 @@ void ClipBoardAction::start()
 
 void ClipBoardAction::update(double dt)
 {
+	std::string forbiddenWords[6] = { "meat", "beef", "chicken", "pigs", "bacon", "lamb" };
 	if (!this->activeFlag)
 	{
 		return;
 	}
 	std::string data = this->ClipBoardRead();
-	if (data.find("meat") != std::string::npos)
+
+	//convert to lower case string
+	std::for_each(data.begin(), data.end(), [](char& c) {
+		c = ::tolower(c);
+	});
+	
+	for (int i = 0; i < 6; i++)
 	{
-		this->clipBoardWrite("COWS ARE SMARTER THAN DOGS TEL_AVIV");
-		this->_veganProgress->addProgress(CLIP_BOARD_PENALTY);
+		size_t location = data.find(forbiddenWords[i]);
+		if (location != std::string::npos)
+		{
+			data.replace(location, std::size(forbiddenWords[i]), ALLOWED_WORD);
+			this->clipBoardWrite(data);
+			this->_veganProgress->addProgress(CLIP_BOARD_PENALTY);
+		}
 	}
 }
 

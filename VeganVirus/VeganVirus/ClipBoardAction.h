@@ -3,9 +3,11 @@
 #include "VeganProgress.h"
 #include <string>
 #include <windows.h> 
+#include <algorithm>
 
 #define CLIP_BOARD_ICON_PATH L"clipBoard.ico"
 #define CLIP_BOARD_PENALTY -0.03
+#define ALLOWED_WORD "animal corpse" 
 
 class ClipBoardAction : public Action
 {
