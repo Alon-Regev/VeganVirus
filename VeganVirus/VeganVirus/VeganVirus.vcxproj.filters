@@ -84,6 +84,9 @@
     <ClInclude Include="DesktopAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExcelAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VeganVirus.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DesktopAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcelAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -261,7 +267,10 @@
     <Image Include="popUp\image16.png">
       <Filter>Resource Files\popUp</Filter>
     </Image>
-    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
+    <Image Include="speechBubble.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="desktopAction.ico">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>

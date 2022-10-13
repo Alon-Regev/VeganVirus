@@ -8,6 +8,7 @@
 #include "FruitThrowAction.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
+#include "ExcelAction.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -41,11 +42,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
     veganProgress->addAction(new CaptureAction(hInstance, 0.85));
     veganProgress->addAction(new SoundAction(0.25, audioManager));
+    veganProgress->addAction(new ExcelAction(0.55));
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
-    veganProgress->addAction(new DesktopAction(draw, mouseManager, desktopManager));
+    veganProgress->addAction(new DesktopAction(0.999, draw, mouseManager, desktopManager));
 
-    removeFromTaskBar();
     while (draw->update());
 
     delete draw;
@@ -57,25 +58,4 @@ void drawUpdate(double dt)
 {
     veganProgress->draw(dt);
     veganProgress->addProgress(-dt * PASSIVE_PROGRESS_REDUCTION_PER_SEC);
-}
-
-// the function remove the icon from the task bar
-// param: none
-// return: none
-void removeFromTaskBar()
-{
-    //remove from task bar
-    ITaskbarList* pTaskList = NULL;
-    HRESULT initRet = CoInitialize(NULL);
-    HRESULT createRet = CoCreateInstance(CLSID_TaskbarList,
-        NULL,
-        CLSCTX_INPROC_SERVER,
-        IID_ITaskbarList,
-        (LPVOID*)&pTaskList);
-
-    if (createRet == S_OK && initRet == S_OK)
-    {
-        pTaskList->DeleteTab(draw->getWindowHandle());
-        pTaskList->Release();
-    }
 }

@@ -148,6 +148,8 @@
     <ClInclude Include="CaptureAction.h" />
     <ClInclude Include="DesktopAction.h" />
     <ClInclude Include="DesktopManager.h" />
+    <ClInclude Include="Draw.h" />
+    <ClInclude Include="ExcelAction.h" />
     <ClInclude Include="ImageAction.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
@@ -167,6 +169,8 @@
     <ClCompile Include="CaptureAction.cpp" />
     <ClCompile Include="DesktopAction.cpp" />
     <ClCompile Include="DesktopManager.cpp" />
+    <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="ExcelAction.cpp" />
     <ClCompile Include="ImageAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
@@ -190,6 +194,7 @@
     <Image Include="fruit8.png" />
     <Image Include="fruitThrow.png" />
     <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico" />
+    <Image Include="desktopAction.ico" />
     <Image Include="meat.ico" />
     <Image Include="message.ico" />
     <Image Include="popUp\image0.png" />
@@ -220,6 +225,7 @@
     <Image Include="stars8.gif" />
     <Image Include="VeganVirus.ico" />
     <Image Include="vegetables.png" />
+    <Image Include="speechBubble.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="hit.wav" />
