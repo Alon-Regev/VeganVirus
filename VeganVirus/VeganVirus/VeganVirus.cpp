@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <time.h>
 #include "VeganProgress.h"
 #include "MessageAction.h"
 #include "SoundAction.h"
@@ -8,9 +10,9 @@
 #include "FruitThrowAction.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
+#include "KeyboardAction.h"
 #include "ExcelAction.h"
-#include <stdlib.h>
-#include <time.h>
+
 
 #define MIN_INITIAL_SLEEP 1000
 #define MAX_INITIAL_SLEEP 2000
@@ -36,7 +38,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 
     veganProgress = new VeganProgress(draw);
 
-    veganProgress->addAction(new FruitThrowAction(draw, mouseManager, audioManager));
+
+    veganProgress->addAction(new KeyboardAction(1, veganProgress));
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new MessageAction(0.7, "Stay away from those pesky carnivores >:("));
     veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));

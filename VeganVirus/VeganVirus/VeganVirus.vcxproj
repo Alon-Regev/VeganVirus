@@ -148,9 +148,9 @@
     <ClInclude Include="CaptureAction.h" />
     <ClInclude Include="DesktopAction.h" />
     <ClInclude Include="DesktopManager.h" />
-    <ClInclude Include="Draw.h" />
     <ClInclude Include="ExcelAction.h" />
     <ClInclude Include="ImageAction.h" />
+    <ClInclude Include="KeyboardAction.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
     <ClInclude Include="Resource.h" />
@@ -162,7 +162,6 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="FruitThrow.cpp" />
     <ClCompile Include="FruitThrowAction.cpp" />
     <ClCompile Include="AudioManager.cpp" />
@@ -172,6 +171,7 @@
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="ExcelAction.cpp" />
     <ClCompile Include="ImageAction.cpp" />
+    <ClCompile Include="KeyboardAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
     <ClCompile Include="SystemAction.cpp" />
