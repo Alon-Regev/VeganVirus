@@ -11,7 +11,7 @@
 #define EXCEL_ICON_PATH L"Images\\excelIcon.png"
 #define EXCEL_FILE_EXTENSION ".xlsx"
 #define TITLE_LEN 100
-#define EXCEL_DOCUMENT_PATH "VeganFacts\\VeganFacts.xlsx"
+#define EXCEL_DOCUMENT_PATH "Documents\\VeganFacts.xlsx"
 
 typedef struct
 {
