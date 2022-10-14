@@ -13,8 +13,7 @@ class PopUpAdsAction :
 	public Action
 {
 public:
-	 
-	HBITMAP _bitmap;
+	HBRUSH _brush;
 
 	PopUpAdsAction(Draw* draw);
 	~PopUpAdsAction();
@@ -32,7 +31,7 @@ public:
 	// method updates the icon position by checking if the icon is out of the screen boundaries.
 	// input: icon position (POINT)
 	// return: position the icon needs to be in (POINT)
-	int createWindow();
+	void createWindow();
 
 	bool isActionActive();
 

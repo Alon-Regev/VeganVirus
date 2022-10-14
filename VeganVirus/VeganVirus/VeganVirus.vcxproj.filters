@@ -93,6 +93,7 @@
     <ClInclude Include="ExcelAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PopUpAdsAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -152,6 +153,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExcelAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PopUpAdsAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -286,6 +290,12 @@
     </Image>
     <Image Include="desktopAction.ico">
       <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ad.bmp">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

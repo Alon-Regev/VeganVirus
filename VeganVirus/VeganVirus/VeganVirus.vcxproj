@@ -154,6 +154,7 @@
     <ClInclude Include="KeyboardAction.h" />
     <ClInclude Include="MessageAction.h" />
     <ClInclude Include="MouseManager.h" />
+    <ClInclude Include="PopUpAdsAction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SoundAction.h" />
     <ClInclude Include="SystemAction.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="ImageAction.cpp" />
     <ClCompile Include="KeyboardAction.cpp" />
     <ClCompile Include="MessageAction.cpp" />
+    <ClCompile Include="PopUpAdsAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
     <ClCompile Include="SystemAction.cpp" />
     <ClCompile Include="MouseManager.cpp" />
@@ -185,6 +187,7 @@
     <ResourceCompile Include="VeganVirus.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ad.bmp" />
     <Image Include="fruit0.png" />
     <Image Include="fruit1.png" />
     <Image Include="fruit2.png" />

@@ -155,7 +155,7 @@ void Draw::applyFrame()
 bool Draw::update()
 {
     MSG msg;
-    if (GetMessage(&msg, NULL, 0, 0) > 0)
+    if (GetMessageW(&msg, this->_hwnd, 0, 0) > 0)
     {
         TranslateMessage(&msg);
         DispatchMessage(&msg);

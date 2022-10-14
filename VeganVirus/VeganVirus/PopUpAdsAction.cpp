@@ -13,7 +13,7 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
      _actionTime = 0;
 
      WNDCLASSW wc = { 0 };
-     wc.hbrBackground = CreateSolidBrush(RGB(255, 0, 0));
+     wc.hbrBackground = CreateSolidBrush(RGB(255, 255, 255));
      wc.hCursor = LoadCursor(NULL, IDC_ARROW);
      wc.lpszClassName = CLASS_NAME;
      wc.lpfnWndProc = AdWindowCallBack;
@@ -25,20 +25,17 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
          MessageBoxA(NULL, std::to_string(GetLastError()).c_str(), "GetLastError", 0);
          MessageBox(NULL, L"Window Registration Failed!", L"Error!", MB_ICONEXCLAMATION | MB_OK);
      }
-
-     this->_bitmap = (HBITMAP)LoadImageW(NULL, L"ad.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-     MessageBoxA(NULL, std::to_string(GetLastError()).c_str(), "Error", 0);
 }
 
  PopUpAdsAction::~PopUpAdsAction()
  {
-     DeleteObject(this->_bitmap);
+     DeleteObject(this->_brush);
  }
 
 void PopUpAdsAction::start()
 {
     _actionTime = POP_UP_ADS_ACTION_TIME;
-    this->createWindow();
+    std::thread(&PopUpAdsAction::createWindow, this).detach();
 }
 
 void PopUpAdsAction::update(double dt)
@@ -55,30 +52,28 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpP
     case WM_CLOSE:
     {
         PopUpAdsAction* _this = (PopUpAdsAction*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-        DestroyWindow(hwnd);
         if (_this->isActionActive())
         {
-            _this->createWindow();
-            _this->createWindow();
+            std::thread(&PopUpAdsAction::createWindow, _this).detach();
+            std::thread(&PopUpAdsAction::createWindow, _this).detach();
         }
-        break;
-    }
-    case WM_CREATE:
-    {
-        PopUpAdsAction* _this = (PopUpAdsAction*)((CREATESTRUCT*)lpParam)->lpCreateParams;
+        DestroyWindow(hwnd);
         break;
     }
     case WM_PAINT:
     {
-        PAINTSTRUCT ps = { 0 };
         PopUpAdsAction* _this = (PopUpAdsAction*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-        HDC hdc = BeginPaint(hwnd, &ps);
-
-        HDC hMemDC = CreateCompatibleDC((HDC)hdc);
-        ::SelectObject(hMemDC, _this->_bitmap);
-        BitBlt((HDC)hdc, 0, 0, 200, 400, hMemDC, 0, 0, SRCCOPY);
-        ::DeleteDC(hMemDC);
-        EndPaint(hwnd, &ps);
+        RECT rect;
+        HDC hdc = GetDC(hwnd);
+        HBITMAP hbitmap = (HBITMAP)LoadImageW(NULL, L"ad.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+        HBRUSH brush = CreatePatternBrush(hbitmap);
+        GetWindowRect(hwnd, &rect);
+        rect.right -= rect.left;
+        rect.left = 0;
+        rect.bottom -= rect.top;
+        rect.top = 0;
+        FillRect(hdc, &rect, brush);
+        ReleaseDC(hwnd, hdc);
         break;
     }
     default:
@@ -87,17 +82,7 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpP
     return 0;
 }
 
-void AdWindowMessageLoop(HWND hwnd)
-{
-    MSG Msg = { 0 };
-    while (GetMessage(&Msg, NULL, NULL, NULL))
-    {
-        TranslateMessage(&Msg);
-        DispatchMessage(&Msg);
-    }
-}
-
-int PopUpAdsAction::createWindow()
+void PopUpAdsAction::createWindow()
 {
     HWND hwnd;
     POINT screenSize = _draw->getScreenSize();
@@ -115,10 +100,12 @@ int PopUpAdsAction::createWindow()
         MessageBoxA(NULL, std::to_string(GetLastError()).c_str(), "GetLastError", 0);
     }
 
-    //std::thread(AdWindowMessageLoop, hwnd).detach();
-    AdWindowMessageLoop(hwnd);
- 
-    return 0;
+    MSG Msg = { 0 };
+    while (GetMessageW(&Msg, hwnd, NULL, NULL))
+    {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
 }
 
 bool PopUpAdsAction::isActionActive()
