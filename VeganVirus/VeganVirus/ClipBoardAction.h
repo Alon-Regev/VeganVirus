@@ -32,7 +32,7 @@ private:
 		{"milk", "lentils"},
 		{"egg", "chickpeas"},
 		{"butter", "mushrooms"},
-		{"cheese", "Fish"}
+		{"cheese", "grass"}
 	};
 
 	/*
