@@ -50,6 +50,7 @@ public:
 	void allowUpdates(bool allow);
 
 private:
+	void goToDesktop();
 	// method calculates an icon's velocity based on the interaction between it's position and another point.
 	// input: two positions of interacting objects, 
 	//        the coefficient and power to use while calculating (V=C/R^p)

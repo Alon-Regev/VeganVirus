@@ -21,7 +21,6 @@
 #define PASSIVE_PROGRESS_REDUCTION_PER_SEC (1. / 1800)
 
 void drawUpdate(double dt);
-void removeFromTaskBar();
 
 Draw* draw;
 VeganProgress* veganProgress;

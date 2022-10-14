@@ -1,5 +1,6 @@
 #include "DesktopAction.h"
 #include <thread>
+#include <Shldisp.h>
 
 const std::vector<const wchar_t*> DesktopAction::_messages = {
 	L"Eww... Go away,\nmeat eater!",
@@ -26,6 +27,7 @@ DesktopAction::~DesktopAction()
 
 void DesktopAction::start()
 {
+	goToDesktop();
 	this->_actionTime = DESKTOP_ACTION_TIME;
 	this->_iconPositions = std::vector<POINT>();
 	int iconCount = this->_desktopManager.iconCount();
@@ -96,6 +98,15 @@ void DesktopAction::allowUpdates(bool allow)
 {
 	std::lock_guard<std::mutex> lock(this->_allowUpdatesMutex);
 	this->_allowUpdates = allow;
+}
+
+void DesktopAction::goToDesktop()
+{
+	IShellDispatch4* pShellDisp = NULL;
+	HRESULT sc = CoCreateInstance(CLSID_Shell, NULL, CLSCTX_SERVER, IID_IDispatch, (LPVOID*)&pShellDisp);
+	// Show the desktop
+	sc = pShellDisp->ToggleDesktop();
+	pShellDisp->Release();
 }
 
 std::vector<POINT> DesktopAction::computeIconInteractionVelocities()
