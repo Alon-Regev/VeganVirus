@@ -84,10 +84,15 @@
     <ClInclude Include="DesktopAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClipBoardAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="KeyboardAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ExcelAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -138,6 +143,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DesktopAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClipBoardAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardAction.cpp">

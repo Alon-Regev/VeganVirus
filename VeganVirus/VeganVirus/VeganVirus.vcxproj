@@ -146,6 +146,7 @@
     <ClInclude Include="FruitThrowAction.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="CaptureAction.h" />
+    <ClInclude Include="ClipBoardAction.h" />
     <ClInclude Include="DesktopAction.h" />
     <ClInclude Include="DesktopManager.h" />
     <ClInclude Include="ExcelAction.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="FruitThrowAction.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="CaptureAction.cpp" />
+    <ClCompile Include="ClipBoardAction.cpp" />
     <ClCompile Include="DesktopAction.cpp" />
     <ClCompile Include="DesktopManager.cpp" />
     <ClCompile Include="Draw.cpp" />

@@ -10,6 +10,7 @@
 #include "FruitThrowAction.h"
 #include "DesktopManager.h"
 #include "DesktopAction.h"
+#include "ClipBoardAction.h"
 #include "KeyboardAction.h"
 #include "ExcelAction.h"
 
@@ -36,8 +37,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     AudioManager audioManager;
 
     veganProgress = new VeganProgress(draw);
-
-
+    veganProgress->addAction(new ClipBoardAction(1, veganProgress));
     veganProgress->addAction(new KeyboardAction(1, veganProgress));
     veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
     veganProgress->addAction(new MessageAction(0.7, "Stay away from those pesky carnivores >:("));
