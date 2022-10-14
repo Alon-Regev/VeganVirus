@@ -4,7 +4,7 @@ ImageAction::ImageAction(double req, Draw* draw) :
     Action(req, POP_UP_ICON_PATH), _draw(draw)
 {
     _time = 0;
-    _bmp = new Bitmap(L"Images\\image0.png");
+    _bmp = new Bitmap(POPUP_IMAGE_PATH(0));
 }
 
 ImageAction::~ImageAction()
@@ -42,10 +42,8 @@ void ImageAction::setImage()
 {
     delete _bmp;
     this->_imageNumber++;
-    //choose random image
-    std::wstring path = POPUP_IMAGE_PATH(this->_imageNumber % NUM_OF_IMAGES);
-    //convert string wchar
-    _bmp = new Bitmap((wchar_t*)path.c_str());
+    // choose new image
+    _bmp = new Bitmap(POPUP_IMAGE_PATH(this->_imageNumber % NUM_OF_IMAGES));
 }
 
 void ImageAction::updateWallBounce(double dt)
