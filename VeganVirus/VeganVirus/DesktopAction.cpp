@@ -13,8 +13,8 @@ const std::vector<const wchar_t*> DesktopAction::_messages = {
 };
 
 DesktopAction::DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
-	: Action(req, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
-	_speechBubbleBmp(Draw::resizedBitmap(L"speechBubble.png", SPEECH_BUBBLE_SIZE))
+	: Action(0.999, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
+	_speechBubbleBmp(Draw::resizedBitmap(L"Images\\speechBubble.png", SPEECH_BUBBLE_SIZE))
 {
 	_draw = draw;
 	_actionTime = 0;
@@ -64,6 +64,8 @@ void DesktopAction::update(double dt)
 			(long)(position.y + velocity.y * dt) }
 		);
 		_iconPositions[i] = newPosition;
+		newPosition.x -= this->_iconSize / 2;
+		newPosition.y -= this->_iconSize / 2;
 		bool success = this->_desktopManager.setIconPosition(i, newPosition);
 		if (!success)
 			this->allowUpdates(false);
@@ -197,13 +199,16 @@ POINT DesktopAction::correctIconOutOfScreen(POINT newPos)
 {
 	// check if icon is out of boundaries and return corrected position
 	POINT screenBoundries = _draw->getScreenSize();
-	if (newPos.x < SCREEN_MARGIN)
-		newPos.x = SCREEN_MARGIN;
-	if (newPos.x > screenBoundries.x - SCREEN_MARGIN)
-		newPos.x = screenBoundries.x - SCREEN_MARGIN;
-	if (newPos.y < SCREEN_MARGIN)
-		newPos.y = SCREEN_MARGIN;
-	if (newPos.y > screenBoundries.y - SCREEN_MARGIN)
-		newPos.y = screenBoundries.y - SCREEN_MARGIN;
-	return { newPos.x, newPos.y };
+	int margin = SCREEN_MARGIN + this->_iconSize / 2;
+	// move up bottom and top borders
+	newPos.y += SCREEN_MARGIN;
+	if (newPos.x < margin)
+		newPos.x = margin;
+	if (newPos.x > screenBoundries.x - margin)
+		newPos.x = screenBoundries.x - margin;
+	if (newPos.y < margin)
+		newPos.y = margin;
+	if (newPos.y > screenBoundries.y - margin)
+		newPos.y = screenBoundries.y - margin;
+	return { newPos.x, newPos.y - SCREEN_MARGIN };
 }
