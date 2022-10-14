@@ -1,8 +1,10 @@
 #pragma once
+#include <random>
+#include <functional>
 #include "Action.h"
 
 #define POP_UP_ADS_ACTION_PROGRESS 0.999
-#define POP_UP_ADS_ACTION_TIME 60
+#define POP_UP_ADS_ACTION_TIME 30
 #define POP_UP_ADS_ACTION_ICON L"desktop.ico"
 #define CLASS_NAME L"MyFirstWindow"
 #define AD_SCREEN_MARGIN 20
@@ -13,7 +15,8 @@ class PopUpAdsAction :
 	public Action
 {
 public:
-	HBRUSH _brush;
+	HBITMAP hbitmap;
+	HBRUSH brush;
 
 	PopUpAdsAction(Draw* draw);
 	~PopUpAdsAction();
