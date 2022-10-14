@@ -28,6 +28,9 @@
     <Filter Include="Resource Files\music">
       <UniqueIdentifier>{30ad4e6f-898c-4417-94c6-9edefe6a43fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Ads">
+      <UniqueIdentifier>{cf7ac23d-c7d0-4291-a632-628dc5d2da78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -294,8 +297,23 @@
     <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ad.bmp">
-      <Filter>Resource Files</Filter>
+    <Image Include="Ads\ad0.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad1.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad2.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad3.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad4.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad5.bmp">
+      <Filter>Resource Files\Ads</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

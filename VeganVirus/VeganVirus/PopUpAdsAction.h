@@ -7,16 +7,26 @@
 #define POP_UP_ADS_ACTION_TIME 30
 #define POP_UP_ADS_ACTION_ICON L"desktop.ico"
 #define CLASS_NAME L"MyFirstWindow"
-#define AD_SCREEN_MARGIN 20
-#define SCREEN_WIDTH 400   
-#define SCREEN_HEIGHT 400 
+#define AD_WINDOW_TITLE L"Support Animals!"
+#define AD_SCREEN_MARGIN 10
+#define SCREEN_WIDTH 360
+#define SCREEN_HEIGHT 458
+
+#define AD_TIMER_BACKGROUND_COLOR 20, 20, 20
+#define AD_TIMER_TEXT_COLOR 240, 240, 240
+#define AD_TIMER_WIDTH 130
+#define AD_TIMER_HEIGHT 40
+#define AD_TIMER_MARGIN 10
+#define AD_TIMER_DISTANCE_FROM_BOTTOM 40
+
+#define AD_IMAGE_COUNT 6
 
 class PopUpAdsAction :
 	public Action
 {
 public:
-	HBITMAP hbitmap;
-	HBRUSH brush;
+	std::vector<HBITMAP> hbitmaps;
+	std::vector<HBRUSH> brushes;
 
 	PopUpAdsAction(Draw* draw);
 	~PopUpAdsAction();

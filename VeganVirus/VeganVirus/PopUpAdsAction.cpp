@@ -26,27 +26,50 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
          MessageBox(NULL, L"Window Registration Failed!", L"Error!", MB_ICONEXCLAMATION | MB_OK);
      }
 
-     this->hbitmap = (HBITMAP)LoadImageW(NULL, L"ad.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-     this->brush = CreatePatternBrush(this->hbitmap);
+     for (int i = 0; i < AD_IMAGE_COUNT; i++)
+     {
+         std::wstring path = L"Ads\\ad" + std::to_wstring(i) + L".bmp";
+         HBITMAP hbmp = (HBITMAP)LoadImageW(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+         this->hbitmaps.push_back(hbmp);
+         this->brushes.push_back(CreatePatternBrush(this->hbitmaps[i]));
+     }
 }
 
  PopUpAdsAction::~PopUpAdsAction()
  {
-     DeleteObject(this->brush);
-     DeleteObject(this->hbitmap);
+     for (int i = 0; i < AD_IMAGE_COUNT; i++)
+     {
+         DeleteObject(this->brushes[i]);
+         DeleteObject(this->hbitmaps[i]);
+     }
+ }
+
+ int intRand(const int& min, const int& max)
+ {
+     static thread_local std::mt19937* generator = nullptr;
+     if (!generator) generator = new std::mt19937(clock() + std::hash<std::thread::id>()(std::this_thread::get_id()));
+     std::uniform_int_distribution<int> distribution(min, max);
+     return distribution(*generator);
  }
 
 void PopUpAdsAction::start()
 {
-    _actionTime = POP_UP_ADS_ACTION_TIME;
+    this->_actionTime = POP_UP_ADS_ACTION_TIME;
     std::thread(&PopUpAdsAction::createWindow, this).detach();
 }
 
 void PopUpAdsAction::update(double dt)
 {
-    if (_actionTime <= 0)
+    if (this->_actionTime <= 0)
         return;
-    _actionTime -= dt;
+    this->_actionTime -= dt;
+    // show timer
+    POINT screen = this->_draw->getScreenSize();
+    std::wstring toWrite = L"Skip Ads in " + std::to_wstring((int)this->_actionTime + 1);
+
+    int y = screen.y - AD_TIMER_HEIGHT - AD_TIMER_DISTANCE_FROM_BOTTOM;
+    this->_draw->drawRectangle(0, y, AD_TIMER_WIDTH, AD_TIMER_HEIGHT, AD_TIMER_BACKGROUND_COLOR);
+    this->_draw->drawText(AD_TIMER_MARGIN, y + AD_TIMER_MARGIN, toWrite.c_str(), AD_TIMER_TEXT_COLOR);
 }
 
 LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpParam)
@@ -56,6 +79,12 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpP
     {
         phdc = new HDC;
         *phdc = GetDC(hwnd);
+    }
+    static thread_local int* pImageIndex = nullptr;
+    if (!pImageIndex)
+    {
+        pImageIndex = new int;
+        *pImageIndex = intRand(0, AD_IMAGE_COUNT - 1);
     }
     switch (msg)
     {
@@ -70,6 +99,7 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpP
         DestroyWindow(hwnd);
         ReleaseDC(hwnd, *phdc);
         delete phdc;
+        delete pImageIndex;
         break;
     }
     case WM_PAINT:
@@ -81,7 +111,7 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpP
         rect.left = 0;
         rect.bottom -= rect.top;
         rect.top = 0;
-        FillRect(*phdc, &rect, _this->brush);
+        FillRect(*phdc, &rect, _this->brushes[*pImageIndex]);
         break;
     }
     default:
@@ -90,24 +120,14 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpP
     return 0;
 }
 
-int intRand(const int& min, const int& max)
-{
-    static thread_local std::mt19937* generator = nullptr;
-    if (!generator) generator = new std::mt19937(clock() + std::hash<std::thread::id>()(std::this_thread::get_id()));
-    std::uniform_int_distribution<int> distribution(min, max);
-    return distribution(*generator);
-}
-
 void PopUpAdsAction::createWindow()
 {
     HWND hwnd;
-    POINT screenSize = _draw->getScreenSize();
-    int maxX = screenSize.x - SCREEN_WIDTH - AD_SCREEN_MARGIN;
-    int maxY = screenSize.y - AD_SCREEN_MARGIN - SCREEN_HEIGHT;
-    int randX = intRand(0, 1e6) % (maxX - AD_SCREEN_MARGIN) + AD_SCREEN_MARGIN;
-    int randY = intRand(0, 1e6) % (maxY - AD_SCREEN_MARGIN) + AD_SCREEN_MARGIN;
+    POINT screenSize = this->_draw->getScreenSize();
+    int randX = intRand(AD_SCREEN_MARGIN, screenSize.x - SCREEN_WIDTH - AD_SCREEN_MARGIN);
+    int randY = intRand(AD_SCREEN_MARGIN, screenSize.y - SCREEN_HEIGHT - AD_SCREEN_MARGIN);
 
-    hwnd = CreateWindowW(CLASS_NAME, L"MyWindow", WS_OVERLAPPEDWINDOW | WS_VISIBLE, randX, randY, SCREEN_WIDTH, SCREEN_HEIGHT
+    hwnd = CreateWindowW(CLASS_NAME, AD_WINDOW_TITLE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, randX, randY, SCREEN_WIDTH, SCREEN_HEIGHT
         ,NULL, NULL, NULL, this);
 
     SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this);

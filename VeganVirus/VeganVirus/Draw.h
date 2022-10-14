@@ -46,7 +46,7 @@ public:
 	// input: position of the text (x, y) in pixels
 	//		  text to draw (wide string, utf-16)
 	// return: none
-	void drawText(int x, int y, const wchar_t* text);
+	void drawText(int x, int y, const wchar_t* text, BYTE r = 5, BYTE g = 5, BYTE b = 5);
 
 	// method loads a bitmap in a specific size
 	// input: bitmap path to load,
