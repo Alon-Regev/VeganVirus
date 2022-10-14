@@ -13,6 +13,7 @@
 #include "ClipBoardAction.h"
 #include "KeyboardAction.h"
 #include "ExcelAction.h"
+#include "PopUpAdsAction.h"
 
 
 #define MIN_INITIAL_SLEEP 1000
@@ -37,17 +38,18 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     AudioManager audioManager;
 
     veganProgress = new VeganProgress(draw);
-    veganProgress->addAction(new ClipBoardAction(1, veganProgress));
+    veganProgress->addAction(new PopUpAdsAction(draw));
     veganProgress->addAction(new KeyboardAction(1, veganProgress));
-    veganProgress->addAction(new MessageAction(0.9, "Being a vegan is awesome!"));
+    veganProgress->addAction(new ClipBoardAction(0.965, veganProgress));
+    veganProgress->addAction(new ExcelAction(0.93));
+    veganProgress->addAction(new MessageAction(0.85, "Being a vegan is awesome!"));
     veganProgress->addAction(new MessageAction(0.7, "Stay away from those pesky carnivores >:("));
+    veganProgress->addAction(new DesktopAction(0.6, draw, mouseManager, desktopManager));
     veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
-    veganProgress->addAction(new CaptureAction(hInstance, 0.85));
+    veganProgress->addAction(new CaptureAction(hInstance, 0.4));
     veganProgress->addAction(new SoundAction(0.25, audioManager));
-    veganProgress->addAction(new ExcelAction(0.55));
     veganProgress->addAction(new ImageAction(0.15, draw));
     veganProgress->addAction(new SystemAction());
-    veganProgress->addAction(new DesktopAction(0.999, draw, mouseManager, desktopManager));
 
     while (draw->update());
 

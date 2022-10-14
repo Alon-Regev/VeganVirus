@@ -28,6 +28,9 @@
     <Filter Include="Resource Files\music">
       <UniqueIdentifier>{30ad4e6f-898c-4417-94c6-9edefe6a43fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Ads">
+      <UniqueIdentifier>{cf7ac23d-c7d0-4291-a632-628dc5d2da78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -93,6 +96,9 @@
     <ClInclude Include="ExcelAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PopUpAdsAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VeganVirus.cpp">
@@ -150,6 +156,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExcelAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PopUpAdsAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -284,6 +293,27 @@
     </Image>
     <Image Include="desktopAction.ico">
       <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="..\..\..\Dropbox\PC\Downloads\desktop.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Ads\ad0.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad1.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad2.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad3.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad4.bmp">
+      <Filter>Resource Files\Ads</Filter>
+    </Image>
+    <Image Include="Ads\ad5.bmp">
+      <Filter>Resource Files\Ads</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
