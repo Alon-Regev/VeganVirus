@@ -1,12 +1,12 @@
 #pragma once
 #include "Action.h"
 
-#define POP_UP_ICON_PATH L"pop_up.ico"
+#define POP_UP_ICON_PATH L"Images\\pop_up.ico"
 #define POP_UP_DURATION 30
 #define NUM_OF_IMAGES 17
 #define IMAGE_WIDTH 255
 #define IMAGE_HEIGHT 255
-#define POPUP_IMAGE_PATH(n) (L"popUp\\image" + std::to_wstring(n) + L".png")
+#define POPUP_IMAGE_PATH(n) ((L"Images\\image" + std::to_wstring(n) + L".png").c_str())
 
 class ImageAction : public Action
 {

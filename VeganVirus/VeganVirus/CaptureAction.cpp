@@ -100,7 +100,7 @@ done:
 
 
 
-CaptureAction::CaptureAction(HINSTANCE hInstance, double req) : Action(req, CAPTURE_ICON_PATH)
+CaptureAction::CaptureAction(double req, HINSTANCE hInstance) : Action(req, CAPTURE_ICON_PATH)
 {
     LoadStringW(hInstance, IDC_VEGANVIRUS, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);

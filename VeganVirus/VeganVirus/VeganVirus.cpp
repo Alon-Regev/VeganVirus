@@ -36,20 +36,21 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     MouseManager mouseManager;
     DesktopManager desktopManager;
     AudioManager audioManager;
-
+    
     veganProgress = new VeganProgress(draw);
-    veganProgress->addAction(new PopUpAdsAction(draw));
     veganProgress->addAction(new KeyboardAction(1, veganProgress));
-    veganProgress->addAction(new ClipBoardAction(0.965, veganProgress));
-    veganProgress->addAction(new ExcelAction(0.93));
-    veganProgress->addAction(new MessageAction(0.85, "Being a vegan is awesome!"));
-    veganProgress->addAction(new MessageAction(0.7, "Stay away from those pesky carnivores >:("));
-    veganProgress->addAction(new DesktopAction(0.6, draw, mouseManager, desktopManager));
-    veganProgress->addAction(new MessageAction(0.5, "Veganism is the only way! If you don't agree, there will be consequences..."));
-    veganProgress->addAction(new CaptureAction(hInstance, 0.4));
-    veganProgress->addAction(new SoundAction(0.25, audioManager));
-    veganProgress->addAction(new ImageAction(0.15, draw));
-    veganProgress->addAction(new SystemAction());
+    veganProgress->addAction(new ClipBoardAction(0.955, veganProgress));
+    veganProgress->addAction(new ExcelAction(0.91));
+    veganProgress->addAction(new MessageAction(0.83, "Being a vegan is awesome!"));
+    veganProgress->addAction(new ImageAction(0.76, draw));
+    veganProgress->addAction(new CaptureAction(0.68, hInstance));
+    veganProgress->addAction(new MessageAction(0.62, "Stay away from those pesky carnivores >:("));
+    veganProgress->addAction(new FruitThrowAction(0.52, draw, mouseManager, audioManager));
+    veganProgress->addAction(new PopUpAdsAction(0.42, draw));
+    veganProgress->addAction(new SoundAction(0.31, audioManager));
+    veganProgress->addAction(new MessageAction(0.21, "Veganism is the only way! If you don't agree, there will be consequences..."));
+    veganProgress->addAction(new DesktopAction(0.1, draw, mouseManager, desktopManager));
+    veganProgress->addAction(new SystemAction(0));
 
     while (draw->update());
 

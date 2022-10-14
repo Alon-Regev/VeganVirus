@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8d6c0d56-5d06-493f-9e9b-e62eb76177f0}</ProjectGuid>
-    <RootNamespace>VeganVirus</RootNamespace>
+    <ProjectGuid>{eb0d9cbe-27f6-44a7-89be-e72272cdde7f}</ProjectGuid>
+    <RootNamespace>VirusBuilder</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -86,11 +86,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -100,11 +100,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,11 +114,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -128,117 +128,21 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Draw.h" />
-    <ClInclude Include="FruitThrow.h" />
-    <ClInclude Include="FruitThrowAction.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="CaptureAction.h" />
-    <ClInclude Include="ClipBoardAction.h" />
-    <ClInclude Include="DesktopAction.h" />
-    <ClInclude Include="DesktopManager.h" />
-    <ClInclude Include="ExcelAction.h" />
-    <ClInclude Include="ImageAction.h" />
-    <ClInclude Include="KeyboardAction.h" />
-    <ClInclude Include="MessageAction.h" />
-    <ClInclude Include="MouseManager.h" />
-    <ClInclude Include="PopUpAdsAction.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="SoundAction.h" />
-    <ClInclude Include="SystemAction.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="VeganProgress.h" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="FruitThrow.cpp" />
-    <ClCompile Include="FruitThrowAction.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="CaptureAction.cpp" />
-    <ClCompile Include="ClipBoardAction.cpp" />
-    <ClCompile Include="DesktopAction.cpp" />
-    <ClCompile Include="DesktopManager.cpp" />
-    <ClCompile Include="Draw.cpp" />
-    <ClCompile Include="ExcelAction.cpp" />
-    <ClCompile Include="ImageAction.cpp" />
-    <ClCompile Include="KeyboardAction.cpp" />
-    <ClCompile Include="MessageAction.cpp" />
-    <ClCompile Include="PopUpAdsAction.cpp" />
-    <ClCompile Include="SoundAction.cpp" />
-    <ClCompile Include="SystemAction.cpp" />
-    <ClCompile Include="MouseManager.cpp" />
-    <ClCompile Include="VeganProgress.cpp" />
-    <ClCompile Include="VeganVirus.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="VeganVirus.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Images\ad0.bmp" />
-    <Image Include="Images\ad1.bmp" />
-    <Image Include="Images\ad2.bmp" />
-    <Image Include="Images\ad3.bmp" />
-    <Image Include="Images\ad4.bmp" />
-    <Image Include="Images\ad5.bmp" />
-    <Image Include="Images\capture.ico" />
-    <Image Include="Images\clipBoard.ico" />
-    <Image Include="Images\clip_board.ico" />
-    <Image Include="Images\desktopAction.ico" />
-    <Image Include="Images\fruit0.png" />
-    <Image Include="Images\fruit1.png" />
-    <Image Include="Images\fruit2.png" />
-    <Image Include="Images\fruit3.png" />
-    <Image Include="Images\fruit4.png" />
-    <Image Include="Images\fruit5.png" />
-    <Image Include="Images\fruit6.png" />
-    <Image Include="Images\fruit7.png" />
-    <Image Include="Images\fruit8.png" />
-    <Image Include="Images\fruitThrow.png" />
-    <Image Include="Images\image0.png" />
-    <Image Include="Images\image1.png" />
-    <Image Include="Images\image10.png" />
-    <Image Include="Images\image11.png" />
-    <Image Include="Images\image12.png" />
-    <Image Include="Images\image14.png" />
-    <Image Include="Images\image15.png" />
-    <Image Include="Images\image16.png" />
-    <Image Include="Images\image2.png" />
-    <Image Include="Images\image3.png" />
-    <Image Include="Images\image4.png" />
-    <Image Include="Images\image5.png" />
-    <Image Include="Images\image6.png" />
-    <Image Include="Images\image7.png" />
-    <Image Include="Images\image8.png" />
-    <Image Include="Images\image9.png" />
-    <Image Include="Images\meat.ico" />
-    <Image Include="Images\message.ico" />
-    <Image Include="Images\music.ico" />
-    <Image Include="Images\pop_up.ico" />
-    <Image Include="Images\speechBubble.png" />
-    <Image Include="Images\virusIcon.ico" />
-    <Image Include="Images\virusIcon1.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="Audio\hit.wav" />
-    <Media Include="Audio\song0.wav" />
-    <Media Include="Audio\song1.wav" />
-    <Media Include="Audio\song2.wav" />
-    <Media Include="Audio\song3.wav" />
-    <Media Include="Audio\song4.wav" />
-    <Media Include="Audio\song5.wav" />
+    <None Include="ThemeMe.exe" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,5 @@
 #include "ExcelAction.h"
 
-
-
 BOOL CALLBACK windowCountCallback(
     HWND hwnd,
     LPARAM lParam
@@ -82,7 +80,6 @@ void ExcelAction::openFile(int num)
     system(fileToOpen.c_str());
 
 }
-
 
 /*!
     create file

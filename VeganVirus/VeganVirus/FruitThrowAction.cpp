@@ -1,7 +1,7 @@
 #include "FruitThrowAction.h"
 
-FruitThrowAction::FruitThrowAction(Draw* draw, MouseManager& mouseManager, AudioManager& audioManager) : 
-	Action(FRUIT_THROW_REQ, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager), _audioManager(audioManager),
+FruitThrowAction::FruitThrowAction(double req, Draw* draw, MouseManager& mouseManager, AudioManager& audioManager) : 
+	Action(req, FRUIT_THROW_ICON), _draw(draw), _mouseManager(mouseManager), _audioManager(audioManager),
 	_mouseDisabledAnimation(draw, FRAME_DURATION, MOUSE_ANIMATION_PATHS, MOUSE_DISABLED_ANIMATION_SIZE, MOUSE_DISABLED_ANIMATION_SIZE)
 {
 	// initialize trail

@@ -3,8 +3,8 @@
 #include "Draw.h"
 #include "Action.h"
 
-#define MEAT_ICON_FILE L"meat.ico"
-#define VEGETABLE_ICON_FILE L"vegetables.png"
+#define MEAT_ICON_FILE L"Images\\meat.ico"
+#define VEGETABLE_ICON_FILE L"Images\\vegetables.png"
 #define PROGRESS_BAR_ICON_SIZE 48, 48
 
 #define CONTENT_COLOR 0, 255, 40

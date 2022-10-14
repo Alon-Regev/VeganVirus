@@ -5,7 +5,7 @@
 
 #define POP_UP_ADS_ACTION_PROGRESS 0.999
 #define POP_UP_ADS_ACTION_TIME 30
-#define POP_UP_ADS_ACTION_ICON L"desktop.ico"
+#define POP_UP_ADS_ACTION_ICON L"Images\\popupIcon.png"
 #define CLASS_NAME L"MyFirstWindow"
 #define AD_WINDOW_TITLE L"Support Animals!"
 #define AD_SCREEN_MARGIN 10
@@ -28,7 +28,7 @@ public:
 	std::vector<HBITMAP> hbitmaps;
 	std::vector<HBRUSH> brushes;
 
-	PopUpAdsAction(Draw* draw);
+	PopUpAdsAction(double req, Draw* draw);
 	~PopUpAdsAction();
 
 	// method called to start the action

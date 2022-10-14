@@ -3,15 +3,15 @@
 #include <math.h>
 
 const std::vector<const wchar_t*> FruitThrow::fruitImages = {
-	L"fruit0.png",
-	L"fruit1.png",
-	L"fruit2.png",
-	L"fruit3.png",
-	L"fruit4.png",
-	L"fruit5.png",
-	L"fruit6.png",
-	L"fruit7.png",
-	L"fruit8.png",
+	L"Images\\fruit0.png",
+	L"Images\\fruit1.png",
+	L"Images\\fruit2.png",
+	L"Images\\fruit3.png",
+	L"Images\\fruit4.png",
+	L"Images\\fruit5.png",
+	L"Images\\fruit6.png",
+	L"Images\\fruit7.png",
+	L"Images\\fruit8.png",
 };
 
 FruitThrow::FruitThrow(Draw* draw, MouseManager& mouseManager) : _draw(draw), _mouseManager(mouseManager)

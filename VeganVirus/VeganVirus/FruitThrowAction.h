@@ -9,11 +9,10 @@
 #define TRAIL_LENGTH 5
 #define TRAIL_COLOR 255, 255, 255
 #define FRAME_DURATION 0.08
-#define MOUSE_ANIMATION_PATHS { L"stars0.gif", L"stars1.gif", L"stars2.gif", L"stars3.gif", L"stars4.gif", L"stars5.gif", L"stars6.gif", L"stars7.gif", L"stars8.gif" }
+#define MOUSE_ANIMATION_PATHS { L"Images\\stars0.gif", L"Images\\stars1.gif", L"Images\\stars2.gif", L"Images\\stars3.gif", L"Images\\stars4.gif", L"Images\\stars5.gif", L"Images\\stars6.gif", L"Images\\stars7.gif", L"Images\\stars8.gif" }
 
-#define HIT_AUDIO_FILE "hit.wav"
-#define FRUIT_THROW_ICON L"fruitThrow.png"
-#define FRUIT_THROW_REQ 0.9975
+#define HIT_AUDIO_FILE "Audio\\hit.wav"
+#define FRUIT_THROW_ICON L"Images\\fruitThrow.png"
 
 #define MIN_FRUIT_TIMER 0.325
 #define MAX_FRUIT_TIMER 0.825
@@ -39,8 +38,8 @@ class FruitThrowAction :
 {
 public:
     // FruitThrowAction Constructor
-    // input: pointer to draw object, mouse manager reference
-    FruitThrowAction(Draw* draw, MouseManager& mouseManager, AudioManager& audioManager);
+    // input: progress bar requirement, pointer to draw object, mouse manager reference, audio manager reference
+    FruitThrowAction(double req, Draw* draw, MouseManager& mouseManager, AudioManager& audioManager);
 
     // FruitThrowAction Destructor
     ~FruitThrowAction();
