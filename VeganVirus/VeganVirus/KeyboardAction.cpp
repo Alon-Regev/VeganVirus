@@ -23,7 +23,7 @@ LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 	// main characters (letters and digits) are the same as ascii (uppercase)
 	// so stored as ascii
 	keyboardActionInstance->addToBuffer(kbdStruct.vkCode);
-
+	
 	// check if typed word
 	for (auto pair : keyboardActionInstance->keyboardReplaceMap)
 	{
@@ -70,7 +70,7 @@ bool KeyboardAction::checkWord(const char* word, int length)
 	return !strcmp(_lastChars + CHAR_BUFFER_LENGTH - length, word);
 }
 
-void KeyboardAction::writeString(std::string str)
+void KeyboardAction::writeString(const std::string& str)
 {
 	std::vector<INPUT> inputs;
 	for (int i = 0; i < str.size(); i++)
@@ -104,4 +104,10 @@ KeyboardAction::~KeyboardAction()
 void KeyboardAction::start()
 {
 	this->setHook();
+	this->_isActive = true;
+}
+
+bool KeyboardAction::canActivate()
+{
+	return !this->_isActive;
 }

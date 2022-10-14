@@ -1,7 +1,7 @@
 #include "SystemAction.h"
 
-SystemAction::SystemAction() :
-	Action(0, SYSTEM_ICON_PATH)
+SystemAction::SystemAction(double req) :
+	Action(req, SYSTEM_ICON_PATH)
 {
 }
 

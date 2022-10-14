@@ -10,7 +10,7 @@
 class CaptureAction : public Action
 {
 public:
-	CaptureAction(HINSTANCE hinstance, double req);
+	CaptureAction(double req, HINSTANCE hinstance);
 	void start();
 
 

@@ -7,7 +7,7 @@
 class SystemAction : public Action
 {
 public:
-	SystemAction();
+	SystemAction(double req);
 	virtual void start();
 private:
 };

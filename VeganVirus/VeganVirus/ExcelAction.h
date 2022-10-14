@@ -8,7 +8,7 @@
 #include <iostream>
 #include <set>
 
-#define EXCEL_ICON_PATH L"Images\\excel.ico"
+#define EXCEL_ICON_PATH L"Images\\excelIcon.png"
 #define EXCEL_FILE_EXTENSION ".xlsx"
 #define TITLE_LEN 100
 #define EXCEL_DOCUMENT_PATH "liron.xlsx"

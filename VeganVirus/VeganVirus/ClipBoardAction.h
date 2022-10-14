@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <map>
 
-#define CLIP_BOARD_ICON_PATH L"Images\\clipBoard.ico"
+#define CLIP_BOARD_ICON_PATH L"Images\\clipboardIcon.png"
 #define CLIP_BOARD_PENALTY -0.03
 #define ALLOWED_WORD "animal corpse" 
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 
-#define POP_UP_ICON_PATH L"pop_up.ico"
+#define POP_UP_ICON_PATH L"Images\\pop_up.ico"
 #define POP_UP_DURATION 30
 #define NUM_OF_IMAGES 17
 #define IMAGE_WIDTH 255

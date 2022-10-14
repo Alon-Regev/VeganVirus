@@ -4,7 +4,7 @@ ImageAction::ImageAction(double req, Draw* draw) :
     Action(req, POP_UP_ICON_PATH), _draw(draw)
 {
     _time = 0;
-    _bmp = new Bitmap(L"popUp\\image0.png");
+    _bmp = new Bitmap(L"Images\\image0.png");
 }
 
 ImageAction::~ImageAction()
