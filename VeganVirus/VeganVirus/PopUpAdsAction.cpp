@@ -137,8 +137,11 @@ void PopUpAdsAction::createWindow()
     }
 
     MSG Msg = { 0 };
-    while (GetMessageW(&Msg, hwnd, NULL, NULL))
+    BOOL ret;
+    while (ret = GetMessageW(&Msg, hwnd, NULL, NULL))
     {
+        if (ret == -1)   // error
+            break;
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
     }
