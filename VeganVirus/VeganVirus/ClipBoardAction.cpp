@@ -13,7 +13,6 @@ void ClipBoardAction::start()
 
 void ClipBoardAction::update(double dt)
 {
-	std::string forbiddenWords[6] = { "meat", "beef", "chicken", "pigs", "bacon", "lamb" };
 	if (!this->activeFlag)
 	{
 		return;
@@ -25,12 +24,12 @@ void ClipBoardAction::update(double dt)
 		c = ::tolower(c);
 	});
 	
-	for (int i = 0; i < 6; i++)
+	for (auto pair : this->_keyboardReplaceMap)
 	{
-		size_t location = data.find(forbiddenWords[i]);
+		size_t location = data.find(pair.first);
 		if (location != std::string::npos)
 		{
-			data.replace(location, std::size(forbiddenWords[i]), ALLOWED_WORD);
+			data.replace(location, std::size(pair.first), pair.second);
 			this->clipBoardWrite(data);
 			this->_veganProgress->addProgress(CLIP_BOARD_PENALTY);
 		}
