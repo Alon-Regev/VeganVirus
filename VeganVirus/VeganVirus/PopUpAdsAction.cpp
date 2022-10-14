@@ -28,7 +28,7 @@ LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
      for (int i = 0; i < AD_IMAGE_COUNT; i++)
      {
-         std::wstring path = L"Ads\\ad" + std::to_wstring(i) + L".bmp";
+         std::wstring path = L"Images\\ad" + std::to_wstring(i) + L".bmp";
          HBITMAP hbmp = (HBITMAP)LoadImageW(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
          this->hbitmaps.push_back(hbmp);
          this->brushes.push_back(CreatePatternBrush(this->hbitmaps[i]));

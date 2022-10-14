@@ -13,7 +13,7 @@ void SoundAction::start()
 
     //choose randomly song
     this->_currentSong = rand() % NUM_OF_SONGS;
-    std::string song = "music\\song" + std::to_string(this->_currentSong) + ".wav";
+    std::string song = "Audio\\song" + std::to_string(this->_currentSong) + ".wav";
 
     //play and check when song start
     this->_audioManager.play(song);

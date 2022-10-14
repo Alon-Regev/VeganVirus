@@ -5,7 +5,7 @@
 
 #define POP_UP_ADS_ACTION_PROGRESS 0.999
 #define POP_UP_ADS_ACTION_TIME 30
-#define POP_UP_ADS_ACTION_ICON L"desktop.ico"
+#define POP_UP_ADS_ACTION_ICON L"Images\\desktop.ico"
 #define CLASS_NAME L"MyFirstWindow"
 #define AD_WINDOW_TITLE L"Support Animals!"
 #define AD_SCREEN_MARGIN 10

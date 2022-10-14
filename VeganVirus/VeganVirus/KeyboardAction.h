@@ -8,7 +8,7 @@
 #include <map>
 
 #define CHAR_BUFFER_LENGTH 10
-#define KEYBOARD_ACTION_ICON L"meat.ico"
+#define KEYBOARD_ACTION_ICON L"Images\\meat.ico"
 #define KEYBOARD_PENALTY -0.02
 #define KEYBOARD_AWARD 0.01
 

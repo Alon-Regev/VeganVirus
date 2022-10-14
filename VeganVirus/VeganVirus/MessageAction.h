@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 
-#define MESSAGE_ICON_PATH L"message.ico"
+#define MESSAGE_ICON_PATH L"Images\\message.ico"
 
 class MessageAction :
     public Action

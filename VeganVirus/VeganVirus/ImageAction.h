@@ -6,7 +6,7 @@
 #define NUM_OF_IMAGES 17
 #define IMAGE_WIDTH 255
 #define IMAGE_HEIGHT 255
-#define POPUP_IMAGE_PATH(n) (L"popUp\\image" + std::to_wstring(n) + L".png")
+#define POPUP_IMAGE_PATH(n) (L"Images\\" + std::to_wstring(n) + L".png")
 
 class ImageAction : public Action
 {

@@ -7,7 +7,7 @@
 #include <chrono>
 #include <ctime>  
 
-#define MUSIC_ICON_PATH L"music.ico"
+#define MUSIC_ICON_PATH L"Images\\music.ico"
 #define NUM_OF_SONGS 6
 #define SOUND_DUARTION 120
 #define NO_SONG -1
