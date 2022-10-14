@@ -156,12 +156,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="VeganVirus.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Images\ad0.bmp">
       <Filter>Resource Files\Images</Filter>
     </Image>
@@ -284,6 +278,12 @@
     </Image>
     <Image Include="Images\speechBubble.png">
       <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\virusIcon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\virusIcon.ico">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

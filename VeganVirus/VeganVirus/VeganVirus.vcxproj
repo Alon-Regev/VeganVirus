@@ -228,8 +228,8 @@
     <Image Include="Images\music.ico" />
     <Image Include="Images\pop_up.ico" />
     <Image Include="Images\speechBubble.png" />
-    <Image Include="small.ico" />
-    <Image Include="VeganVirus.ico" />
+    <Image Include="Images\virusIcon.ico" />
+    <Image Include="Images\virusIcon1.ico" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Audio\hit.wav" />
