@@ -13,7 +13,6 @@
 
 #define HIT_AUDIO_FILE "Audio\\hit.wav"
 #define FRUIT_THROW_ICON L"Images\\fruitThrow.png"
-#define FRUIT_THROW_REQ 0.9975
 
 #define MIN_FRUIT_TIMER 0.325
 #define MAX_FRUIT_TIMER 0.825
@@ -39,8 +38,8 @@ class FruitThrowAction :
 {
 public:
     // FruitThrowAction Constructor
-    // input: pointer to draw object, mouse manager reference
-    FruitThrowAction(Draw* draw, MouseManager& mouseManager, AudioManager& audioManager);
+    // input: progress bar requirement, pointer to draw object, mouse manager reference, audio manager reference
+    FruitThrowAction(double req, Draw* draw, MouseManager& mouseManager, AudioManager& audioManager);
 
     // FruitThrowAction Destructor
     ~FruitThrowAction();
