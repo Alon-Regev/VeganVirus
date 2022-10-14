@@ -63,6 +63,10 @@ void VeganProgress::draw(double dt)
 void VeganProgress::addProgress(double amount)
 {
 	this->_progress += amount;
+	if (this->_progress > 1)
+	{
+		this->_progress = 1;
+	}
 
 	// check immediate activations
 	for (Action* action : this->_actions)

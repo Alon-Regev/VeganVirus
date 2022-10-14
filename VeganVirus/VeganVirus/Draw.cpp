@@ -1,9 +1,6 @@
 #include "Draw.h"
 #include <chrono>
 
-DrawFrameCallback drawFrameUpdate;
-Draw* mainDraw;
-
 auto t = std::chrono::high_resolution_clock::now();
 //callback procedure for this window, takes in all the window details
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -17,11 +14,12 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         return 0;
     case WM_PAINT:
     {
+        Draw* draw = (Draw*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
         auto nt = std::chrono::high_resolution_clock::now();
         double dt = std::chrono::duration<double>(nt - t).count();
         t = nt;
-        drawFrameUpdate(dt);
-        mainDraw->applyFrame();
+        draw->drawFrameUpdate(dt);
+        draw->applyFrame();
         break;
     }
     case WM_TIMER:
@@ -37,8 +35,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 Draw::Draw(HINSTANCE hInstance, DrawFrameCallback drawCallback)
 {
-    mainDraw = this;
-    drawFrameUpdate = drawCallback;
+    this->drawFrameUpdate = drawCallback;
 
     const wchar_t CLASS_NAME[] = L"Static";
     WNDCLASS wc = {};
@@ -52,6 +49,7 @@ Draw::Draw(HINSTANCE hInstance, DrawFrameCallback drawCallback)
     GdiplusStartup(&this->_token, &input, NULL);
 
     this->createWindow(hInstance);
+    this->removeFromTaskBar();
 
     // set frame timer
     SetTimer(this->_hwnd, 1, 1000 / FPS, NULL);
@@ -59,7 +57,6 @@ Draw::Draw(HINSTANCE hInstance, DrawFrameCallback drawCallback)
     SetLayeredWindowAttributes(this->_hwnd, RGB(0, 0, 0), 128, LWA_COLORKEY);
 
     ShowWindow(this->_hwnd, SW_SHOWMAXIMIZED);
-
 
     this->_graphics = new ::Graphics(this->_hwnd, FALSE);
 
@@ -97,6 +94,7 @@ void Draw::createWindow(HINSTANCE hInstance)
         hInstance,
         NULL
     );
+    SetWindowLongPtr(this->_hwnd, GWLP_USERDATA, (LONG_PTR)this);
 }
 
 void Draw::drawImage(Bitmap* bmp, int x, int y)
@@ -114,6 +112,14 @@ void Draw::drawLine(int x1, int y1, int x2, int y2, double w, BYTE r, BYTE g, BY
 {
     Pen pen(Color(a, r, b, g), w);
     this->_offscreenGraphics->DrawLine(&pen, Point(x1, y1), Point(x2, y2));
+}
+
+void Draw::drawText(int x, int y, const wchar_t* text)
+{
+    FontFamily fontFamily(L"Arial");
+    Font font(&fontFamily, 12);
+    SolidBrush brush(Color(5, 5, 5));
+    this->_offscreenGraphics->DrawString(text, -1, &font, PointF(x, y), &brush);
 }
 
 Bitmap* Draw::resizedBitmap(const wchar_t* path, int w, int h)
@@ -161,4 +167,22 @@ bool Draw::update()
 HWND Draw::getWindowHandle() const
 {
     return this->_hwnd;
+}
+
+void Draw::removeFromTaskBar()
+{
+    //remove from task bar
+    ITaskbarList* pTaskList = NULL;
+    HRESULT initRet = CoInitialize(NULL);
+    HRESULT createRet = CoCreateInstance(CLSID_TaskbarList,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_ITaskbarList,
+        (LPVOID*)&pTaskList);
+
+    if (createRet == S_OK && initRet == S_OK)
+    {
+        pTaskList->DeleteTab(this->_hwnd);
+        pTaskList->Release();
+    }
 }

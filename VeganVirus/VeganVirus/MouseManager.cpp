@@ -12,6 +12,11 @@ void MouseManager::moveMouse(int dx, int dy)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
+void MouseManager::setMousePosition(int x, int y)
+{
+	SetCursorPos(x, y);
+}
+
 Point_t MouseManager::getMousePosition()
 {
 	POINT point = { 0 };
