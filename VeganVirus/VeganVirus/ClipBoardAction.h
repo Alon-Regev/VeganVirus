@@ -26,13 +26,13 @@ public:
 
 private:
 	
-	std::map<std::string, std::string> _keyboardReplaceMap =
+	const std::map<std::string, std::string> _keyboardReplaceMap =
 	{
-		{"meat", "vegetable"},
-		{"milk", "almond mil\blk"},
-		{"egg", "baby chicken"},
-		{"butter", "olive oil"},
-		{"cheese", "stinky mil\blk"}
+		{"meat", "beans"},
+		{"milk", "lentils"},
+		{"egg", "chickpeas"},
+		{"butter", "mushrooms"},
+		{"cheese", "Fish"}
 	};
 
 	/*
