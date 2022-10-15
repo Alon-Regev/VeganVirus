@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirusBuilder", "VirusBuilde
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HideProcessHookDLL", "HideProcessHookDLL\HideProcessHookDLL.vcxproj", "{CCF6F904-36BA-4A3B-B461-04A348795F45}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirusExtractor", "VirusExtractor\VirusExtractor.vcxproj", "{9F19B432-3703-451E-BD33-D8CB763888DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{CCF6F904-36BA-4A3B-B461-04A348795F45}.Release|x64.Build.0 = Release|x64
 		{CCF6F904-36BA-4A3B-B461-04A348795F45}.Release|x86.ActiveCfg = Release|Win32
 		{CCF6F904-36BA-4A3B-B461-04A348795F45}.Release|x86.Build.0 = Release|Win32
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Debug|x64.ActiveCfg = Debug|x64
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Debug|x64.Build.0 = Debug|x64
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Debug|x86.ActiveCfg = Debug|Win32
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Debug|x86.Build.0 = Debug|Win32
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Release|x64.ActiveCfg = Release|x64
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Release|x64.Build.0 = Release|x64
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Release|x86.ActiveCfg = Release|Win32
+		{9F19B432-3703-451E-BD33-D8CB763888DB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
