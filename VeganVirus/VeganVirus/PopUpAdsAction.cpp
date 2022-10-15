@@ -75,14 +75,11 @@ void PopUpAdsAction::update(double dt)
 LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lpParam)
 {
     static thread_local HDC* phdc = nullptr;
+    static thread_local int* pImageIndex = nullptr;
     if (!phdc)
     {
         phdc = new HDC;
         *phdc = GetDC(hwnd);
-    }
-    static thread_local int* pImageIndex = nullptr;
-    if (!pImageIndex)
-    {
         pImageIndex = new int;
         *pImageIndex = intRand(0, AD_IMAGE_COUNT - 1);
     }
