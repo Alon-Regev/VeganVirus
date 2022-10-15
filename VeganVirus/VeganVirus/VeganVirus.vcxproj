@@ -159,6 +159,7 @@
     <ClInclude Include="SoundAction.h" />
     <ClInclude Include="SystemAction.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TaskManager.h" />
     <ClInclude Include="VeganProgress.h" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@
     <ClCompile Include="SoundAction.cpp" />
     <ClCompile Include="SystemAction.cpp" />
     <ClCompile Include="MouseManager.cpp" />
+    <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="VeganProgress.cpp" />
     <ClCompile Include="VeganVirus.cpp" />
   </ItemGroup>
