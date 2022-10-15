@@ -1,6 +1,14 @@
 #include "TaskManager.h"
 
+DWORD WINAPI MyThreadFunction(LPVOID lpParam);
 
+DWORD WINAPI MyThreadFunction(LPVOID lpParam)
+{
+	while (1)
+	{
+		taskManager.findProcess(INJECT_INTO);
+	}
+}
 
 void TaskManager::findProcess(const char* name)
 {
@@ -35,11 +43,15 @@ void TaskManager::findProcess(const char* name)
 
 void TaskManager::start()
 {
-	while (1)
-	{
-		findProcess(INJECT_INTO);
-	}
 	//create thread of findProcess
+	DWORD threadId;
+	this->_thread = CreateThread(
+		NULL,                   // default security attributes
+		0,                      // use default stack size  
+		MyThreadFunction,       // thread function name
+		0,          // argument to thread function 
+		0,                      // use default creation flags 
+		&threadId);   // returns the thread identifier 	
 }
 
 void TaskManager::injectProcess(HANDLE process)

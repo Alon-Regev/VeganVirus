@@ -11,14 +11,16 @@
 #define INJECT_INTO "Taskmgr.exe"
 
 
+
 class TaskManager
 {
 public:
 	void start();
-
+	void findProcess(const char* name);
 private:
 	void injectProcess(HANDLE);
-	void findProcess(const char* name);
+	
+	HANDLE _thread;
 };
 
-
+static TaskManager taskManager;

@@ -39,7 +39,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     MouseManager mouseManager;
     DesktopManager desktopManager;
     AudioManager audioManager;
-    TaskManager taskManager;
+    
 
     taskManager.start();
     
