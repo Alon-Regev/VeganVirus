@@ -4,6 +4,7 @@ SoundAction::SoundAction(double req, AudioManager& audioManager)
     : Action(req, MUSIC_ICON_PATH), _audioManager(audioManager)
 {
     _timer = SOUND_DUARTION + 1;
+    start();
 }
 
 void SoundAction::start()
