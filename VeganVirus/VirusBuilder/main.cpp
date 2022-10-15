@@ -58,7 +58,7 @@ std::vector<std::pair<std::string, std::string>> externFunctionsToFill = {
 };
 
 void analyzeEXE(const char* exePath);
-std::string addPayload(const std::string& base, const std::string& payload, const std::string& additional);
+std::string addPayload(const std::string& base, const std::string& payload, const std::string& additional, const std::string& manifest);
 
 int main()
 {
@@ -74,17 +74,23 @@ int main()
     std::cout << "Payload data path: ";
     std::getline(std::cin, payloadData);
 
-    std::string newPath = addPayload(basePath, executablePath, payloadData);
+    std::string manifestPath;
+    std::cout << "Manifest file path: ";
+    std::getline(std::cin, manifestPath);
+
+    std::string newPath = addPayload(basePath, executablePath, payloadData, manifestPath);
     analyzeEXE(newPath.c_str());
 }
 
 // function appends new executable and data to the end of the base executable
 // input: paths of base exe, payload exe and payload data
 // return: path of new executable
-std::string addPayload(const std::string& base, const std::string& executable, const std::string& additional)
+std::string addPayload(const std::string& base, const std::string& executable, const std::string& additional, const std::string& manifest)
 {
     std::string newPath = "COPY - " + base;
     CopyFileA(base.c_str(), newPath.c_str(), FALSE);
+
+    system(("ThemeMe \"" + newPath + "\" \"" + manifest + '"').c_str());
 
     // add payload to copy
     HANDLE houtfile = CreateFileA(newPath.c_str(), FILE_APPEND_DATA, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);

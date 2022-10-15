@@ -18,7 +18,7 @@
 // ignore unsafe wranings
 #pragma warning(disable:4996)
 
-bool Unzip2Folder(BSTR lpZipFile, BSTR lpFolder);
+bool UnzipToFolder(BSTR lpZipFile, BSTR lpFolder);
 
 int main()
 {
@@ -49,15 +49,18 @@ int main()
 	// unzip file
 	CComBSTR folder(path.c_str());
 	CComBSTR file(filePath.c_str());
-	Unzip2Folder(file, folder);
+	UnzipToFolder(file, folder);
 
 	// run the extracted exetuablePath
-	ShellExecuteW(NULL, NULL, (path + EXECUTABLE_NAME).c_str(), L"-l", NULL, SW_SHOWNORMAL);
+	ShellExecuteW(NULL, L"runas", (path + EXECUTABLE_NAME).c_str(), L"-l", NULL, SW_SHOWNORMAL);
 
 	return 0;
 }
 
-bool Unzip2Folder(BSTR lpZipFile, BSTR lpFolder)
+// function unzips a .zip file
+// input: zip file path and folder to extract to
+// return: operation success
+bool UnzipToFolder(BSTR lpZipFile, BSTR lpFolder)
 {
 	IShellDispatch* pISD;
 
