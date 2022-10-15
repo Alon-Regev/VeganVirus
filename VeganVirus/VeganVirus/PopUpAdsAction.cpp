@@ -6,8 +6,8 @@
 LRESULT CALLBACK AdWindowCallBack(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 
- PopUpAdsAction::PopUpAdsAction(double req, Draw* draw)
-    :Action(req, POP_UP_ADS_ACTION_ICON)
+PopUpAdsAction::PopUpAdsAction(double req, Draw* draw)
+    : Action(req, POP_UP_ADS_ACTION_ICON)
 {
      _draw = draw;
      _actionTime = 0;

