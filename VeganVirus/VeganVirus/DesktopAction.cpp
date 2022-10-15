@@ -13,7 +13,7 @@ const std::vector<const wchar_t*> DesktopAction::_messages = {
 };
 
 DesktopAction::DesktopAction(double req, Draw* draw, MouseManager& mouseManager, DesktopManager& desktopManager)
-	: Action(0.999, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
+	: Action(req, DESKTOP_ACTION_ICON), _mouseManager(mouseManager), _desktopManager(desktopManager), 
 	_speechBubbleBmp(Draw::resizedBitmap(L"Images\\speechBubble.png", SPEECH_BUBBLE_SIZE))
 {
 	_draw = draw;

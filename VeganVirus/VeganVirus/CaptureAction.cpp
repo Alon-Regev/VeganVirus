@@ -39,6 +39,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CLOSE:
+        DestroyWindow(hWnd);
+        break;
     case WM_TIMER:
     {
         CaptureImage(hWnd);
@@ -119,8 +122,11 @@ void captureWindowLoop(HINSTANCE hinstance)
     SetTimer(hwnd, 1, 1000 / 5, NULL);
 
     MSG msg;
-    while (GetMessageW(&msg, hwnd, 0, 0))
+    BOOL ret;
+    while (ret = GetMessageW(&msg, hwnd, 0, 0))
     {
+        if (ret == -1)   // error
+            break;
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
