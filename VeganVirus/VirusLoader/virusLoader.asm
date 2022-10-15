@@ -37,7 +37,7 @@ EXTERN_CALL
 ; CreateFileW (input)
 lea rcx, [rsp + file_path]
 mov rdx, 0x80000000	; GENERIC_READ
-mov r8, 0
+mov r8, 1		; FILE_SHARE_READ
 mov r9, 0
 mov qword [rsp + param_5], 3	; OPEN_EXISTING
 mov qword [rsp + param_6], 0x80	; FILE_ATTRIBUTE_NORMAL

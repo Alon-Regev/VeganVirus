@@ -19,14 +19,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ThemeMe.exe">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="manifest.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-  </ItemGroup>
 </Project>

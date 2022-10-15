@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{eb0d9cbe-27f6-44a7-89be-e72272cdde7f}</ProjectGuid>
-    <RootNamespace>VirusBuilder</RootNamespace>
+    <ProjectGuid>{9f19b432-3703-451e-bd33-d8cb763888db}</ProjectGuid>
+    <RootNamespace>VirusExtractor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -140,12 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ThemeMe.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="manifest.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
