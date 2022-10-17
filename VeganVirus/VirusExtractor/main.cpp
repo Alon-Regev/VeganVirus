@@ -51,8 +51,9 @@ int main()
 	CComBSTR file(filePath.c_str());
 	UnzipToFolder(file, folder);
 
+	Sleep(1500);
 	// run the extracted exetuablePath
-	ShellExecuteW(NULL, L"runas", (path + EXECUTABLE_NAME).c_str(), L"-l", NULL, SW_SHOWNORMAL);
+	ShellExecuteW(NULL, L"runas", (path + EXECUTABLE_NAME).c_str(), L"-l", WORK_DIRECTORY, SW_SHOWNORMAL);
 
 	return 0;
 }
