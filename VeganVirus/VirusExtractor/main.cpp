@@ -10,7 +10,7 @@
 #define OUTPUT_FILE_NAME "C:\\Program Files (x86)\\not_sus\\output.zip"
 
 #define ZIP_NAME L"\\output.zip"
-#define EXECUTABLE_NAME L"\\execute.exe"
+#define EXECUTABLE_NAME L"\\VeganVirus.exe"
 
 #define LENGTH 200
 #define ZIP_LOCATION_IN_FILE 14848
