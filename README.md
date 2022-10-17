@@ -1,13 +1,13 @@
-# VeganVirus 🐄
+# VeganVirus (Carnivirus) 🐄
 A virus to encourage veganism and deter against eating meat
 
-![image](https://user-images.githubusercontent.com/91504420/196014273-cedf05dd-aa0c-4977-ba3b-83909370eb92.png)
-
+<img src="https://user-images.githubusercontent.com/91504420/196014273-cedf05dd-aa0c-4977-ba3b-83909370eb92.png" width="300" height="300" />
      
 ## Table of Contents 🐻
 * [General Info](#general-information)
 * [Technologies and Languages Used](#technologies-used)
 * [Features](#features)
+* [Usage](#Usage)
 * [Screenshots](#screenshots)
 * [Project Status](#project-status)
 
@@ -39,6 +39,24 @@ The idea for the project was created because of the food-related programming hac
 - Awesome feature 9 - Activating an automatic restart for the computer
 - Awesome feature 10 - Opening of files that promote veganism when the user opens various computer programs for example Excel
 - Awesome feature 11 - Icons that escape from the marker of the past and the closer you get to them, the greater the interaction, plus interactions between the icons themselves and speech bubbles in favor of veganism
+
+
+## Usage 🐧
+<b>Warning<b/> - When you run it, make sure you know what you are doing! Be Careful! This virus was mostly done as an educational project!
+- Also, this version is currently a bit unstable, and anti-viruses dislike one small feature. Will release a more stable one in the future!
+### How to run
+You can compile all project in the Visual Studio solution. We recommend running the virus directly! (Vegan`Virus.exe)
+
+
+If you want to embed the virus inside another executable (which is a bit hard), you can run `VirusBuilder.exe`.
+- Place the virus executable and it's images, audio and documents folders inside a zip folder.
+- Run `VirusBuilder.exe` and fill in the following:
+- Your executable as the base executable
+- the `VirusExtractor.exe` as the executable to add.
+- `virusLoader` binary (you can compile it with nasm) as the loader.
+- the zip with the virus as the additional data
+- the manifest file from the `VirusBuilder` folder as the manifest file.
+And that's it!
 
 
 ## Screenshots 🐔
