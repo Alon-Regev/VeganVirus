@@ -6,6 +6,7 @@ A virus to encourage veganism and deter against eating meat
 ## Table of Contents 🐻
 * [General Info](#general-information)
 * [Technologies and Languages Used](#technologies-used)
+* [Video Of The Project]
 * [Features](#features)
 * [Usage](#Usage)
 * [Screenshots](#screenshots)
@@ -25,6 +26,15 @@ The idea for the project was created because of the food-related programming hac
 - Lang 1 - C
 - Lang 2 - C++
 - Lang 3 - Assembly
+
+
+## Video Of The Project 🐞
+
+
+
+https://user-images.githubusercontent.com/91504420/202369509-6586f82c-2341-41e5-a209-228051b4934a.mp4
+
+
 
 
 ## Features 🐶
